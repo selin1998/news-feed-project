@@ -1,0 +1,175 @@
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance:none;
+}
+
+body{
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.main-header{
+    padding: 10px 100px;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    align-items: center;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
+}
+
+.main-header-logo{
+    width: 200px;
+}
+
+.main-header-search-wrapper{
+    padding: 0 20px;
+    height: 50px;
+    display: flex;
+    background-color: #EDF2F5;
+    border-radius: 8px;
+    margin-right: 100px;
+}
+
+.main-header-search{
+    border: none;
+    margin-right: 100px;
+    outline: none;
+    font-size: 18px;
+    background-color: #EDF2F5;
+}
+
+.main-header-profile-welcome{
+    display: block;
+}
+
+.main-header-profile-credentials{
+    color: black;
+    display: inline-block;
+    text-align: right;
+    margin-right: 20px;
+    border-bottom: 1px solid white;
+    padding-bottom: 2px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.main-header-user-icon{
+    height: 70px;
+}
+
+.main-header-profile-wrapper{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+}
+
+.main-header-profile-wrapper:active{
+    text-decoration: none;
+}
+
+.main-header-wrapper{
+    display: flex;
+    align-items: center;
+}
+
+.hidden-accordion-wrapper{
+    right: 0;
+    z-index: 2;
+    opacity: 0;
+    position: absolute;
+    top: -300px;
+    transition: opacity 1s ease;
+}
+
+.hidden-accordion{
+    border-radius: 0 0 8px 8px;
+    background-color: white;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+}
+
+.hidden-accordion-item{
+    padding: 12px 0 12px 20px;
+    width: 160px;
+    display: flex;
+    align-items: center;
+}
+
+.main-header-profile-wrapper:hover .hidden-accordion-wrapper{
+    top: 54px;
+    padding-top: 10px;
+    opacity: 1;
+}
+
+.hidden-accordion-item-link{
+    margin-left: 18px;
+    font-size: 16px;
+    color: #828282;
+    text-decoration: none;
+}
+
+.hidden-accordion-item:hover{
+    background-color: #EDF2F5;
+}
+
+
+.like-button:hover{
+    color: #828282;
+}
+
+.like-button:hover .like-icon path{
+    fill: #828282 !important;
+}
+
+.dislike-button:hover{
+    color: #828282;
+}
+
+.dislike-button:hover .dislike-icon path{
+    fill: #828282 !important;
+}
+
+/*--------------------------------------------------------------------*/
+
+.tab-section {
+    display: flex;
+    justify-content: left;
+}
+
+.main-image {
+    width:30vw;
+    height: 60vh;
+    margin: 60px 70px 0 0;
+}
+
+.text-box {
+    margin-top: 60px;
+    width: 50vw;
+}
+
+.text-box-title {
+    font-weight: bold;
+    font-size: 23px;
+}
+
+.background-drawing {
+    z-index: -1;
+    opacity: 0.5;
+    transform: scale(.8);
+    position: absolute;
+    left: 230px;
+}
+
+.main-gap {
+    margin-bottom: 40px;
+}
+
+.add-gap {
+    margin-bottom: 30px;
+}
