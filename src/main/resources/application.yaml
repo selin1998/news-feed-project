@@ -13,7 +13,7 @@ datasource:
 
 
 jpa:
-
+    open-in-view: false
     generate-ddl: true
     hibernate.ddl-auto: create
     show-sql: true
