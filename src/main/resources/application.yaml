@@ -6,13 +6,14 @@ spring:
   main:
     banner-mode: off
 
-datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password:
+  datasource:
+    url: jdbc:postgresql://ec2-34-239-241-25.compute-1.amazonaws.com:5432/d4esebrqf7ojjc
+    username: fcwiewbfecdqag
+    password: 7ffc0470ac796221eda5eeaafb6542f9a3073b971e60e8cb8ac1d494b7de39cd
 
 
-jpa:
+  jpa:
+    open-in-view: false
     generate-ddl: true
     hibernate.ddl-auto: create
     show-sql: true

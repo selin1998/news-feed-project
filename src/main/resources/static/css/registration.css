@@ -1,0 +1,96 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header{
+    /*padding: 40px 0;*/
+    margin: 30px 70px
+}
+
+.header-link{
+    /*margin-left: 60px;*/
+}
+
+.registration-section{
+    display: flex;
+    justify-content: space-between;
+    /*align-items: center;*/
+    background-image: url("../img/Group 54.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left bottom;
+    height: 100vh;
+}
+
+.registration-section-image{
+    /*align-self: flex-end;*/
+    width: 50%;
+    margin-right: 100px;
+}
+
+.registration-section-container{
+    /*align-self: flex-start;*/
+    width: 29%;
+    margin: 100px 120px 0 0;
+}
+
+.registration-section-container-title{
+    font-size: 40px;
+    margin-bottom: 15px;
+    margin-top: 0;
+}
+
+.registration-section-container-description{
+    font-size: 17px;
+    line-height: 36px;
+    color: #828282;
+    margin-bottom: 40px;
+}
+
+.registration-section-container-description-link{
+    font-size: 20px;
+    color: #00B5AD;
+}
+
+.registration-section-container-form-input-wrapper{
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #BDBDBD;;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.registration-section-container-form-input{
+    border: none;
+    height: 42px;
+    flex-grow: 1;
+    font-size: 18px;
+    margin-left: 20px;
+    outline: none;
+}
+
+.mb0{
+    margin-bottom: 0;
+}
+
+.registration-section-container-form-submit{
+    padding: 13px 26px;
+    color: white;
+    background-color: black;
+    font-size: 21px;
+    margin-top: 35px;
+    border-radius: 5px;
+    border: none;
+}
+
+.box-icons {
+    transform: scale(.8);
+}
