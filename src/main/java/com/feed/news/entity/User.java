@@ -18,14 +18,14 @@ public class User {
     @Column(name="full_name")
     private String full_name;
 
-    @Column(name = "user_email")
+    @Column(name = "user_email" ,unique = true)
     private String user_email;
 
     @Column(name = "password")
     private String password;
 
     @Column(name = "image")
-    private String image;
+    private byte[] image;
 
     @ManyToMany(mappedBy = "users")
     private Set<News> news;
