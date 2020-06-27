@@ -18,12 +18,10 @@ public class DigitInParser extends News implements JsoupParser {
         Document document = Jsoup.connect("https://www.digit.in/news/").get();
         Elements elements = document.getElementsByClass("Thumb-new");
         for (Element element : elements) {
-            String header = element.select(".product-desc").text();  //<a><div class="product-desc"></div></a>
+            String header = element.select(".product-desc").text();
             String content = element.select(".product-desc").text();
             String link =element.getElementsByTag("a").first().attr("href");
-//            String imageLink = element.select(".Search-product").first()
-//                    .getElementsByTag("img").first().attr("src");
-            String imageLink = element.getElementsByTag("img").attr("src");
+            String imageLink = element.getElementsByTag("img").first().attr("data-src");
             String date = element.getElementsByTag("span").first().text();
 
             articles.add(new Article(header, content, link, imageLink, date, Website.DigitIn));
