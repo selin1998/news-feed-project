@@ -25,7 +25,7 @@ public class HabrParser extends News implements JsoupParser {
             String image = element.getElementsByTag("img").attr("src");
             String date = element.select(".post__time").text();
 
-            articles.add(new Article(header, content, link, image, date));
+            articles.add(new Article(header, content, link, image, date,Website.Habr));
         }
 
         return articles;

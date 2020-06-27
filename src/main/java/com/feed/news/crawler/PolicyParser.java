@@ -27,7 +27,7 @@ public class PolicyParser extends News implements JsoupParser {
             String image = element.select(".picture__image").attr("data-src");
             String date = element.getElementsByTag("time").text();
 
-            articles.add(new Article(header,content,link,image,date));
+            articles.add(new Article(header,content,link,image,date, Website.Policy));
 
         }
         return articles;

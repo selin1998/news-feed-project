@@ -24,13 +24,12 @@ public class NewsController {
 
     @GetMapping("/test")
     public String showDesignForm(Model model) {
-        JsoupParser [] parsers=new JsoupParser[]{new HabrParser(),new TechCrunchParser(),new PolicyParser() };
+        JsoupParser [] parsers=new JsoupParser[]{new HabrParser(),new InsiderParser(),new TechCrunchParser(),new PolicyParser() };
 //        JsoupParser techCrunchParser = new TechCrunchParser();
 //        JsoupParser  policyParser= new PolicyParser();
 //        JsoupParser habrParser = new HabrParser();
         List<Article> articles = Arrays.stream(parsers).flatMap(p -> p.getArticles().stream()).collect(Collectors.toList());
         model.addAttribute("articles", articles);
-
         return "main-page";
     }
 

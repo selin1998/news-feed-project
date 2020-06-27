@@ -16,5 +16,6 @@ public class Article {
     String articleLink;
     String imageLink;
     String date;
+    Website site;
 
 }

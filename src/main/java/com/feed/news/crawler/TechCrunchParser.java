@@ -25,7 +25,7 @@ public class TechCrunchParser extends News implements JsoupParser{
             String image = element.select(".post-block__media").first().select("img").first().attr("src");
             String date = element.select("[datetime]").text();
 
-            articles.add(new Article(header, content, link, image, date));
+            articles.add(new Article(header, content, link, image, date, Website.TechCrunch));
 
 
 
