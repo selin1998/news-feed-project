@@ -98,9 +98,16 @@ body{
 }
 
 .tab-image {
-    /*width: 20%;*/
+    width: 50px;
+    height: 50px;
     margin: 10px;
 }
+
+.main-page-image{
+    width: 250px;
+    height: 200px;
+}
+
 
 .tab-title {
     font-weight: bold;

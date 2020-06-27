@@ -1,15 +1,15 @@
 package com.feed.news.crawler;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.ZonedDateTime;
 
 @Data
 @AllArgsConstructor
 @ToString
+@Getter
+@Setter
 public class Article {
     String header;
     String content;
