@@ -25,7 +25,7 @@ public class NewsController {
     @GetMapping("/test")
     public String showDesignForm(Model model) {
         JsoupParser [] parsers=new JsoupParser[]{new HabrParser(),new InsiderParser(),new TechCrunchParser(),new PolicyParser()
-                ,new DigitInParser(),new UberGizmoParser() };
+                ,new DigitInParser() ,new BBCParser() ,new TheNextWebParser(),new TechStartupsParser() };
 //        JsoupParser techCrunchParser = new TechCrunchParser();
 //        JsoupParser  policyParser= new PolicyParser();
 //        JsoupParser habrParser = new HabrParser();
