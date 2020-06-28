@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>Tinder: Registration</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/registration.css">
+    <link rel="stylesheet" type="text/css" href="/css/registration.css">
 </head>
 <body>
 
@@ -19,7 +19,7 @@
     <div class="registration-section-container">
         <h1 class="registration-section-container-title">Create An Account</h1>
         <p class="registration-section-container-description">Create your account, it takes less than a minute. If you already have an account - <a href="./login.html" class="registration-section-container-description-link">login</a></p>
-        <form th:action="@{/registration}" th:object="${user}"  method="post" class="registration-section-container-form">
+        <form th:action="@{/registration}" th:object="${user}"  method="post" class="registration-section-container-form" role="form">
             <div class="registration-section-container-form-input-wrapper">
                 <img class="box-icons" src="/img/user-icon.svg" alt="User Icon">
                 <label th:if="${#fields.hasErrors('full_name')}" th:errors="*{full_name}" for="full-name"></label>
@@ -28,19 +28,22 @@
             <div class="registration-section-container-form-input-wrapper">
                 <img class="box-icons" src="/img/mail-icon.svg" alt="User Icon">
                 <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" for="email"></label>
-                <input class="registration-section-container-form-input" id="email" placeholder="Email address" type="email">
+                <input  th:field="*{email}" class="registration-section-container-form-input" id="email" placeholder="Email address" type="email">
             </div>
             <div class="registration-section-container-form-input-wrapper">
                 <img class="box-icons" src="/img/lock-icon.svg" alt="User Icon">
                 <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" for="password"></label>
-                <input class="registration-section-container-form-input" id="password" placeholder="Password" type="password">
+                <input th:field="*{password}" class="registration-section-container-form-input" id="password" placeholder="Password" type="password">
             </div>
             <div class="registration-section-container-form-input-wrapper mb0">
                 <img class="box-icons" src="/img/lock-icon.svg" alt="User Icon">
-                <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" for="confirm-password"></label>
+                <label th:if="${#fields.hasErrors('confirm_password')}" th:errors="*{confirm_password}" for="confirm-password">
+                    <h2><span class="text-success" th:utext="${failMessage}"></span></h2>
+                </label>
                 <input class="registration-section-container-form-input" id="confirm-password" placeholder="Confirm Password" type="password">
             </div>
             <input type="submit" value="Create account" class="registration-section-container-form-submit">
+            <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
         </form>
     </div>
 </section>

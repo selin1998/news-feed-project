@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Tinder: Login</title>
-    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
 <body>
 
@@ -16,12 +16,10 @@
 </form>
 
 <section class="login-section">
-    <!--    <img class="login-section-image" src="./img/Union.png" alt="404">-->
     <header class="header">
         <a th:action="@{/login}" th:method="post" class="header-link"><img src="/img/Group 12.png" alt="IBA Tech Academy"></a>
     </header>
     <div class="login-section-container">
-        <!--        <img src="img/Union.png">-->
         <h1 class="login-section-container-title">Welcome Back!</h1>
         <p class="login-section-container-description">To keep connected with us please login with personal information by email address and password</p>
         <form th:action="@{/login}" method="post" class="login-section-container-form">
@@ -46,7 +44,7 @@
             </div>
             <div class="login-section-form-buttons">
                 <a href="/main-page.html" class="login-section-container-form-login">Login now</a>
-                <a th:action="@{/registration}" methods="get" class=" login-section-container-form-signup">Create account</a>
+                <a href="/registration"  class=" login-section-container-form-signup">Create account</a>
             </div>
             <div class="login-section-form-social">
                 <div class="login-section-form-social-description-wrapper">

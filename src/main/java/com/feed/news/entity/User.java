@@ -19,18 +19,19 @@ public class User {
     private int user_id;
 
     @Column(name="full_name")
-    @NotEmpty(message = "*Please provide your name")
     private String full_name;
 
     @Column(name = "email" ,unique = true)
     @Email(message = "*Please provide a valid Email")
-    @NotEmpty(message = "*Please provide an email")
     private String email;
 
     @Column(name = "password")
     @Length(min = 5, message = "*Your password must have at least 5 characters")
-    @NotEmpty(message = "*Please provide your password")
     private String password;
+
+    @Column(name = "confirm_password")
+    @Length(min = 5, message = "*Your password must have at least 5 characters")
+    private String confirm_password;
 
     @Column(name = "image")
     private byte[] image;

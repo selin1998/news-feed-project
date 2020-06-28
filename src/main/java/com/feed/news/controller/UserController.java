@@ -44,8 +44,10 @@ public class UserController {
                     .rejectValue("email", "error.user",
                             "There is already a user registered with the email provided");
         }
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() && !user.getPassword().equals(user.getConfirm_password())) {
             modelAndView.setViewName("registration");
+            modelAndView.addObject("failMessage", "Password and Confirm Password is not match");
+
         } else {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
