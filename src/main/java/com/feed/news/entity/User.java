@@ -22,10 +22,10 @@ public class User {
     @NotEmpty(message = "*Please provide your name")
     private String full_name;
 
-    @Column(name = "user_email" ,unique = true)
+    @Column(name = "email" ,unique = true)
     @Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide an email")
-    private String user_email;
+    private String email;
 
     @Column(name = "password")
     @Length(min = 5, message = "*Your password must have at least 5 characters")

@@ -1,32 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>Tinder: Login</title>
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
 </head>
 <body>
 
+<form th:action="@{/registration}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
+</form>
 
 <section class="login-section">
     <!--    <img class="login-section-image" src="./img/Union.png" alt="404">-->
     <header class="header">
-        <a href="/login.html" class="header-link"><img src="/img/Group 12.png" alt="IBA Tech Academy"></a>
+        <a th:action="@{/login}" th:method="post" class="header-link"><img src="/img/Group 12.png" alt="IBA Tech Academy"></a>
     </header>
     <div class="login-section-container">
         <!--        <img src="img/Union.png">-->
         <h1 class="login-section-container-title">Welcome Back!</h1>
         <p class="login-section-container-description">To keep connected with us please login with personal information by email address and password</p>
-        <form action="" class="login-section-container-form">
+        <form th:action="@{/login}" method="post" class="login-section-container-form">
             <div class="login-section-container-form-input-wrapper">
                 <img class="input-icons" src="/img/mail-icon.svg" alt="User Icon">
                 <label for="email"></label>
-                <input class="login-section-container-form-input" id="email" placeholder="Email address" type="email">
+                <input  th:placeholder="User_email" class="login-section-container-form-input" id="email" placeholder="Email address" type="email">
             </div>
             <div class="login-section-container-form-input-wrapper">
                 <img class="input-icons" src="/img/lock-icon.svg" alt="User Icon">
                 <label for="password"></label>
-                <input class="login-section-container-form-input" id="password" placeholder="Password" type="password">
+                <input  th:placeholder="Password" class="login-section-container-form-input" id="password" placeholder="Password" type="password">
             </div>
             <div class="login-section-container-options">
                 <div class="login-section-container-options-wrapper">
@@ -39,7 +46,7 @@
             </div>
             <div class="login-section-form-buttons">
                 <a href="/main-page.html" class="login-section-container-form-login">Login now</a>
-                <a href="/registration.html" class="login-section-container-form-signup">Create account</a>
+                <a th:action="@{/registration}" methods="get" class=" login-section-container-form-signup">Create account</a>
             </div>
             <div class="login-section-form-social">
                 <div class="login-section-form-social-description-wrapper">

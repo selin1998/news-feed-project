@@ -4,21 +4,19 @@ package com.feed.news.controller;
 import com.feed.news.entity.User;
 import com.feed.news.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
-@Controller
+@RestController
 public class UserController {
-
     @Autowired
     private UserService userService;
+
 
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
     public ModelAndView login(){
@@ -40,7 +38,7 @@ public class UserController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
-        User userExists = userService.findUserByEmail(user.getUser_email());
+        User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
             bindingResult
                     .rejectValue("email", "error.user",
@@ -55,28 +53,6 @@ public class UserController {
             modelAndView.setViewName("registration");
 
         }
-        return modelAndView;
-    }
-
-    @RequestMapping(value="/admin/adminHome", method = RequestMethod.GET)
-    public ModelAndView home(){
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
-        modelAndView.addObject("userName", "Welcome " +" "+ user.getFull_name() + " (" + user.getUser_email() + ")");
-        modelAndView.addObject("adminMessage","This Page is available to Users with Admin Role");
-        modelAndView.setViewName("admin/adminHome");
-        return modelAndView;
-    }
-
-    @RequestMapping(value="/user/userHome", method = RequestMethod.GET)
-    public ModelAndView user(){
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
-        modelAndView.addObject("userName", "Welcome " + user.getFull_name() + " (" + user.getUser_email()+ ")");
-        modelAndView.addObject("userMessage","This Page is available to Users with User Role");
-        modelAndView.setViewName("user/userHome");
         return modelAndView;
     }
 

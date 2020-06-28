@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 
@@ -27,7 +26,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User findUserByEmail( String user_email){
-        return userRepository.findByUser_email(user_email);
+        return userRepository.findByEmail(user_email);
     }
 
     @Override
