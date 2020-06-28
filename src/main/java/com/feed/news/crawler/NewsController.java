@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.feed.news.crawler.PolicyParser.articles;
+//import static com.feed.news.crawler.PolicyParser.articles;
 
 @Controller
 public class NewsController {
@@ -24,8 +24,14 @@ public class NewsController {
 
     @GetMapping("/test")
     public String showDesignForm(Model model) {
-        JsoupParser [] parsers=new JsoupParser[]{new HabrParser(),new InsiderParser(),new TechCrunchParser(),new PolicyParser()
-                ,new DigitInParser() ,new BBCParser() ,new TheNextWebParser(),new TechStartupsParser(),new UberGizmoParser() };
+        JsoupParser [] parsers=new JsoupParser[]{
+                new DigitInParser()
+//                ,new InsiderParser(),new TechCrunchParser(),new PolicyParser()
+                //               , new HabrParser()
+//                ,new BBCParser() ,new TheNextWebParser(),new TechStartupsParser()
+//                ,new UberGizmoParser()
+                ,new MashableParser()
+                ,new DroidLifeParser()};
 //        JsoupParser techCrunchParser = new TechCrunchParser();
 //        JsoupParser  policyParser= new PolicyParser();
 //        JsoupParser habrParser = new HabrParser();
