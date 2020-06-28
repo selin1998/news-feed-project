@@ -16,17 +16,17 @@ public class DroidLifeParser extends News implements JsoupParser {
     @Override
     public List<Article> getArticles() {
         Document document = Jsoup.connect("https://www.droid-life.com/").get();
-        Elements elements = document.getElementsByTag("article");  //preview-home
+        Elements elements = document.getElementsByTag("article");
         for (Element element : elements) {
             String header = element.select(".preview__title").first()
-                    .getElementsByTag("a").first().text();   //h2->text
+                    .getElementsByTag("a").first().text();
             String content = element.select(".preview__excerpt").text();
-            String link =element.select("preview__link").first()
-                    .getElementsByTag("a").first().attr("href");  //+
+            String link =element
+//                    .select("preview__link").first()
+                    .getElementsByTag("a").first().attr("href");
             String imageLink ="https://www.droid-life.com/"
                     .concat(element.getElementsByTag("img").first().attr("src"));  //.wp-post-image
-            //https://www.droid-life.com/+imageLink  //???
-            String date = element.getElementsByTag("time").first().text();  //+
+            String date = element.getElementsByTag("time").first().text();
 
             articles.add(new Article(header, content, link, imageLink, date, Website.DroidLife));
         }
