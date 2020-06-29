@@ -9,7 +9,7 @@
 //import java.util.ArrayList;
 //import java.util.List;
 //
-//public class TechStartupsParser extends News implements JsoupParser {
+//public class TechStartupsParser implements JsoupParser {
 //
 //    static List<Article> articles = new ArrayList();
 //

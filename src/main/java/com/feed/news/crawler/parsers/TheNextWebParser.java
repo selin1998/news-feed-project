@@ -9,7 +9,7 @@
 //import java.util.ArrayList;
 //import java.util.List;
 //
-//public class TheNextWebParser extends News implements JsoupParser {
+//public class TheNextWebParser implements JsoupParser {
 //    static List<Article> articles = new ArrayList();
 //
 //    @SneakyThrows
@@ -18,8 +18,8 @@
 //        Document document = Jsoup.connect("https://thenextweb.com/latest/").get();
 //        Elements elements = document.getElementsByTag("li");
 //        for (Element element : elements) {
-////            String header = element.select(".story-title").first()
-////                    .getElementsByTag("a").first().text();
+//            String header = element.select(".story-title").first()
+//                    .getElementsByTag("a").first().text();
 //            String content = element.select(".story-chunk").text();  //tag--><p>.text()
 //            String link =element.select(".story-title").first()
 //                    .getElementsByTag("a").first().attr("href");
