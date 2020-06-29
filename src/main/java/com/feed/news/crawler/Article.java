@@ -3,7 +3,8 @@ package com.feed.news.crawler;
 
 import lombok.*;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
+import java.util.Optional;
 
 @Data
 @AllArgsConstructor
@@ -15,7 +16,7 @@ public class Article {
     String content;
     String articleLink;
     String imageLink;
-    String date;
+    LocalDate date;
     Website site;
 
 }

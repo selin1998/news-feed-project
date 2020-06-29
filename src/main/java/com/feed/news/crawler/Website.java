@@ -13,7 +13,7 @@ public enum Website {
 //    TheNextWeb(new TheNextWebParser()),
     TechStartups(new TechStartupsParser()),
     UberGizmo(new UberGizmoParser()),
-    Mashable(new MashableParser()),
+ //   Mashable(new MashableParser()),
     DroidLife(new DroidLifeParser());
 
     public final JsoupParser parser;

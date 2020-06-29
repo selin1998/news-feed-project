@@ -1,6 +1,7 @@
 package com.feed.news.crawler.parsers;
 
 import com.feed.news.crawler.Article;
+import com.feed.news.crawler.DateTimeFormats;
 import com.feed.news.crawler.JsoupParser;
 import com.feed.news.crawler.Website;
 import lombok.SneakyThrows;
@@ -9,8 +10,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UberGizmoParser  implements JsoupParser {
 
@@ -26,7 +29,7 @@ public class UberGizmoParser  implements JsoupParser {
             String content = element.select(".article_card_excerpt").text();
             String link = element.select(".article_card_title").first().select("a").first().attr("href");
             String image = element.select(".article_card_divimg").first().attr("data-bg");
-            String date = element.select(".byline").text();
+            LocalDate date = convertStringToDate(element.select(".byline").text(), DateTimeFormats.PDT_FORMAT);
 
             articles.add(new Article(header, content, link, image, date, Website.UberGizmo));
 
