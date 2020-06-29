@@ -1,6 +1,7 @@
 package com.feed.news.crawler;
 
 
+import com.feed.news.repository.ArticleRepo;
 import com.feed.news.service.NewsFeedService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,11 @@ import java.util.stream.Stream;
 @RequestMapping("/")
 public class NewsController {
     private final  NewsFeedService feedService;
+    private final ArticleRepo articleRepo;
 
-    public NewsController(NewsFeedService feedService) {
+    public NewsController(NewsFeedService feedService, ArticleRepo articleRepo) {
         this.feedService = feedService;
+        this.articleRepo = articleRepo;
     }
 
 
@@ -29,6 +32,8 @@ public class NewsController {
         Stream<JsoupParser> newsParsers = feedService.getNewsParsers(id);
 
         List<Article> articles = newsParsers.flatMap(p -> p.getArticles().stream()).collect(Collectors.toList());
+
+        articleRepo.saveAll(articles);
 
         model.addAttribute("articles", articles);
 

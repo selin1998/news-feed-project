@@ -1,6 +1,7 @@
 package com.feed.news.crawler.parsers;
 
 import com.feed.news.crawler.Article;
+import com.feed.news.crawler.DateTimeFormats;
 import com.feed.news.crawler.JsoupParser;
 import com.feed.news.crawler.Website;
 import lombok.SneakyThrows;
@@ -9,8 +10,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PolicyParser implements JsoupParser {
 
@@ -27,7 +30,7 @@ public class PolicyParser implements JsoupParser {
             String content = header;
             String link = String.format("%s%s","https://www.policygenius.com",element.select(".teaser__title").select("a").attr("href"));
             String image = element.select(".picture__image").attr("data-src");
-            String date = element.getElementsByTag("time").text();
+            LocalDate date = convertStringToDate(element.getElementsByTag("time").text(), DateTimeFormats.POLICY_FORMAT);
 
             articles.add(new Article(header,content,link,image,date, Website.Policy));
 

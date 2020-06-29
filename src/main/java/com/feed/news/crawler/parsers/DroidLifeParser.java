@@ -1,6 +1,7 @@
 package com.feed.news.crawler.parsers;
 
 import com.feed.news.crawler.Article;
+import com.feed.news.crawler.DateTimeFormats;
 import com.feed.news.crawler.JsoupParser;
 import com.feed.news.crawler.Website;
 import lombok.SneakyThrows;
@@ -9,8 +10,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class DroidLifeParser  implements JsoupParser {
     static List<Article> articles = new ArrayList();
@@ -29,7 +32,7 @@ public class DroidLifeParser  implements JsoupParser {
                     .getElementsByTag("a").first().attr("href");
             String imageLink ="https://www.droid-life.com/"
                     .concat(element.getElementsByTag("img").first().attr("src"));  //.wp-post-image
-            String date = element.getElementsByTag("time").first().text();
+            LocalDate date = convertStringToDate(element.getElementsByTag("time").first().text(), DateTimeFormats.FULL_MONTH_FORMAT);
 
             articles.add(new Article(header, content, link, imageLink, date, Website.DroidLife));
         }
