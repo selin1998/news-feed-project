@@ -26,7 +26,7 @@ public class UberGizmoParser  implements JsoupParser {
             String content = element.select(".article_card_excerpt").text();
             String link = element.select(".article_card_title").first().select("a").first().attr("href");
             String image = element.select(".article_card_divimg").first().attr("data-bg");
-            String date = element.select(".byline").text();
+            String date = element.select(".byline").text().split( ", on")[1];
 
             articles.add(new Article(header, content, link, image, date, Website.UberGizmo));
 

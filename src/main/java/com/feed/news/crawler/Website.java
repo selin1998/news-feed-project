@@ -9,12 +9,13 @@ public enum Website {
     Habr(new HabrParser()),
     Insider(new InsiderParser()),
     DigitIn(new DigitInParser()),
-    BBC(new BBCParser()),
+//    BBC(new BBCParser()),
 //    TheNextWeb(new TheNextWebParser()),
 //    TechStartups(new TechStartupsParser()),
     UberGizmo(new UberGizmoParser()),
     Mashable(new MashableParser()),
-    DroidLife(new DroidLifeParser());
+    DroidLife(new DroidLifeParser()),
+    Lenova(new LenovaParser());
 
     public final JsoupParser parser;
 
