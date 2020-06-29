@@ -1,5 +1,8 @@
-package com.feed.news.crawler;
+package com.feed.news.crawler.parsers;
 
+import com.feed.news.crawler.Article;
+import com.feed.news.crawler.JsoupParser;
+import com.feed.news.crawler.Website;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.jsoup.Jsoup;
@@ -11,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
-public class MashableParser extends News implements JsoupParser {
+public class MashableParser  implements JsoupParser {
     static List<Article> articles = new ArrayList();
 
     @SneakyThrows
