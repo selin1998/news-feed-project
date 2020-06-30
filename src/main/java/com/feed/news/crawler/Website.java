@@ -9,9 +9,9 @@ public enum Website {
     DroidLife(new DroidLifeParser()),
     TechStartups(new TechStartupsParser()),
     LenovaNews(new LenovaNewsParser()),
+    Insider(new InsiderParser()),
     HTCNews(new HTCNewsParser()),
     DigitIn(new DigitInParser()),
-    Insider(new InsiderParser()),
     Policy(new PolicyParser()),
     Habr(new HabrParser());
     // Mashable(new MashableParser());

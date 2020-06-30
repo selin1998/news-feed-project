@@ -2,10 +2,10 @@ INSERT INTO public.news (news_id, news_name, news_url) VALUES (1, 'TechCrunch', 
 INSERT INTO public.news (news_id, news_name, news_url) VALUES (2, 'UberGizmo', 'https://www.ubergizmo.com/');
 INSERT INTO public.news (news_id, news_name, news_url) VALUES (3, 'DroidLife', 'https://www.droid-life.com/');
 INSERT INTO public.news (news_id, news_name, news_url) VALUES (4, 'TechStartups', 'https://techstartups.com/');
-INSERT INTO public.news (news_id, news_name, news_url) VALUES (5, 'Lenova', 'https://news.lenovo.com/pressroom/press-releases/');
-INSERT INTO public.news (news_id, news_name, news_url) VALUES (6, 'HTCNews', 'https://www.pocket-lint.com/htc');
-INSERT INTO public.news (news_id, news_name, news_url) VALUES (7, 'DigitIn', 'https://www.digit.in/news/');
-INSERT INTO public.news (news_id, news_name, news_url) VALUES (8, 'Insider', 'https://www.insider.com/news');
+INSERT INTO public.news (news_id, news_name, news_url) VALUES (5, 'LenovaNews', 'https://news.lenovo.com/pressroom/press-releases/');
+INSERT INTO public.news (news_id, news_name, news_url) VALUES (6, 'Insider', 'https://www.insider.com/news');
+INSERT INTO public.news (news_id, news_name, news_url) VALUES (7, 'HTCNews', 'https://www.pocket-lint.com/htc');
+INSERT INTO public.news (news_id, news_name, news_url) VALUES (8, 'DigitIn', 'https://www.digit.in/news/');
 INSERT INTO public.news (news_id, news_name, news_url) VALUES (9, 'Policy', 'https://www.policygenius.com/blog/');
 INSERT INTO public.news (news_id, news_name, news_url) VALUES (10, 'Habr', 'https://habr.com/en/flows/develop/');
 -- INSERT INTO public.news (news_id, news_name, news_url) VALUES (11, 'Mashable', 'https://mashable.com/category/startups/');
