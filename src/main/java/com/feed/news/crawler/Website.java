@@ -14,9 +14,6 @@ public enum Website {
     DigitIn(new DigitInParser()),
     Policy(new PolicyParser()),
     Habr(new HabrParser());
-    // Mashable(new MashableParser());
-    //   BBC(new BBCParser()),
-    //   TheNextWeb(new TheNextWebParser()),
 
     public final JsoupParser parser;
 

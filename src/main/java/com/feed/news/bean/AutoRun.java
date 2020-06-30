@@ -36,16 +36,15 @@ public class AutoRun {
         return args->{
             newsRepo.saveAll(Arrays.asList(
                     new News("TechCrunch","https://techcrunch.com/"),
-                    new News("Policy","https://www.policygenius.com/blog/"),
-                    new News("Habr","https://habr.com/en/flows/develop/"),
-                    new News("Insider","https://www.insider.com/news"),
-                    new News("DigitIn","https://www.digit.in/news/"),
-                    new News("BBC","https://www.bbc.co.uk/news"),
-                    new News("TheNextWeb","https://thenextweb.com/latest/"),
+                    new News("UberGizmo","https://www.ubergizmo.com/"),
+                    new News("DroidLife","https://www.droid-life.com/"),
                     new News("TechStartups","https://techstartups.com/"),
-                    new News("UberGizmo","https://techstartups.com/"),
-                    new News("Mashable","https://techstartups.com/"),
-                    new News("DroidLife","https://techstartups.com/")
+                    new News("LenovaNews","https://news.lenovo.com/pressroom/press-releases/"),
+                    new News("Insider","https://www.insider.com/news"),
+                    new News("HTCNews","https://www.pocket-lint.com/htc"),
+                    new News("DigitIn","https://www.digit.in/news/"),
+                    new News("Policy","https://www.policygenius.com/blog/"),
+            new News("Habr","https://habr.com/en/flows/develop/")
             ));
 
         };
