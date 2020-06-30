@@ -3,20 +3,25 @@ package com.feed.news.controller;
 
 import com.feed.news.entity.User;
 import com.feed.news.service.UserService;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
+import javax.validation.Validator;
+import java.util.Set;
 
 @RestController
 public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private Validator validator;
 
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
     public ModelAndView login(){
@@ -44,10 +49,8 @@ public class UserController {
                     .rejectValue("email", "error.user",
                             "There is already a user registered with the email provided");
         }
-        if (bindingResult.hasErrors() && !user.getPassword().equals(user.getConfirm_password())) {
+        if (bindingResult.hasErrors()) {
             modelAndView.setViewName("registration");
-            modelAndView.addObject("failMessage", "Password and Confirm Password is not match");
-
         } else {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
@@ -58,4 +61,19 @@ public class UserController {
         return modelAndView;
     }
 
+//    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+//    public @ResponseBody
+//    ModelAndView handleSignupForm(@ModelAttribute User candidate, HttpServletResponse response) throws ServiceException {
+//        Set<ConstraintViolation<User>> failures = validator
+//                .validate(candidate);
+//
+////        if (!failures.isEmpty()) {
+////            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+//////            return ValidationHelper.validationMessages(failures);
+////
+////        } else {
+////            return userService.saveUser(candidate);
+////        }
+////    }
+//
 }

@@ -1,5 +1,6 @@
 package com.feed.news.entity;
 
+import com.feed.news.validation.PasswordsEqualConstraint;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -10,6 +11,7 @@ import java.util.Set;
 
 @Data
 @Entity
+@PasswordsEqualConstraint(message = "passwords are not equal")
 @Table (name = "user_table")
 public class User {
 

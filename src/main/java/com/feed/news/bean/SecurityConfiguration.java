@@ -53,27 +53,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authenticated().and().csrf().disable().formLogin()
 
                 .loginPage("/login").failureUrl("/login?error=true")
-                .defaultSuccessUrl("/admin/adminHome")
-
+                .defaultSuccessUrl("/main-page")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                /*.antMatchers("/user/**").hasAuthority("USER").anyRequest()
-                .authenticated().and().csrf().disable().formLogin()
-                .loginPage("/login").failureUrl("/login?error=true")
-                .defaultSuccessUrl("/user/userHome")
-                .usernameParameter("email")
-                .passwordParameter("password")*/
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/").and().exceptionHandling()
                 .accessDeniedPage("/access-denied")
 
         ;
+        http
+                .rememberMe()
+                .key("myUniqueKey")
+                .rememberMeCookieName("websparrow-login-remember-me")
+                .tokenValiditySeconds(10000000);
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-
         web.ignoring()
                 .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/img/**");
     }
