@@ -1,0 +1,313 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header{
+    /*padding: 20px 0;*/
+    margin: 30px 70px
+}
+
+.header-link{
+    /*margin-left: 60px;*/
+}
+
+.login-section {
+    display: flex;
+    justify-content: space-between;
+    /*align-items: center;*/
+    background-image: url("../img/Group 54.png");
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: contain;
+    height: 100vh;
+    /*background: linear-gradient(to bottom, black, white), url("../img/Union.png");*/
+}
+
+.login-section-image{
+    width: 50%;
+    margin-right: 100px;
+}
+
+.login-section-container{
+    width: 29%;
+    text-align: center;
+    margin: 160px 120px 0px 0px;
+    /*align-items: flex-end;*/
+}
+
+.login-section-container-title{
+    font-size: 50px;
+    margin-bottom: 15px;
+    margin-top: 0;
+}
+
+.login-section-container-description{
+    font-size: 20px;
+    line-height: 36px;
+    color: #828282;
+    margin-bottom: 40px;
+}
+
+.login-section-container-description-link{
+    font-size: 20px;
+    color: #1B3E85;
+}
+
+.login-section-container-form-input-wrapper{
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #BDBDBD;;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.login-section-container-form-input{
+    border: none;
+    height: 42px;
+    flex-grow: 1;
+    font-size: 18px;
+    margin-left: 20px;
+    outline: none;
+}
+
+.mb0{
+    margin-bottom: 0;
+}
+
+.login-section-container-form-login{
+    padding: 13px 56px;
+    color: white;
+    background-color: black;
+    font-size: 25px;
+    margin-top: 50px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.login-section-container-form-signup{
+    padding: 13px 26px;
+    font-size: 25px;
+    margin-top: 50px;
+    border-radius: 5px;
+    border: 1px solid #4E535B;
+    box-sizing: border-box;
+    background-color: white;
+    color: #4E535B;
+    cursor: pointer;
+}
+
+.login-section-container-options-wrapper {
+    display: inline-block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    user-select: none;
+}
+
+.login-section-container-options-old-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.login-section-container-options-checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+    cursor: pointer;
+    border: 1px solid #BDBDBD;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.login-section-container-options-wrapper:hover .login-section-container-options-checkmark {
+    background-color: #BDBDBD;
+}
+
+.login-section-container-options-old-checkbox:checked + .login-section-container-options-checkmark {
+    background-color: #00B5AD;
+    border: none;
+}
+
+.login-section-container-options-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.login-section-container-options-old-checkbox:checked + .login-section-container-options-checkmark:after {
+    display: block;
+}
+
+.login-section-container-options-wrapper{
+    cursor: pointer;
+}
+
+.login-section-container-options-checkbox-wrapper{
+    cursor: pointer;
+    font-size: 19px;
+    color: #BDBDBD;
+}
+
+.active-label{
+    color: black;
+}
+
+.login-section-container-options-link{
+    color: #BDBDBD;
+    font-size: 19px;
+}
+
+.login-section-container-options-link:hover{
+    color: black;
+}
+
+.login-section-container-options{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.login-section-form-buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+.login-section-form-social-description{
+    text-align: center;
+    font-size: 21px;
+    color: #4E535B;
+    display: block;
+    margin: 0 10px;
+}
+
+.login-section-form-social-description-wrapper{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.login-section-form-social-description-line{
+    flex-grow: 1;
+    background-color: #4E535B;
+    height: 1px;
+    border: none;
+}
+
+.login-section-form-social-icon-wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.login-section-form-social-icon{
+    margin-right: 20px;
+}
+
+.mr0{
+    margin-right: 0;
+}
+
+@media (max-width: 1585px) {
+    .login-section-container-form-login{
+        font-size: 20px;
+        padding: 13px 35px;
+    }
+    .login-section-container-form-signup{
+        font-size: 20px;
+        padding: 13px 13px;
+    }
+}
+
+@media (min-width: 1400px) and (max-width: 1585px) {
+    .login-section-container-form-login{
+        padding: 13px 50px;
+    }
+    .login-section-container-form-signup{
+        padding: 13px 29px;
+    }
+}
+
+@media (width: 1280px) {
+    .login-section-container {
+        margin-top: 60px;
+    }
+
+    .login-section-container-title {
+        margin-top: 0;
+        font-size: 45px;
+    }
+
+    .login-section-container-description {
+        font-size: 16px;
+    }
+
+    .login-section-container-form-input-wrapper {
+        padding: 5px 10px;
+        margin-bottom: 20px;
+    }
+
+    .login-section-container-form-input {
+        font-size: 14px;
+        height: 34px;
+    }
+
+    .input-icons {
+        transform: scale(0.8);
+    }
+
+    .login-section-container-form-login {
+     font-size: 17px;
+        padding: 15px 32px;
+        margin-top: 20px;
+    }
+
+    .login-section-container-form-signup {
+        font-size: 17px;
+        margin-top: 20px;
+    }
+
+    .login-section-form-buttons  {
+        margin-bottom: 28px;
+    }
+
+    .login-section-container-options-checkbox-wrapper {
+        font-size: 17px;
+    }
+
+    .login-section-container-options-link {
+        font-size: 17px;
+    }
+
+    .login-section-container-options-wrapper {
+        display:flex;
+    }
+
+    .login-section-container-options-checkmark {
+        top: -2px;
+    }
+}
