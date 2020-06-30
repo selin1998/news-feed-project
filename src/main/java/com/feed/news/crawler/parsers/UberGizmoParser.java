@@ -29,7 +29,7 @@ public class UberGizmoParser  implements JsoupParser {
             String content = element.select(".article_card_excerpt").text();
             String link = element.select(".article_card_title").first().select("a").first().attr("href");
             String image = element.select(".article_card_divimg").first().attr("data-bg");
-            LocalDate date = convertStringToDate(element.select(".byline").text(), DateTimeFormats.PDT_FORMAT);
+            LocalDate date = convertStringToDate(element.select(".byline").text().split( ", on")[1], DateTimeFormats.PDT_FORMAT);
 
             articles.add(new Article(header, content, link, image, date, Website.UberGizmo));
 

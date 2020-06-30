@@ -5,21 +5,22 @@ import com.feed.news.crawler.parsers.*;
 public enum Website {
 
     TechCrunch(new TechCrunchParser()),
-    Policy(new PolicyParser()),
-    Habr(new HabrParser()),
-    Insider(new InsiderParser()),
-    DigitIn(new DigitInParser()),
-//    BBC(new BBCParser()),
-//    TheNextWeb(new TheNextWebParser()),
-    TechStartups(new TechStartupsParser()),
     UberGizmo(new UberGizmoParser()),
- //   Mashable(new MashableParser()),
-    DroidLife(new DroidLifeParser());
+    DroidLife(new DroidLifeParser()),
+    TechStartups(new TechStartupsParser()),
+    Lenova(new LenovaParser()),
+    DigitIn(new DigitInParser()),
+    Policy(new PolicyParser()),
+    Insider(new InsiderParser()),
+    Habr(new HabrParser());
+    // Mashable(new MashableParser());
+    //   BBC(new BBCParser()),
+    //   TheNextWeb(new TheNextWebParser()),
 
     public final JsoupParser parser;
 
     Website(JsoupParser parser) {
-        this.parser=parser;
+        this.parser = parser;
     }
 
     public JsoupParser getParser() {
