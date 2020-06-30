@@ -8,10 +8,11 @@ public enum Website {
     UberGizmo(new UberGizmoParser()),
     DroidLife(new DroidLifeParser()),
     TechStartups(new TechStartupsParser()),
-    Lenova(new LenovaParser()),
+    LenovaNews(new LenovaNewsParser()),
+    HTCNews(new HTCNewsParser()),
     DigitIn(new DigitInParser()),
-    Policy(new PolicyParser()),
     Insider(new InsiderParser()),
+    Policy(new PolicyParser()),
     Habr(new HabrParser());
     // Mashable(new MashableParser());
     //   BBC(new BBCParser()),

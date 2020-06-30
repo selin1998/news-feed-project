@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LenovaParser implements JsoupParser {
+public class LenovaNewsParser implements JsoupParser {
 
     static List<Article> articles = new ArrayList();
 
@@ -30,7 +30,7 @@ public class LenovaParser implements JsoupParser {
             String image = element.select(".card-image").first().select("img").attr("src");
             LocalDate date = convertStringToDate(element.select(".card-date").text(), DateTimeFormats.SIMPLE_MONTH_FORMAT);
 
-            articles.add(new Article(header, content, link, image, date, Website.Lenova));
+            articles.add(new Article(header, content, link, image, date, Website.LenovaNews));
 
                     }
         return articles;
