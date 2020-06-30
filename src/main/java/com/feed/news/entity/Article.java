@@ -1,6 +1,7 @@
-package com.feed.news.crawler;
+package com.feed.news.entity;
 
 
+import com.feed.news.crawler.Website;
 import lombok.*;
 import org.springframework.context.annotation.Bean;
 

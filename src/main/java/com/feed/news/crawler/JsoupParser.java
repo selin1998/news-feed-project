@@ -1,7 +1,8 @@
 package com.feed.news.crawler;
 
+import com.feed.news.entity.Article;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
