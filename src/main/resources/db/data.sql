@@ -8,9 +8,6 @@ INSERT INTO public.news (news_id, news_name, news_url) VALUES (7, 'HTCNews', 'ht
 INSERT INTO public.news (news_id, news_name, news_url) VALUES (8, 'DigitIn', 'https://www.digit.in/news/');
 INSERT INTO public.news (news_id, news_name, news_url) VALUES (9, 'Policy', 'https://www.policygenius.com/blog/');
 INSERT INTO public.news (news_id, news_name, news_url) VALUES (10, 'Habr', 'https://habr.com/en/flows/develop/');
--- INSERT INTO public.news (news_id, news_name, news_url) VALUES (11, 'Mashable', 'https://mashable.com/category/startups/');
--- INSERT INTO public.news (news_id, news_name, news_url) VALUES (12, 'BBC', 'https://www.bbc.co.uk/news');
--- INSERT INTO public.news (news_id, news_name, news_url) VALUES (13, 'TheNextWeb', 'https://thenextweb.com/latest/');
 
 
 
