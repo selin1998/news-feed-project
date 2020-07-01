@@ -37,4 +37,7 @@ public class TechCrunchParser implements JsoupParser {
         }
         return articles;
     }
+
+
+
 }
