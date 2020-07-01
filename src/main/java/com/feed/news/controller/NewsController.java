@@ -3,7 +3,9 @@ package com.feed.news.controller;
 
 import com.feed.news.crawler.JsoupParser;
 import com.feed.news.entity.Article;
+import com.feed.news.entity.News;
 import com.feed.news.repository.ArticleRepo;
+import com.feed.news.service.DisableNewsService;
 import com.feed.news.service.NewsFeedService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,10 +22,12 @@ import java.util.stream.Stream;
 public class NewsController {
     private final  NewsFeedService feedService;
     private final ArticleRepo articleRepo;
+    private final DisableNewsService disableNewsService;
 
-    public NewsController(NewsFeedService feedService, ArticleRepo articleRepo) {
+    public NewsController(NewsFeedService feedService, ArticleRepo articleRepo,DisableNewsService disableNewsService) {
         this.feedService = feedService;
         this.articleRepo = articleRepo;
+        this.disableNewsService=disableNewsService;
     }
 
 
@@ -42,6 +46,21 @@ public class NewsController {
         return "main-page";
 
     }
+
+    // http://localhost:8080/disable_news/1
+
+    @GetMapping("/disable_news/{id}")
+    public String showAllSites(Model model, @PathVariable int id) {
+
+        List<News> allSites = disableNewsService.getAllSites();
+
+        model.addAttribute("allSites", allSites);
+
+        return "disable-news";
+
+    }
+
+
 
 
 }

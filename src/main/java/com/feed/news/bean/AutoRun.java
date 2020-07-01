@@ -4,6 +4,7 @@ import com.feed.news.entity.News;
 import com.feed.news.entity.User;
 import com.feed.news.repository.NewsFeedRepo;
 import com.feed.news.repository.UserRepo;
+import lombok.SneakyThrows;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,9 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,21 +34,66 @@ public class AutoRun {
         this.newsRepo = newsRepo;
     }
 
-//    @Bean
-//    @Order(1)
+    @SneakyThrows
+    public byte[] convertImagetoByteArray(String path) {
+        File file = new File(path);
+        FileInputStream fis = new FileInputStream(file);
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        int nRead;
+        byte[] data = new byte[16384];
+        while ((nRead = fis.read(data, 0, data.length)) != -1) {
+            buffer.write(data, 0, nRead);
+        }
+
+        return buffer.toByteArray();
+    }
+
+
+
+    @Bean
+    @Order(1)
     public CommandLineRunner add_news(){
         return args->{
             newsRepo.saveAll(Arrays.asList(
-                    new News("TechCrunch","https://techcrunch.com/"),
-                    new News("UberGizmo","https://www.ubergizmo.com/"),
-                    new News("DroidLife","https://www.droid-life.com/"),
-                    new News("TechStartups","https://techstartups.com/"),
-                    new News("LenovaNews","https://news.lenovo.com/pressroom/press-releases/"),
-                    new News("Insider","https://www.insider.com/news"),
-                    new News("HTCNews","https://www.pocket-lint.com/htc"),
-                    new News("DigitIn","https://www.digit.in/news/"),
-                    new News("Policy","https://www.policygenius.com/blog/"),
-            new News("Habr","https://habr.com/en/flows/develop/")
+                    new News("TechCrunch","https://techcrunch.com/"
+                    ,"TechCrunch - Reporting on the business of technology, startups, venture capital funding, and Silicon Valley"
+                    ,convertImagetoByteArray("techcrunch_logo.png")),
+
+                    new News("UberGizmo","https://www.ubergizmo.com/"
+                    ,"Opinionated news and reviews of consumer electronics"
+                    ,convertImagetoByteArray("ubergizmo_logo_icon_64.png")),
+
+                    new News("DroidLife","https://www.droid-life.com/"
+                    ,"We write about the happenings in the Android world, most of which involves Google. " +
+                            "We do reviews too, so we got you covered, Samsung guy."
+                    , convertImagetoByteArray("droidlife_logo.png")),
+
+                    new News("TechStartups","https://techstartups.com/"
+                    ,"TechStartups - Coverage of Technology News, technology startups, Emerging technology, venture capital funding, and Silicon Valley"
+                    ,convertImagetoByteArray("techstartups.com-logo-v3.png")),
+
+                    new News("LenovaNews","https://news.lenovo.com/pressroom/press-releases/"
+                    ,"Lenovo's official site for press materials and original stories about the vision and passion behind the technology."
+                    ,convertImagetoByteArray("lenovo2_logo.png")),
+
+                    new News("Insider","https://www.insider.com/news","What You Need To Know"
+                            ,convertImagetoByteArray("insider_logo.png")),
+
+                    new News("HTCNews","https://www.pocket-lint.com/htc"
+                    ,"Get all the latest on HTC. All the very best in HTC news, HTC reviews, HTC rumours and HTC buying advice in one place."
+                    ,convertImagetoByteArray("HTC_logo.png")),
+
+                    new News("DigitIn","https://www.digit.in/news/"
+                            ,"Latest Technology News on mobile phones in India. Read news on computer, apps, games, gadgets and other personal tech."
+                    ,convertImagetoByteArray("digit_logo.png")),
+
+                    new News("Policy","https://www.policygenius.com/blog/"
+                    ,"A financial newsletter bringing you the money news and the money moves."
+                    ,convertImagetoByteArray("policy_logo.png")),
+
+            new News("Habr","https://habr.com/en/flows/develop/"
+                    ,"All posts in Development stream on Habr"
+                    ,convertImagetoByteArray("Habr_logo.png"))
             ));
 
         };
@@ -56,7 +105,11 @@ public class AutoRun {
     public CommandLineRunner populate_user_with_news(){
 
             return args->{
-                Set<News> newsSet=new HashSet<>(Arrays.asList(new News("Habr","https://habr.com/en/"),new News("Policy","https://www.policygenius.com/blog/")));
+                Set<News> newsSet=new HashSet<>(Arrays.asList(new News("Habr","https://habr.com/en/"
+                        ,"All posts in Development stream on Habr",convertImagetoByteArray("Habr_logo.png"))
+                        ,new News("Policy","https://www.policygenius.com/blog/"
+                                ,"A financial newsletter bringing you the money news and the money moves."
+                                ,convertImagetoByteArray("policy_logo.png"))));
                 User user1=new User("sherlock holmes","sholmes@gmail.com","watson",newsSet);
                 userRepo.save(user1);
 

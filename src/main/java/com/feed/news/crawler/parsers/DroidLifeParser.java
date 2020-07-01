@@ -26,11 +26,9 @@ public class DroidLifeParser  implements JsoupParser {
             String header = element.select(".preview__title").first()
                     .getElementsByTag("a").first().text();
             String content = element.select(".preview__excerpt").text();
-            String link =element
-//                    .select("preview__link").first()
-                    .getElementsByTag("a").first().attr("href");
+            String link =element.getElementsByTag("a").first().attr("href");
             String imageLink ="https://www.droid-life.com/"
-                    .concat(element.getElementsByTag("img").first().attr("src"));  //.wp-post-image
+                    .concat(element.getElementsByTag("img").first().attr("src"));
             LocalDate date = convertStringToDate(element.select(".entry-meta__updated").text(), DateTimeFormats.FULL_MONTH_FORMAT);
 
             articles.add(new Article(header, content, link, imageLink, date, Website.DroidLife));

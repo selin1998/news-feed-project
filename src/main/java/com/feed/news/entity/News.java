@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -28,6 +29,12 @@ public class News {
     @Column (name = "news_url")
     private String news_url;
 
+    @Column(name = "news_description")
+    private String news_description;
+
+    @Column(name = "news_image")
+    private byte[] news_image;
+
     @JsonManagedReference
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "disliked",
@@ -37,9 +44,19 @@ public class News {
     private Set<User> users;
 
 
-    public News(String news_name, String news_url) {
+    public News(String news_name, String news_url
+            ,String news_description,byte[] news_image
+    ) {
         this.news_name=news_name;
         this.news_url=news_url;
+        this.news_description=news_description;
+        this.news_image=news_image;
+    }
 
+    public String getImageAsBase64() {
+        byte[] encoded = Base64.getEncoder().encode(news_image);
+        String imgDataAsBase64 = new String(encoded);
+        String imgAsBase64 = "data:image/png;base64," + imgDataAsBase64;
+        return imgAsBase64;
     }
 }
