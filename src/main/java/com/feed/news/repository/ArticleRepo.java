@@ -12,6 +12,9 @@ import java.util.Set;
 
 @Repository
 public interface ArticleRepo extends JpaRepository<Article,String> {
-    List<Article> findByHeaderIgnoreCaseContaining(String keyword1);
+
+    List<Article> findByHeaderIgnoreCaseContainingOrContentIgnoreCaseContaining(String keyword1,String keyword2);
+
+    List<Article> findByDateEquals(LocalDate d);
 }
 
