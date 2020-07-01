@@ -2,7 +2,9 @@ package com.feed.news.crawler;
 
 import com.feed.news.crawler.parsers.*;
 
+
 public enum Website {
+
 
     TechCrunch(new TechCrunchParser()),
     UberGizmo(new UberGizmoParser()),
@@ -14,7 +16,6 @@ public enum Website {
     DigitIn(new DigitInParser()),
     Policy(new PolicyParser()),
     Habr(new HabrParser());
-
     public final JsoupParser parser;
 
     Website(JsoupParser parser) {
@@ -24,4 +25,6 @@ public enum Website {
     public JsoupParser getParser() {
         return this.parser;
     }
+
+
 }

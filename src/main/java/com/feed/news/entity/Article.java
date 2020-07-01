@@ -31,10 +31,10 @@ public class Article {
     @Column(name="image_link")
     String imageLink;
 
-    @Column(name="date")
+    @Column(name="article_date")
     LocalDate date;
 
-    @Transient
-    Website site;
+    @Column(name="site")
+    @Enumerated(EnumType.STRING)Website site;
 
 }
