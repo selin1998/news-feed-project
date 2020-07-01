@@ -49,7 +49,7 @@ public class AutoRun {
                     new News("HTCNews","https://www.pocket-lint.com/htc"),
                     new News("DigitIn","https://www.digit.in/news/"),
                     new News("Policy","https://www.policygenius.com/blog/"),
-            new News("Habr","https://habr.com/en/flows/develop/")
+                    new News("Habr","https://habr.com/en/flows/develop/")
             ));
 
         };
