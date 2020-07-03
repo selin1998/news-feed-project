@@ -52,43 +52,28 @@ public class NewsController {
 
     // http://localhost:8080/disable_news/1
 
-    @GetMapping("/disable_news/{id}")
-    public String showAllSites(Model model, @PathVariable int id, String operation, @ModelAttribute News site) {
+    @GetMapping(value={"/disable_news/{id}","/disable_news/{id}/{news_id}"})
+    public String showAllSites(Model model, @PathVariable int id,@PathVariable(required = false) Optional<Integer> news_id, String operation) {
 
         List<News> allSites = disableNewsService.getAllSites();
 
         model.addAttribute("allSites", allSites);
 
         model.addAttribute("user_id",id);
+
         log.info(id);
-        log.info(site.getNews_id());
         log.info(operation);
+
         if(operation!=null){
             log.info("adding dislike");
-            disableNewsService.addDislike(id,site.getNews_id());
+            log.info("news id that clicked is "+ news_id.get());
+            disableNewsService.addDislike(id, news_id.get());
         }
 
 
         return "disable-news";
 
     }
-
-//    @PostMapping("/disable_news/{id}")
-//    public String dismissNews(Model model, @PathVariable int id, String dismiss, @ModelAttribute News site) {
-//
-//
-//        disableNewsService.addDislike(id,site);
-//
-//        List<News> allSites = disableNewsService.getAllSites();
-//
-//        model.addAttribute("user_id",String.valueOf(id));
-//
-//        model.addAttribute("allSites", allSites);
-//
-//        return "disable-news";
-//    }
-
-
 
 
 

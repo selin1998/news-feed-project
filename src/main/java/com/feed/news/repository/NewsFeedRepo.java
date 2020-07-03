@@ -4,10 +4,12 @@ import com.feed.news.entity.News;
 import com.feed.news.entity.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -21,6 +23,8 @@ public interface NewsFeedRepo extends JpaRepository<News,Integer> {
     @Query(value="SELECT news_name FROM news  JOIN disliked ON disliked.n_id = news.news_id WHERE disliked.u_id=:id" , nativeQuery = true)
     List<String> extractbyUserid(@Param("id") int id);
 
+    @Modifying
+    @Transactional
     @Query(value ="INSERT INTO disliked(u_id,n_id) VALUES(:user_id,:news_id)",nativeQuery=true)
     void addDislike(@Param("user_id")int u_id,@Param("news_id")int n_id);
 

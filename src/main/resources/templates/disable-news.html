@@ -42,7 +42,7 @@
             <img class="tab-picture " th:src="${site.getImageAsBase64()}">
             <p class="tab-title" th:text="${site.news_name}"></p>
             <p class="tab-description" th:text="${site.news_description}"></p>
-                <form th:action="@{/disable_news/{id}(id = ${user_id})}" method="get">
+                <form th:action="@{'/disable_news/'+${user_id}+'/'+${site.getNews_id()}}" method="get">
                     <input  type="submit" th:onclick="'/disable_news/'+${user_id}+'?param='+${site.getNews_id()}"  value="dismiss" name="operation"  />
                     <p class="button-text">Dissmiss this site</p>
                 </form>
