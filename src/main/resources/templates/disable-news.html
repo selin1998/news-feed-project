@@ -38,14 +38,18 @@
         </label>
     </div>
     <div class="news-tabs">
-        <div class="single-tab" th:each="site : ${allSites}">
-            <img class="tab-picture" th:src="${site.getImageAsBase64()}">
+        <div  class="single-tab" th:each="site : ${allSites}">
+            <img class="tab-picture " th:src="${site.getImageAsBase64()}">
             <p class="tab-title" th:text="${site.news_name}"></p>
             <p class="tab-description" th:text="${site.news_description}"></p>
-            <div class="button">
-                <img class="icon" src="/img/vec.png">
-                <p class="button-text">Dissmiss this site</p>
-            </div>
+                <form th:action="@{/disable_news/{id}(id = ${user_id})}" method="get">
+                    <input  type="submit" th:onclick="'/disable_news/'+${user_id}+'?param='+${site.getNews_id()}"  value="dismiss" name="operation"  />
+                    <p class="button-text">Dissmiss this site</p>
+                </form>
+
+
+
+
         </div>
 <!--        <div class="single-tab">-->
 <!--            <img class="tab-picture" src="/img/1_6_fgYnisCa9V21mymySIvA 1.png">-->

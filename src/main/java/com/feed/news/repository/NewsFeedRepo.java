@@ -21,4 +21,7 @@ public interface NewsFeedRepo extends JpaRepository<News,Integer> {
     @Query(value="SELECT news_name FROM news  JOIN disliked ON disliked.n_id = news.news_id WHERE disliked.u_id=:id" , nativeQuery = true)
     List<String> extractbyUserid(@Param("id") int id);
 
+    @Query(value ="INSERT INTO disliked(u_id,n_id) VALUES(:user_id,:news_id)",nativeQuery=true)
+    void addDislike(@Param("user_id")int u_id,@Param("news_id")int n_id);
+
 }
