@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Tinder: Main Page</title>
     <link rel="stylesheet" th:href="@{/css/main-page.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <body>
 
@@ -34,7 +35,35 @@
     </div>
 </header>
 
+<div class="container">
+
+<form th:action ="@{/news_feed/{id}(id = ${user_id})}" method="post">
+<div class="row justify-content-center ">
+    <div class="col-2">
+        <p></p>
+        <input  type="date" id="start" name="news_start"
+               value="2020-07-01"
+               min="2018-01-01" max="2021-12-31">
+        <p>Start</p>
+    </div>
+    <div class="col-2">
+        <p></p>
+        <input  type="date" id="finish" name="news_finish"
+                value="2020-07-01"
+                min="2018-01-01" max="2021-12-31">
+        <p>Finish</p>
+    </div>
+</div>
+<div class="row justify-content-center ">
+    <button  type="submit">Submit</button>
+    <p></p>
+</div>
+</form>
+
+</div>
+
 <section class="main-section">
+
     <div class="tab" th:each="article : ${articles}">
         <a class="tab-link-wrapper" th:href="${article.articleLink}">
             <img class="tab-image main-page-image" th:src="${article.imageLink}" alt="404">

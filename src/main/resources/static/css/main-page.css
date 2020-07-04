@@ -108,7 +108,9 @@ body{
     height: 200px;
 }
 
-
+.article-date{
+    border-top: 20px;
+}
 
 .tab-title {
     font-weight: bold;

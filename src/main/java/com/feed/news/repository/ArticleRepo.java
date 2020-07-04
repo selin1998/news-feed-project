@@ -1,5 +1,6 @@
 package com.feed.news.repository;
 
+import com.feed.news.crawler.Website;
 import com.feed.news.entity.Article;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,8 +14,10 @@ import java.util.Set;
 @Repository
 public interface ArticleRepo extends JpaRepository<Article,String> {
 
-    List<Article> findByHeaderIgnoreCaseContainingOrContentIgnoreCaseContaining(String keyword1,String keyword2);
+    List<Article> findByHeaderIgnoreCaseContainingOrContentIgnoreCaseContainingOrSiteEquals(String keyword1,String keyword2, Website keyword3);
 
-    List<Article> findByDateEquals(LocalDate d);
+    List<Article> findByDateBetween(LocalDate d1, LocalDate d2);
+
+   // List<Article> findBySiteEquals(Website site);
 }
 

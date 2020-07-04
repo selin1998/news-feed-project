@@ -11,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.websocket.server.PathParam;
 import java.util.*;
@@ -50,10 +51,20 @@ public class NewsController {
 
     }
 
+
+    @PostMapping("/news_feed/{id}")
+    public String sortByDate(Model model,@PathVariable int id,String news_start, String news_finish ){
+        log.info(news_start);
+        log.info(news_finish);
+        model.addAttribute("user_id",id);
+        model.addAttribute("articles", articleService.findArticleByDate(news_start,news_finish));
+        return "main-page";
+    }
+
     // http://localhost:8080/disable_news/1
 
     @GetMapping(value={"/disable_news/{id}","/disable_news/{id}/{news_id}"})
-    public String showAllSites(Model model, @PathVariable int id,@PathVariable(required = false) Optional<Integer> news_id, String operation) {
+    public String showAllSites(Model model, @PathVariable int id, @PathVariable(required = false) Optional<Integer> news_id, String operation) {
 
         List<News> allSites = disableNewsService.getAllSites();
 
@@ -64,7 +75,7 @@ public class NewsController {
         log.info(id);
         log.info(operation);
 
-        if(operation!=null){
+        if(String.valueOf(operation).equals("enable")){
             log.info("adding dislike");
             log.info("news id that clicked is "+ news_id.get());
             disableNewsService.addDislike(id, news_id.get());
@@ -74,6 +85,11 @@ public class NewsController {
         return "disable-news";
 
     }
+
+//    @PostMapping(value={"/disable_news/{id}","/disable_news/{id}/{news_id}"})
+//    public String disableNews(){
+//
+//    }
 
 
 

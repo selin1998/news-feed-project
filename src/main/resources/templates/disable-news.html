@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Tinder: news</title>
     <link rel="stylesheet" th:href="@{/css/news.css}">
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
 </head>
 <body>
 <header class="main-header">
@@ -43,7 +44,7 @@
             <p class="tab-title" th:text="${site.news_name}"></p>
             <p class="tab-description" th:text="${site.news_description}"></p>
                 <form th:action="@{'/disable_news/'+${user_id}+'/'+${site.getNews_id()}}" method="get">
-                    <input  type="submit" th:onclick="'/disable_news/'+${user_id}+'?param='+${site.getNews_id()}"  value="dismiss" name="operation"  />
+                    <button th:onclick="'javascript:disfunction('+${site.getNews_id()} +');'" th:id="${site.getNews_id()}"  type="submit"  value="dismiss" name="operation"  />
                     <p class="button-text">Dissmiss this site</p>
                 </form>
 
