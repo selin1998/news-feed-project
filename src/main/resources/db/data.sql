@@ -19,4 +19,4 @@ INSERT INTO public.disliked (n_id, u_id) VALUES (6, 1);
 INSERT INTO public.disliked (n_id, u_id) VALUES (5, 1);
 
 
-INSERT INTO public.user_table (user_id, full_name, password, user_email) VALUES (1, 'sherlock', 'aaaabbb23', 'asa@asa');
+INSERT INTO public.user_table (user_id, full_name, password, email) VALUES (1, 'sherlock', 'aaaabbb23', 'asa@asa');

@@ -19,11 +19,11 @@
     <div class="login-section-container">
         <h1 class="login-section-container-title">Welcome Back!</h1>
         <p class="login-section-container-description">To keep connected with us please login with personal information by email address and password</p>
-        <form th:action="@{/login}" method="post" class="login-section-container-form">
+        <form th:action="@{/login}" method="POST" class="login-section-container-form">
             <div class="login-section-container-form-input-wrapper">
                 <img class="input-icons" src="/img/mail-icon.svg" alt="User Icon">
                 <label for="email"></label>
-                <input  th:placeholder="User_email" class="login-section-container-form-input" id="email" placeholder="Email address" type="email">
+                <input  th:placeholder="Email" class="login-section-container-form-input" id="email" placeholder="Email address" type="email">
             </div>
             <div class="login-section-container-form-input-wrapper">
                 <img class="input-icons" src="/img/lock-icon.svg" alt="User Icon">
@@ -40,7 +40,7 @@
                 <a href="/forgot-password.html" class="login-section-container-options-link">Forgot password?</a>
             </div>
             <div class="login-section-form-buttons">
-                <a href="/main-page.html" class="login-section-container-form-login">Login now</a>
+                <button th:text="Login" name="Submit" value="Login" type="Submit" class="login-section-container-form-login">Login now</button>
                 <a href="/registration"  class=" login-section-container-form-signup">Create account</a>
             </div>
             <div class="login-section-form-social">
@@ -60,6 +60,5 @@
     </div>
 </section>
 
-<script src="./js/checkbox.js"></script>
 </body>
 </html>

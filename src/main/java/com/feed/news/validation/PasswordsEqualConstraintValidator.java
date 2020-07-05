@@ -3,7 +3,7 @@ package com.feed.news.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.feed.news.entity.User;
+import com.feed.news.entity.XUser;
 
 public class PasswordsEqualConstraintValidator implements
         ConstraintValidator<PasswordsEqualConstraint, Object> {
@@ -14,7 +14,7 @@ public class PasswordsEqualConstraintValidator implements
 
     @Override
     public boolean isValid(Object candidate, ConstraintValidatorContext arg1) {
-        User user = (User) candidate;
+        XUser user = (XUser) candidate;
         return user.getPassword().equals(user.getConfirm_password());
     }
 }

@@ -1,10 +1,12 @@
 package com.feed.news.repository;
 
-import com.feed.news.entity.User;
+import com.feed.news.entity.XUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface UserRepository extends JpaRepository<User,Integer> {
-    public User findByEmail(String user_email);
+public interface UserRepository extends JpaRepository<XUser,Integer> {
+     Optional<XUser> findByEmail(String user_email);
 }

@@ -1,13 +1,10 @@
 package com.feed.news.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 @Data
@@ -28,13 +25,12 @@ public class News {
     @Column (name = "news_url")
     private String news_url;
 
-    @JsonManagedReference
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "disliked",
     joinColumns = {@JoinColumn(name = "n_id", referencedColumnName ="news_id" )},
             inverseJoinColumns = {@JoinColumn(name = "u_id", referencedColumnName = "user_id")}
     )
-    private Set<User> users;
+    private Set<XUser> users;
 
 
     public News(String news_name, String news_url) {
