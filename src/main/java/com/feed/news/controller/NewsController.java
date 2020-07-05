@@ -2,7 +2,7 @@
 //
 //
 //import com.feed.news.crawler.JsoupParser;
-//import com.feed.news.entity.Article;
+//import com.feed.news.entity.db.Article;
 //import com.feed.news.entity.User;
 //import com.feed.news.repository.ArticleRepo;
 //import com.feed.news.service.NewsFeedService;

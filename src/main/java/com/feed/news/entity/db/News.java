@@ -1,5 +1,6 @@
-package com.feed.news.entity;
+package com.feed.news.entity.db;
 
+import com.feed.news.entity.db.XUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
