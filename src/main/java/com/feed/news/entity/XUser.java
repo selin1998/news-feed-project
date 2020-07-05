@@ -1,6 +1,10 @@
 package com.feed.news.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.feed.news.validation.PasswordsEqualConstraint;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -10,8 +14,10 @@ import java.util.Set;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table (name = "user_table")
-public class User {
+public class XUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,17 +39,17 @@ public class User {
     @Length(min = 5, message = "*Your password must have at least 5 characters")
     private String confirm_password;
 
-    @Column(name = "image")
-    private byte[] image;
+    @Transient
+    private final static String DELIMITER = ":";
 
-    @Column(name = "active")
-    private int active;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
-    private Set<Role> roles;
-
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<News> news;
 
+    public XUser(String full_name, String email, String password, Set<News> news) {
+        this.full_name=full_name;
+        this.email=email;
+        this.password=password;
+        this.news=news;
 
+    }
 }

@@ -1,9 +1,11 @@
 package com.feed.news.service;
 
 
-import com.feed.news.entity.User;
+import com.feed.news.entity.XUser;
+
+import java.util.Optional;
 
 public interface UserService {
-    public User findUserByEmail(String user_email);
-    public User saveUser(User user);
+    public Optional<XUser> findUserByEmail(String user_email);
+    public XUser saveUser(XUser user);
 }

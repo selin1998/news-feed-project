@@ -1,42 +1,47 @@
 package com.feed.news.service;
 
-import com.feed.news.entity.Role;
-import com.feed.news.entity.User;
-import com.feed.news.repository.RoleRepository;
+import com.feed.news.entity.XUser;
 import com.feed.news.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService{
     private UserRepository userRepository;
-    private RoleRepository roleRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    public List<XUser> allUsers() {
+        return userRepository.findAll();
+    }
+
     @Override
-    public User findUserByEmail( String user_email){
+    public Optional<XUser> findUserByEmail(String user_email){
         return userRepository.findByEmail(user_email);
     }
 
     @Override
-    public User saveUser(User user) {
+    public XUser saveUser(XUser user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setActive(1);
-        Role userRole= roleRepository.findByRole("ADMIN");
-        user.setRoles(new HashSet<Role>(Collections.singletonList(userRole)));
+        user.setPassword(bCryptPasswordEncoder.encode(user.getConfirm_password()));
         return userRepository.save(user);
     }
 
+    public boolean deleteUser(int userId) {
+        if (userRepository.findById(userId).isPresent()) {
+            userRepository.deleteById(userId);
+            return true;
+        }
+        return false;
+    }
 
 }
