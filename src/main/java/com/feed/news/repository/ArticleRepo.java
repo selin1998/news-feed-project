@@ -18,6 +18,6 @@ public interface ArticleRepo extends JpaRepository<Article,String> {
 
     List<Article> findByDateBetween(LocalDate d1, LocalDate d2);
 
-   // List<Article> findBySiteEquals(Website site);
+
 }
 

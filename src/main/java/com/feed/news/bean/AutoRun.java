@@ -20,7 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-@Configuration
+@Component
 public class AutoRun {
 
 

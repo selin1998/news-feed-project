@@ -22,49 +22,21 @@ import java.util.stream.Stream;
 @Controller
 @RequestMapping("/")
 public class NewsController {
-    private final  NewsFeedService feedService;
-    private final ArticleService articleService;
+
     private final DisableNewsService disableNewsService;
 
-    public NewsController(NewsFeedService feedService, ArticleService articleService, DisableNewsService disableNewsService) {
-        this.feedService = feedService;
-        this.articleService = articleService;
+    public NewsController( DisableNewsService disableNewsService) {
+
         this.disableNewsService=disableNewsService;
     }
 
 
-    // http://localhost:8080/news_feed/1
-    @GetMapping("/news_feed/{id}")
-    public String showDesignForm(Model model, @PathVariable int id, String keyword) {
 
-        Stream<JsoupParser> newsParsers = feedService.getNewsParsers(id);
-
-        List<Article> articles = newsParsers.flatMap(p -> p.getArticles().stream()).collect(Collectors.toList());
-
-        articleService.saveAll(articles);
-
-        model.addAttribute("user_id",id);
-
-        model.addAttribute("articles", keyword!=null ? articleService.findArticleByKeyword(keyword):articles);
-
-        return "main-page";
-
-    }
-
-
-    @PostMapping("/news_feed/{id}")
-    public String sortByDate(Model model,@PathVariable int id,String news_start, String news_finish ){
-        log.info(news_start);
-        log.info(news_finish);
-        model.addAttribute("user_id",id);
-        model.addAttribute("articles", articleService.findArticleByDate(news_start,news_finish));
-        return "main-page";
-    }
 
     // http://localhost:8080/disable_news/1
 
     @GetMapping(value={"/disable_news/{id}","/disable_news/{id}/{news_id}"})
-    public String showAllSites(Model model, @PathVariable int id, @PathVariable(required = false) Optional<Integer> news_id, String operation) {
+    public String showAllSites(Model model, @PathVariable int id) {
 
         List<News> allSites = disableNewsService.getAllSites();
 
@@ -73,23 +45,45 @@ public class NewsController {
         model.addAttribute("user_id",id);
 
         log.info(id);
-        log.info(operation);
 
-        if(String.valueOf(operation).equals("enable")){
-            log.info("adding dislike");
-            log.info("news id that clicked is "+ news_id.get());
-            disableNewsService.addDislike(id, news_id.get());
-        }
+        List<String> buttons = disableNewsService.getButtonsStatus(id,allSites);
+
+        model.addAttribute("buttons",buttons);
 
 
         return "disable-news";
 
     }
 
-//    @PostMapping(value={"/disable_news/{id}","/disable_news/{id}/{news_id}"})
-//    public String disableNews(){
-//
-//    }
+    @PostMapping(value={"/disable_news/{id}","/disable_news/{id}/{news_id}"})
+    public String disableNews(Model model,@RequestParam(required =false) String  operation,@PathVariable int id, @PathVariable(required = false) Optional<Integer> news_id){
+
+        List<News> allSites = disableNewsService.getAllSites();
+
+        model.addAttribute("allSites", allSites);
+
+        model.addAttribute("user_id",id);
+
+        log.info(operation);
+
+        if(String.valueOf(operation).equals("Disable")){
+            log.info("adding dislike");
+            log.info("news id that clicked is "+ news_id.get());
+            disableNewsService.addDislike(id, news_id.get());
+        }
+        if(String.valueOf(operation).equals("Enable")){
+            log.info("deleting dislike");
+            log.info("news id that clicked is "+ news_id.get());
+            disableNewsService.deleteDislike(id, news_id.get());
+        }
+
+
+        List<String> buttons = disableNewsService.getButtonsStatus(id,allSites);
+
+        model.addAttribute("buttons",buttons);
+
+        return "disable-news";
+    }
 
 
 

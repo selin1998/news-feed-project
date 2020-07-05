@@ -28,4 +28,12 @@ public interface NewsFeedRepo extends JpaRepository<News,Integer> {
     @Query(value ="INSERT INTO disliked(u_id,n_id) VALUES(:user_id,:news_id)",nativeQuery=true)
     void addDislike(@Param("user_id")int u_id,@Param("news_id")int n_id);
 
+    @Modifying
+    @Transactional
+    @Query(value="DELETE FROM disliked WHERE disliked.u_id=:user_id AND  disliked.n_id=:news_id",nativeQuery = true)
+    void deleteDislike(@Param("user_id")int u_id,@Param("news_id")int n_id);
+
+    @Query(value="SELECT n_id FROM disliked WHERE disliked.u_id=:user_id", nativeQuery = true)
+    List<Integer> getAllDislikes(@Param("user_id")int u_id);
+
 }

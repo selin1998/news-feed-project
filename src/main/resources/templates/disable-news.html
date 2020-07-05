@@ -52,9 +52,9 @@
             <p class="tab-title" th:text="${allSites[c+r].news_name}"></p>
             <p class="tab-description" th:text="${allSites[c+r].news_description}"></p>
 
-                <form th:action="@{'/disable_news/'+${user_id}+'/'+${allSites[c+r].getNews_id()}}" method="get">
-                    <button th:onclick="'javascript:disfunction('+${allSites[c+r].getNews_id()} +');'" th:id="${allSites[c+r].getNews_id()}"  type="submit"  value="dismiss" name="operation"  />
-                    <p class="button-text">Dissmiss this site</p>
+                <form th:action="@{'/disable_news/'+${user_id}+'/'+${allSites[c+r].getNews_id()}}" method="post">
+                    <button  th:id="${allSites[c+r].getNews_id()}"  type="submit"  th:value="${buttons[c+r]}" name="operation"  />
+                    <p class="button-text" th:text="${buttons[c+r]}"></p>
                 </form>
 
         </div>
