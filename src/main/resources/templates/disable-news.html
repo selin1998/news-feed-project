@@ -34,6 +34,7 @@
     </div>
 </header>
 <section>
+
     <div class="add-search">
         <p class="details">Disable news from specific websites:</p>
         <label class="main-header-search-wrapper">
@@ -41,104 +42,26 @@
             <img src="/img/search-icon.svg" alt="Search Icon">
         </label>
     </div>
-    <div class="news-tabs">
-        <div  class="single-tab" th:each="site : ${allSites}">
-            <img class="tab-picture " th:src="${site.getImageAsBase64()}">
-            <p class="tab-title" th:text="${site.news_name}"></p>
-            <p class="tab-description" th:text="${site.news_description}"></p>
-                <form th:action="@{'/disable_news/'+${user_id}+'/'+${site.getNews_id()}}" method="get">
-                    <button th:onclick="'javascript:disfunction('+${site.getNews_id()} +');'" th:id="${site.getNews_id()}"  type="submit"  value="dismiss" name="operation"  />
+
+    <th:block th:with="colCount=${5}">
+    <div class="news-tabs" th:each="r : ${#numbers.sequence(0, allSites.size()-1,colCount)}">
+
+        <div th:each="c : ${#numbers.sequence(0, colCount-1 )}"  class="single-tab"  >
+
+            <img class="tab-picture " th:src="${allSites[c+r].getImageAsBase64()}">
+            <p class="tab-title" th:text="${allSites[c+r].news_name}"></p>
+            <p class="tab-description" th:text="${allSites[c+r].news_description}"></p>
+
+                <form th:action="@{'/disable_news/'+${user_id}+'/'+${allSites[c+r].getNews_id()}}" method="get">
+                    <button th:onclick="'javascript:disfunction('+${allSites[c+r].getNews_id()} +');'" th:id="${allSites[c+r].getNews_id()}"  type="submit"  value="dismiss" name="operation"  />
                     <p class="button-text">Dissmiss this site</p>
                 </form>
 
-
-
-
         </div>
-<!--        <div class="single-tab">-->
-<!--            <img class="tab-picture" src="/img/1_6_fgYnisCa9V21mymySIvA 1.png">-->
-<!--            <p class="tab-title">MEDIUM</p>-->
-<!--            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>-->
-<!--            <div class="button">-->
-<!--                <img class="icon" src="/img/vec.png">-->
-<!--                <p class="button-text">Dissmiss this author</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="single-tab">-->
-<!--            <img class="tab-picture" src="/img/1_6_fgYnisCa9V21mymySIvA 1.png">-->
-<!--            <p class="tab-title">MEDIUM</p>-->
-<!--            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>-->
-<!--            <div class="button">-->
-<!--                <img class="icon" src="/img/vec.png">-->
-<!--                <p class="button-text">Dissmiss this author</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="single-tab">-->
-<!--            <img class="tab-picture" src="/img/1_6_fgYnisCa9V21mymySIvA 1.png">-->
-<!--            <p class="tab-title">MEDIUM</p>-->
-<!--            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>-->
-<!--            <div class="button">-->
-<!--                <img class="icon" src="/img/vec.png">-->
-<!--                <p class="button-text">Dissmiss this author</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="single-tab">-->
-<!--            <img class="tab-picture" src="/img/1_6_fgYnisCa9V21mymySIvA 1.png">-->
-<!--            <p class="tab-title">MEDIUM</p>-->
-<!--            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>-->
-<!--            <div class="button">-->
-<!--                <img class="icon" src="/img/vec.png">-->
-<!--                <p class="button-text">Dissmiss this author</p>-->
-<!--            </div>-->
-<!--        </div>-->
+
     </div>
-<!--    <div class="news-tabs">-->
-<!--        <div class="single-tab">-->
-<!--            <img class="tab-picture" src="/img/1_6_fgYnisCa9V21mymySIvA 1.png">-->
-<!--            <p class="tab-title">MEDIUM</p>-->
-<!--            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>-->
-<!--            <div class="button">-->
-<!--                <img class="icon" src="/img/vec.png">-->
-<!--                <p class="button-text">Dissmiss this author</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="single-tab">-->
-<!--            <img class="tab-picture" src="/img/1_6_fgYnisCa9V21mymySIvA 1.png">-->
-<!--            <p class="tab-title">MEDIUM</p>-->
-<!--            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>-->
-<!--            <div class="button">-->
-<!--                <img class="icon" src="/img/vec.png">-->
-<!--                <p class="button-text">Dissmiss this author</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="single-tab">-->
-<!--            <img class="tab-picture" src="/img/1_6_fgYnisCa9V21mymySIvA 1.png">-->
-<!--            <p class="tab-title">MEDIUM</p>-->
-<!--            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>-->
-<!--            <div class="button">-->
-<!--                <img class="icon" src="/img/vec.png">-->
-<!--                <p class="button-text">Dissmiss this author</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="single-tab">-->
-<!--            <img class="tab-picture" src="/img/1_6_fgYnisCa9V21mymySIvA 1.png">-->
-<!--            <p class="tab-title">MEDIUM</p>-->
-<!--            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>-->
-<!--            <div class="button">-->
-<!--                <img class="icon" src="/img/vec.png">-->
-<!--                <p class="button-text">Dissmiss this author</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="single-tab">-->
-<!--            <img class="tab-picture" src="/img/1_6_fgYnisCa9V21mymySIvA 1.png">-->
-<!--            <p class="tab-title">MEDIUM</p>-->
-<!--            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>-->
-<!--            <div class="button">-->
-<!--                <img class="icon" src="/img/vec.png">-->
-<!--                <p class="button-text">Dissmiss this author</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+    </th:block>
+
 
 </section>
 
