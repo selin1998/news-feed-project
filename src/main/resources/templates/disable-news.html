@@ -3,7 +3,7 @@
       lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tinder: news</title>
+    <title>Disable-news</title>
     <link rel="stylesheet" th:href="@{/css/news.css}">
     <script type="text/javascript" th:src="@{/js/script.js}"></script>
 </head>
@@ -12,8 +12,11 @@
     <a href="/main-page.html" class="main-header-logo"><img src="/img/Group 12.png" alt="IBA Tech Academy"></a>
     <div class="main-header-wrapper">
         <label class="main-header-search-wrapper">
-            <input type="search" class="main-header-search" placeholder="Search">
-            <img src="/img/search-icon.svg" alt="Search Icon">
+            <form th:action ="@{/news_feed/{id}(id = ${user_id})}" method="get">
+                <input type="text" class="main-header-search"  name="keyword" placeholder="Press Enter">
+                <img src="/img/search-icon.svg" alt="Search Icon">
+            </form>
+
         </label>
         <div class="main-header-profile-wrapper">
             <div class="main-header-profile-credentials">
@@ -23,7 +26,7 @@
             <img class="main-header-user-icon" src="/img/user-icon-with-background.svg" alt="User Icon">
             <div class="hidden-accordion-wrapper">
                 <ul class="hidden-accordion">
-                    <li class="hidden-accordion-item"><img src="/img/favourite-icon.svg" alt="Favourite Icon"><a href="/disable-news.html" class="hidden-accordion-item-link">My News</a></li>
+                    <li class="hidden-accordion-item"><img src="/img/favourite-icon.svg" alt="Favourite Icon"><a th:href="@{/news_feed/{id}(id = ${user_id})}" class="hidden-accordion-item-link">Main-page</a></li>
                     <li class="hidden-accordion-item"><img src="/img/log-out-icon.svg" alt="Log Out Icon"><a href="/index.html" class="hidden-accordion-item-link">Log Out</a></li>
                 </ul>
             </div>

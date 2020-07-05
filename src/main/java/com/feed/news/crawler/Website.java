@@ -16,6 +16,7 @@ public enum Website {
     DigitIn(new DigitInParser()),
     Policy(new PolicyParser()),
     Habr(new HabrParser());
+
     public final JsoupParser parser;
 
     Website(JsoupParser parser) {

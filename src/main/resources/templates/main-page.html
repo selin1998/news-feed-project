@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tinder: Main Page</title>
+    <title>Main Page</title>
     <link rel="stylesheet" th:href="@{/css/main-page.css}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
@@ -27,7 +27,7 @@
             <img class="main-header-user-icon" src="/img/user-icon-with-background.svg" alt="User Icon">
             <div class="hidden-accordion-wrapper">
                 <ul class="hidden-accordion">
-                    <li class="hidden-accordion-item"><img src="/img/favourite-icon.svg" alt="Favourite Icon"><a href="/disable-news.html" class="hidden-accordion-item-link">My News</a></li>
+                    <li class="hidden-accordion-item"><img src="/img/favourite-icon.svg" alt="Favourite Icon"><a th:href="@{/disable_news/{id}(id = ${user_id})}" class="hidden-accordion-item-link">My News</a></li>
                     <li class="hidden-accordion-item"><img src="/img/log-out-icon.svg" alt="Log Out Icon"><a href="/index.html" class="hidden-accordion-item-link">Log Out</a></li>
                 </ul>
             </div>
@@ -53,10 +53,10 @@
                 min="2018-01-01" max="2021-12-31">
         <p>Finish</p>
     </div>
-</div>
-<div class="row justify-content-center ">
-    <button  type="submit">Submit</button>
-    <p></p>
+    <div class="col-2">
+        <p></p>
+        <button  type="submit">Submit</button>
+    </div>
 </div>
 </form>
 
