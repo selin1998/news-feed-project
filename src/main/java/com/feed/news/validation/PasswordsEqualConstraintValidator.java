@@ -3,7 +3,7 @@ package com.feed.news.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.feed.news.entity.XUser;
+import com.feed.news.entity.db.XUser;
 
 public class PasswordsEqualConstraintValidator implements
         ConstraintValidator<PasswordsEqualConstraint, Object> {

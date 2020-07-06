@@ -23,24 +23,24 @@
             <div class="registration-section-container-form-input-wrapper">
                 <img class="box-icons" src="/img/user-icon.svg" alt="User Icon">
                 <label th:if="${#fields.hasErrors('full_name')}" th:errors="*{full_name}" for="full-name"></label>
-                <input th:field="*{full_name}" class="registration-section-container-form-input" id="full-name" placeholder="Full name" type="text">
+                <input name="full_name" th:field="*{full_name}" class="registration-section-container-form-input" id="full-name" placeholder="Full name" type="text">
             </div>
             <div class="registration-section-container-form-input-wrapper">
                 <img class="box-icons" src="/img/mail-icon.svg" alt="User Icon">
                 <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" for="email"></label>
-                <input  th:field="*{email}" class="registration-section-container-form-input" id="email" placeholder="Email address" type="email">
+                <input name="email" th:field="*{email}" class="registration-section-container-form-input" id="email" placeholder="Email address" type="email">
             </div>
             <div class="registration-section-container-form-input-wrapper">
                 <img class="box-icons" src="/img/lock-icon.svg" alt="User Icon">
                 <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" for="password"></label>
-                <input th:field="*{password}" class="registration-section-container-form-input" id="password" placeholder="Password" type="password">
+                <input name="password" th:field="*{password}" class="registration-section-container-form-input" id="password" placeholder="Password" type="password">
             </div>
             <div class="registration-section-container-form-input-wrapper mb0">
                 <img class="box-icons" src="/img/lock-icon.svg" alt="User Icon">
                 <label th:if="${#fields.hasErrors('confirm_password')}" th:errors="*{confirm_password}" for="confirm-password"></label>
-                <input th:field="*{confirm_password}" class="registration-section-container-form-input" id="confirm-password" placeholder="Confirm Password" type="password">
+                <input name="confirm_password" th:field="*{confirm_password}" class="registration-section-container-form-input" id="confirm-password" placeholder="Confirm Password" type="password">
             </div>
-            <input type="submit" value="Create account" class="registration-section-container-form-submit">
+            <input name="Submit" type="submit" value="Create account" class="registration-section-container-form-submit">
             <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
         </form>
     </div>

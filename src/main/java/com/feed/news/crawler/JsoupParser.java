@@ -1,6 +1,6 @@
 package com.feed.news.crawler;
 
-import com.feed.news.entity.Article;
+import com.feed.news.entity.db.Article;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

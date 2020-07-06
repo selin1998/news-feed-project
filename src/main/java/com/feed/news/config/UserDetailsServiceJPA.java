@@ -1,7 +1,7 @@
 package com.feed.news.config;
 
 
-import com.feed.news.entity.XUser;
+import com.feed.news.entity.db.XUser;
 import com.feed.news.entity.XUserDetails;
 import com.feed.news.repository.UserRepository;
 import lombok.extern.log4j.Log4j2;

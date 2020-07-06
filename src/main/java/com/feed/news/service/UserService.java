@@ -1,7 +1,7 @@
 package com.feed.news.service;
 
 
-import com.feed.news.entity.XUser;
+import com.feed.news.entity.db.XUser;
 
 import java.util.Optional;
 

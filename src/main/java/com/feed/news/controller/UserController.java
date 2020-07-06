@@ -2,8 +2,8 @@ package com.feed.news.controller;
 
 
 import com.feed.news.crawler.JsoupParser;
-import com.feed.news.entity.Article;
-import com.feed.news.entity.XUser;
+import com.feed.news.entity.db.Article;
+import com.feed.news.entity.db.XUser;
 import com.feed.news.entity.XUserDetails;
 import com.feed.news.repository.ArticleRepo;
 import com.feed.news.service.NewsFeedService;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import javax.validation.Validator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,7 +36,7 @@ public class UserController {
     private UserService userService;
 
 
-    @RequestMapping(value={ "/login"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
     public ModelAndView login(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
@@ -82,10 +81,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/news", method = RequestMethod.GET)
-    public ModelAndView showDesignForm(Model model, Authentication auth) {
+    public ModelAndView showDesignForm(Model model) {
         ModelAndView modelAndView= new ModelAndView();
-        Object principal = auth.getPrincipal();
-        XUserDetails xd = (XUserDetails) principal;
+        XUserDetails xd = (XUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Stream<JsoupParser> newsParsers = feedService.getNewsParsers(xd.getId());
         List<Article> articles = newsParsers.flatMap(p -> p.getArticles().stream()).collect(Collectors.toList());
         articleRepo.saveAll(articles);

@@ -1,7 +1,7 @@
 package com.feed.news.config;
 
-import com.feed.news.entity.News;
-import com.feed.news.entity.XUser;
+import com.feed.news.entity.db.News;
+import com.feed.news.entity.db.XUser;
 import com.feed.news.repository.NewsFeedRepo;
 import com.feed.news.repository.UserRepo;
 import org.springframework.boot.CommandLineRunner;

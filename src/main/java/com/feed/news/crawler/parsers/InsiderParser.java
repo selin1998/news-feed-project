@@ -1,6 +1,6 @@
 package com.feed.news.crawler.parsers;
 
-import com.feed.news.entity.Article;
+import com.feed.news.entity.db.Article;
 import com.feed.news.crawler.DateTimeFormats;
 import com.feed.news.crawler.JsoupParser;
 import com.feed.news.crawler.Website;
@@ -10,9 +10,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
