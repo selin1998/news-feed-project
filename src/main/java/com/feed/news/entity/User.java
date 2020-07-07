@@ -34,6 +34,7 @@ public class User {
     @ManyToMany(mappedBy = "users" , cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<News> news;
 
+
     public Set<News> getNews(){
         return news;
     }

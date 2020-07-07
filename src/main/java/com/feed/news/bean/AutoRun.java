@@ -2,16 +2,12 @@ package com.feed.news.bean;
 
 import com.feed.news.entity.News;
 import com.feed.news.entity.User;
-import com.feed.news.repository.NewsFeedRepo;
+import com.feed.news.repository.NewsRepo;
 import com.feed.news.repository.UserRepo;
 import lombok.SneakyThrows;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,9 +21,9 @@ public class AutoRun {
 
 
     private final UserRepo userRepo;
-    private final NewsFeedRepo newsRepo;
+    private final NewsRepo newsRepo;
 
-    public AutoRun(UserRepo userRepo, NewsFeedRepo newsRepo) {
+    public AutoRun(UserRepo userRepo, NewsRepo newsRepo) {
 
         this.userRepo = userRepo;
 

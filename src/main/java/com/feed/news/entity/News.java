@@ -44,9 +44,7 @@ public class News {
     private Set<User> users;
 
 
-    public News(String news_name, String news_url
-            ,String news_description,byte[] news_image
-    ) {
+    public News(String news_name, String news_url,String news_description,byte[] news_image) {
         this.news_name=news_name;
         this.news_url=news_url;
         this.news_description=news_description;

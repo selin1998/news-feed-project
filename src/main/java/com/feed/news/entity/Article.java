@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -36,5 +37,6 @@ public class Article {
 
     @Column(name="site")
     @Enumerated(EnumType.STRING)Website site;
+
 
 }

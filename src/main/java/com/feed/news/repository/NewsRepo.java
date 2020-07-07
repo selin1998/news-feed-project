@@ -18,10 +18,9 @@ import static org.hibernate.hql.internal.antlr.SqlTokenTypes.LEFT;
 import static org.hibernate.hql.internal.antlr.SqlTokenTypes.ON;
 
 @Repository
-public interface NewsFeedRepo extends JpaRepository<News,Integer> {
+public interface NewsRepo extends JpaRepository<News,Integer> {
 
-    @Query(value="SELECT news_name FROM news  JOIN disliked ON disliked.n_id = news.news_id WHERE disliked.u_id=:id" , nativeQuery = true)
-    List<String> extractbyUserid(@Param("id") int id);
+
 
     @Modifying
     @Transactional

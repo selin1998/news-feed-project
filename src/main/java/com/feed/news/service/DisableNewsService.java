@@ -1,8 +1,7 @@
 package com.feed.news.service;
 
-import com.feed.news.crawler.Website;
 import com.feed.news.entity.News;
-import com.feed.news.repository.NewsFeedRepo;
+import com.feed.news.repository.NewsRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +9,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class DisableNewsService {
-    private final NewsFeedRepo feedRepo;
+    private final NewsRepo feedRepo;
 
-    public DisableNewsService(NewsFeedRepo feedRepo) {
+    public DisableNewsService(NewsRepo feedRepo) {
+
         this.feedRepo = feedRepo;
     }
 
@@ -20,14 +20,13 @@ public class DisableNewsService {
         return feedRepo.findAll();
     }
 
-
     public void addDislike(int id, int news_id) {
         feedRepo.addDislike(id,news_id);
     }
 
     public void deleteDislike(int id, int news_id){feedRepo.deleteDislike(id,news_id);}
 
-    public List<Integer> getDislikesByUserId(int user_id){return feedRepo.getAllDislikes(user_id);}
+    public  List<Integer> getDislikesByUserId(int user_id){return feedRepo.getAllDislikes(user_id);}
 
     public List<String> getButtonsStatus(int user_id, List<News> allSites){
 

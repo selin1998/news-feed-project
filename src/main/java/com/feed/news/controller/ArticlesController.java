@@ -3,7 +3,6 @@ package com.feed.news.controller;
 import com.feed.news.crawler.JsoupParser;
 import com.feed.news.entity.Article;
 import com.feed.news.service.ArticleService;
-import com.feed.news.service.NewsFeedService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +20,11 @@ import java.util.stream.Stream;
 @RequestMapping("/")
 public class ArticlesController {
 
-    private final NewsFeedService feedService;
+
     private final ArticleService articleService;
 
-    public ArticlesController(NewsFeedService feedService, ArticleService articleService) {
+    public ArticlesController(ArticleService articleService) {
 
-        this.feedService = feedService;
         this.articleService = articleService;
     }
 
@@ -35,15 +33,17 @@ public class ArticlesController {
     @GetMapping("/news_feed/{id}")
     public String showDesignForm(Model model, @PathVariable int id, String keyword) {
 
-        Stream<JsoupParser> newsParsers = feedService.getNewsParsers(id);
+        Stream<JsoupParser> newsParsers = articleService.getNewsParsers(id);
 
         List<Article> articles = newsParsers.flatMap(p -> p.getArticles().stream()).collect(Collectors.toList());
 
         articleService.saveAll(articles);
 
+        log.info(keyword);
+
         model.addAttribute("user_id",id);
 
-        model.addAttribute("articles", keyword!=null ? articleService.findArticleByKeyword(keyword):articles);
+        model.addAttribute("articles", keyword!=null ? articleService.findArticleByKeyword(keyword,id):articleService.getAllEnabled(id));
 
         return "main-page";
 
@@ -55,7 +55,7 @@ public class ArticlesController {
         log.info(news_start);
         log.info(news_finish);
         model.addAttribute("user_id",id);
-        model.addAttribute("articles", articleService.findArticleByDate(news_start,news_finish));
+        model.addAttribute("articles", articleService.findArticleByDate(news_start,news_finish,id));
         return "main-page";
     }
 
