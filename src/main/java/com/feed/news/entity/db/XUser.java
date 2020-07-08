@@ -51,6 +51,19 @@ public class XUser {
         this.email=email;
         this.password=password;
         this.news=news;
-
     }
+
+    public XUser(String full_name,  String email, String password) {
+        this.full_name = full_name;
+        this.email = email;
+        this.password = password;
+    }
+
+//    public XUser(String full_name, String email, String password, Set<Role> roles) {
+//        this.full_name = full_name;
+//        this.email = email;
+//        this.password = password;
+//        this.roles = roles;
+//    }
+
 }

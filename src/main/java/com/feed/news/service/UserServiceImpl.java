@@ -45,6 +45,11 @@ public class UserServiceImpl implements UserService{
         return userRepository.save(user);
     }
 
+    @Override
+    public void updatePassword(String password, Integer userId) {
+        userRepository.updatePassword(password, userId);
+    }
+
     public boolean deleteUser(int userId) {
         if (userRepository.findById(userId).isPresent()) {
             userRepository.deleteById(userId);
@@ -52,5 +57,7 @@ public class UserServiceImpl implements UserService{
         }
         return false;
     }
+
+
 
 }

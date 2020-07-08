@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:8081}
+  port: ${PORT:9091}
 
 
 spring:
@@ -7,7 +7,7 @@ spring:
     banner-mode: off
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/springapp
+    url: jdbc:postgresql://localhost:5432/project
     username: postgres
     password: password
 
@@ -18,10 +18,30 @@ spring:
 #          github:
 #            clientId: 8d408ff76b1915728870
 #            clientSecret: 9403a4ccbd62a8f71ddd21da51abd41531e14bb2
-
+# ===============================
+# = JPA configurations
+# ===============================
   jpa:
     open-in-view: false
     generate-ddl: true
-    hibernate.ddl-auto: create
+    hibernate.ddl-auto: update
     show-sql: true
+
+# ===============================
+# = MAIL configurations
+# ===============================
+  mail:
+      default-encoding: UTF-8
+      host: smtp.gmail.com
+      username: zeynebb2022@gmail.com
+      password: huimxxmrumxwkxcv
+      port: 587
+      properties:
+        mail:
+          smtp:
+            auth: true
+            starttls:
+              enable: true
+      protocol: smtp
+      test-connection: false
 
