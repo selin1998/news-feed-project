@@ -2,6 +2,8 @@ package com.feed.news.repository;
 
 import com.feed.news.crawler.Website;
 import com.feed.news.entity.Article;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,11 +19,11 @@ import java.util.Set;
 public interface ArticleRepo extends JpaRepository<Article,String> {
 
     // (a^b^c)&d=(a&d)^(b&d)^(c&d) -> (header^content^siteEquals)&(siteNotIn) : for search bar
-    List<Article> findAllByHeaderIgnoreCaseContainingAndSiteNotInOrContentIgnoreCaseContainingAndSiteNotInOrSiteEqualsAndSiteNotInOrderByDateDesc(String keyword1,List<Website> sites1, String keyword2,List<Website> sites2, Website keyword3 , List<Website> sites3);
+    Page<Article> findAllByHeaderIgnoreCaseContainingAndSiteNotInOrContentIgnoreCaseContainingAndSiteNotInOrSiteEqualsAndSiteNotInOrderByDateDesc(String keyword1, List<Website> sites1, String keyword2, List<Website> sites2, Website keyword3 , List<Website> sites3, Pageable page);
 
-    List<Article> findBySiteNotInAndDateBetweenOrderByDateDesc(List<Website> sites,LocalDate d1, LocalDate d2);
+    Page<Article> findBySiteNotInAndDateBetweenOrderByDateDesc(List<Website> sites,LocalDate d1, LocalDate d2,Pageable page);
 
-    List<Article> findBySiteNotInOrderByDateDesc(List<Website> sites);
+    Page<Article> findBySiteNotInOrderByDateDesc(List<Website> sites,Pageable page);
 
     @Query(value="SELECT news_name FROM news  JOIN disliked ON disliked.n_id = news.news_id WHERE disliked.u_id=:id" , nativeQuery = true)
     List<String> extractNewsNamebyUserid(@Param("id") int id);

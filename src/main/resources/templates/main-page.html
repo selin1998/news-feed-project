@@ -6,6 +6,7 @@
     <title>Main Page</title>
     <link rel="stylesheet" th:href="@{/css/main-page.css}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
 </head>
 <body>
 
@@ -44,14 +45,14 @@
         <input  type="date" id="start" name="news_start"
                value="2020-07-01"
                min="2018-01-01" max="2021-12-31">
-        <p>Start</p>
+        <p>Start date</p>
     </div>
     <div class="col-2">
         <p></p>
         <input  type="date" id="finish" name="news_finish"
                 value="2020-07-01"
                 min="2018-01-01" max="2021-12-31">
-        <p>Finish</p>
+        <p>Finish date</p>
     </div>
     <div class="col-2">
         <p></p>
@@ -64,7 +65,7 @@
 
 <section class="main-section">
 
-    <div class="tab" th:each="article : ${articles}">
+    <div class="tab" th:each="article : ${articles.content}">
         <a class="tab-link-wrapper" th:href="${article.articleLink}">
             <img class="tab-image main-page-image" th:src="${article.imageLink}" alt="404">
             <div class="tab-content">
@@ -84,6 +85,25 @@
     </div>
 
 </section>
+
+
+<div class="pagination-div main-section">
+    <span th:if="${articles.hasPrevious()}">
+        <a th:href="@{/news_feed/{id}(id = ${user_id},page=${articles.number-1},size=${articles.size}, keyword=${keyword})}">Previous</a>
+    </span>
+        <th:block th:each="i: ${#numbers.sequence(0, articles.totalPages - 1)}">
+            <span th:if="${articles.number == i}" class="selected">[[${i}+1]]</span>
+            <span th:unless="${articles.number == i}">
+             <a th:href="@{/news_feed/{id}(id = ${user_id},page=${i},size=${articles.size},keyword=${keyword})}">[[${i}+1]]</a>
+        </span>
+        </th:block>
+        <span th:if="${articles.hasNext()}">
+        <a th:href="@{/news_feed/{id}(id = ${user_id},page=${articles.number+1},size=${articles.size},keyword=${keyword})}">Next</a>
+    </span>
+</div>
+
+
+
 
 </body>
 </html>
