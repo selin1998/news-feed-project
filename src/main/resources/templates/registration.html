@@ -20,6 +20,9 @@
         <h1 class="registration-section-container-title">Create An Account</h1>
         <p class="registration-section-container-description">Create your account, it takes less than a minute. If you already have an account - <a href="/login" class="registration-section-container-description-link">login</a></p>
         <form th:action="@{/registration}" th:object="${registrationForm}"  method="post" class="registration-section-container-form" role="form">
+            <p class="error-message"
+               th:each="error : ${#fields.errors('full_name')}"
+               th:text="${error}">Validation error</p>
             <div class="registration-section-container-form-input-wrapper">
                 <img class="box-icons" src="/img/user-icon.svg" alt="User Icon">
                 <label for="full-name"></label>

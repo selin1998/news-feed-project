@@ -61,6 +61,12 @@ public class UserController {
     public ModelAndView createNewUser(@ModelAttribute("registrationForm")  @Valid XUser user, BindingResult bindingResult, Model model) {
         ModelAndView modelAndView = new ModelAndView();
         Optional<XUser> userExists = userService.findUserByEmail(user.getEmail());
+        if (user.getFull_name().isEmpty() || user.getEmail().isEmpty()) {
+            bindingResult
+                    .rejectValue("full_name", "error.user",
+                            "Each field is mandatory");
+        }
+
         if (userExists.isPresent()) {
             bindingResult
                     .rejectValue("email", "error.user",
