@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -33,13 +34,21 @@ public class ArticlesController {
 
 
     public int valueOf(String s) {
-        return (s == null)? 0:Integer.parseInt(s);
+        return Optional.ofNullable(s).map(Integer::parseInt).orElse(0);
+    }
+
+    public String getKeyword(String s){
+        return Optional.ofNullable(s).map(String::valueOf).orElse("");
+    }
+
+    public boolean existsDate(String s1, String s2){
+       return getKeyword(s1)!="" && getKeyword(s2)!="";
     }
 
 
 
     @GetMapping("/news_feed/{id}")
-    public String showDesignForm(Model model, @PathVariable int id, @RequestParam(required = false) String keyword, @RequestParam(required = false) String page, @RequestParam(required = false) String size) {
+    public String showDesignForm(Model model, @PathVariable int id, @RequestParam(required = false)String news_start, @RequestParam(required = false)String news_finish, @RequestParam(required = false) String keyword, @RequestParam(required = false) String page, @RequestParam(required = false) String size) {
 
         Stream<JsoupParser> newsParsers = articleService.getNewsParsers(id);
 
@@ -48,29 +57,24 @@ public class ArticlesController {
         articleService.saveAll(articles);
 
         log.info(keyword);
-
-        model.addAttribute("user_id",id);
-
-        PageRequest pageable = PageRequest.of(valueOf(page),10);
-
-        model.addAttribute("articles", keyword!=null ? articleService.findArticleByKeyword(keyword,id,pageable):articleService.getAllEnabled(id,pageable));
-
-        model.addAttribute("keyword",keyword);
-
-        return "main-page";
-
-    }
-
-
-    @PostMapping("/news_feed/{id}")
-    public String sortByDate(Model model,@PathVariable int id,String news_start,@RequestParam(required = false) String keyword,String news_finish,@RequestParam(required = false) String page, @RequestParam(required = false) String size ){
         log.info(news_start);
         log.info(news_finish);
+
         PageRequest pageable = PageRequest.of(valueOf(page),10);
+
+        model.addAttribute("articles", existsDate(news_start,news_finish) ? articleService.findArticleByDate(news_start,news_finish,id,pageable) : articleService.findArticleByKeyword(getKeyword(keyword),id,pageable));
+
         model.addAttribute("keyword",keyword);
+
+        model.addAttribute("news_start",news_start);
+
+        model.addAttribute("news_finish",news_finish);
+
         model.addAttribute("user_id",id);
-        model.addAttribute("articles", articleService.findArticleByDate(news_start,news_finish,id,pageable));
+
         return "main-page";
+
     }
+
 
 }

@@ -57,10 +57,6 @@ public class ArticleService {
 
     public Stream<JsoupParser> getNewsParsers(int id) {
 
-     //   List<String> dismissedNewsNames = articleRepo.extractNewsNamebyUserid(id);
-
-     //   Stream<String> newsThatUserPrefers = EnumSet.allOf(Website.class).stream().map(Website::name).filter(name -> !dismissedNewsNames.contains(name));
-
         Stream<Website> newsThatUserPrefers = EnumSet.allOf(Website.class).stream().filter(site -> !newsDisabled(id).contains(site));
 
         Stream<JsoupParser> newsParsers = newsThatUserPrefers.map(site -> site.getParser());
