@@ -26,7 +26,9 @@ public class NewsController {
     // http://localhost:8080/disable_news/1
 
     @GetMapping(value={"/disable_news/{id}","/disable_news/{id}/{news_id}"})
-    public String showAllSites(Model model, @PathVariable int id) {
+    public String showAllSites(Model model, @PathVariable int id
+            ,String site_name
+    ) {
 
         List<News> allSites = disableNewsService.getAllSites();
 
@@ -34,7 +36,14 @@ public class NewsController {
 
         List<String> buttons = disableNewsService.getButtonsStatus(id,allSites);
 
-        model.addAttribute("allSites", allSites);
+
+//        News site_name = disableNewsService.findBySiteName(site);
+//        model.addAttribute("site_name",site_name);
+
+
+
+//        model.addAttribute("allSites", allSites);
+        model.addAttribute("allSites",site_name!=null ? disableNewsService.findBySiteName(site_name) : allSites);
 
         model.addAttribute("user_id",id);
 
@@ -45,7 +54,8 @@ public class NewsController {
     }
 
     @PostMapping(value={"/disable_news/{id}","/disable_news/{id}/{news_id}"})
-    public String disableNews(Model model,@RequestParam(required =false) String  operation,@PathVariable int id, @PathVariable(required = false) Optional<Integer> news_id){
+    public String disableNews(Model model,@RequestParam(required =false) String  operation
+            ,@PathVariable int id, @PathVariable(required = false) Optional<Integer> news_id){
 
         List<News> allSites = disableNewsService.getAllSites();
 

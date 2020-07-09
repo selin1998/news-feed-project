@@ -38,9 +38,12 @@
     <div class="add-search">
         <p class="details">Disable news from specific websites:</p>
         <label class="main-header-search-wrapper">
-            <input type="search" class="main-header-search" placeholder="Search">
-            <img src="/img/search-icon.svg" alt="Search Icon">
+            <form th:action ="@{/disable_news/{id}(id = ${user_id})}" method="get">
+                <input type="text" class="main-header-search" th:value="${site_name}" name="site_name" placeholder="Press Enter">
+                <img src="/img/search-icon.svg" alt="Search Icon">
+            </form>
         </label>
+
     </div>
 
     <th:block th:with="colCount=${5}">

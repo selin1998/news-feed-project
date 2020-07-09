@@ -1,5 +1,6 @@
 package com.feed.news.repository;
 
+import com.feed.news.crawler.Website;
 import com.feed.news.entity.News;
 import com.feed.news.entity.User;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.hibernate.hql.internal.antlr.SqlTokenTypes.LEFT;
@@ -34,5 +36,9 @@ public interface NewsRepo extends JpaRepository<News,Integer> {
 
     @Query(value="SELECT n_id FROM disliked WHERE disliked.u_id=:user_id", nativeQuery = true)
     List<Integer> getAllDislikes(@Param("user_id")int u_id);
+
+
+    @Query(value = "SELECT * FROM news WHERE news_name=:site_name", nativeQuery = true)
+    List<News> findByNews_name(@Param("site_name") String site);
 
 }

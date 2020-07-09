@@ -1,10 +1,12 @@
 package com.feed.news.service;
 
+import com.feed.news.crawler.Website;
 import com.feed.news.entity.News;
 import com.feed.news.repository.NewsRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,6 +20,11 @@ public class DisableNewsService {
 
     public List<News> getAllSites(){
         return feedRepo.findAll();
+    }
+
+    public List<News> findBySiteName(String site){
+//        Optional<News> byNews_name = Optional.of(feedRepo.findByNews_name(site));
+        return feedRepo.findByNews_name(site);
     }
 
     public void addDislike(int id, int news_id) {
