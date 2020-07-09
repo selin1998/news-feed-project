@@ -13,8 +13,9 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<XUser,Integer> {
      Optional<XUser> findByEmail(String user_email);
 
+
      @Modifying
-     @Query("update XUser u set u.password = :password where u.user_id = :id")
-     void updatePassword(@Param("password") String password, @Param("id") Integer id);
+     @Query("update XUser u set u.password = :password, u.confirm_password =:confirm_password where u.user_id = :id")
+     void updatePassword(@Param("password") String password,@Param("confirm_password") String confirm_password, @Param("id") Integer id);
 
 }

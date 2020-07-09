@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -13,7 +12,7 @@ public class Mail {
     private String from;
     private String to;
     private String subject;
-    private Map<String, Object> model;
+   private String  content;
 
 
     public String getFrom() {
@@ -40,11 +39,5 @@ public class Mail {
         this.subject = subject;
     }
 
-    public Map<String, Object> getModel() {
-        return model;
-    }
 
-    public void setModel(Map<String, Object> model) {
-        this.model = model;
-    }
 }

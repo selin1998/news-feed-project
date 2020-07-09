@@ -2,6 +2,7 @@ package com.feed.news.controller;
 
 
 import com.feed.news.crawler.JsoupParser;
+import com.feed.news.entity.PasswordForgotDto;
 import com.feed.news.entity.db.Article;
 import com.feed.news.entity.db.XUser;
 import com.feed.news.entity.XUserDetails;
@@ -9,7 +10,6 @@ import com.feed.news.repository.ArticleRepo;
 import com.feed.news.service.NewsFeedService;
 import com.feed.news.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,6 +35,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @ModelAttribute("registrationForm")
+    public XUser registrationForm() {
+        return new XUser();
+    }
 
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
     public ModelAndView login(){
@@ -54,7 +58,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid XUser user, BindingResult bindingResult, Model model) {
+    public ModelAndView createNewUser(@ModelAttribute("registrationForm")  @Valid XUser user, BindingResult bindingResult, Model model) {
         ModelAndView modelAndView = new ModelAndView();
         Optional<XUser> userExists = userService.findUserByEmail(user.getEmail());
         if (userExists.isPresent()) {
@@ -63,21 +67,21 @@ public class UserController {
                             "There is already a user registered with the email provided");
         }
         if (!user.getPassword().equals(user.getConfirm_password())){
-            model.addAttribute("passwordError", "Miss match");
-            modelAndView.setViewName("registration");
-            return  modelAndView;
+           bindingResult
+                   .rejectValue("password", "error.user",
+                           "The password fields must match");
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("registration");
-        } else {
+        }
+        else {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user", new XUser());
-            modelAndView.setViewName("registration");
-            return  modelAndView;
 
         }
-        return modelAndView;
+        modelAndView.setViewName("registration");
+        return  modelAndView;
     }
 
     @RequestMapping(value = "/news", method = RequestMethod.GET)

@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -70,14 +68,8 @@ public class PasswordForgotController {
         mail.setFrom("no-reply@ibatech.com");
         mail.setTo(user.get().getEmail());
         mail.setSubject("Password reset request");
-
-        Map<String, Object> model = new HashMap<>();
-        model.put("token", token);
-        model.put("user", user);
-        model.put("signature", "https://ibatech.az");
-        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-        model.put("resetUrl", url + "/reset-password?token=" + token.getToken());
-        mail.setModel(model);
+        mail.setContent("Dear " + user.get().getFull_name() + "\n\nTo complete the password reset process, please click here: "
+                + request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/reset-password?token=" + token.getToken());
         emailService.sendEmail(mail);
         return "redirect:/forgot-password?success";
 

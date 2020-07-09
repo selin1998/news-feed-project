@@ -3,7 +3,7 @@ package com.feed.news.config;
 import com.feed.news.entity.db.News;
 import com.feed.news.entity.db.XUser;
 import com.feed.news.repository.NewsFeedRepo;
-import com.feed.news.repository.UserRepo;
+import com.feed.news.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,10 +16,10 @@ import java.util.Set;
 public class AutoRun {
 
 
-    private final UserRepo userRepo;
+    private final UserRepository userRepo;
     private final NewsFeedRepo newsRepo;
 
-    public AutoRun(UserRepo userRepo, NewsFeedRepo newsRepo) {
+    public AutoRun(UserRepository userRepo, NewsFeedRepo newsRepo) {
 
         this.userRepo = userRepo;
 

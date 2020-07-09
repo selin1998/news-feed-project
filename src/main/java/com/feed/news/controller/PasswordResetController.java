@@ -65,9 +65,9 @@ public class PasswordResetController {
         PasswordResetToken token = tokenRepository.findByToken(form.getToken());
         XUser user = token.getUser();
         String updatedPassword = passwordEncoder.encode(form.getPassword());
-        userService.updatePassword(updatedPassword, user.getUser_id());
+        String updatedConfirmPassword=passwordEncoder.encode(form.getConfirmPassword());
+        userService.updatePassword(updatedPassword, updatedConfirmPassword,user.getUser_id());
         tokenRepository.delete(token);
-
         return "redirect:/login?resetSuccess";
     }
 

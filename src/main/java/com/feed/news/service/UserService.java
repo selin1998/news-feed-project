@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface UserService {
     public Optional<XUser> findUserByEmail(String user_email);
     public XUser saveUser(XUser user);
-    void updatePassword(String password, Integer userId);
+    void updatePassword(String password,String confirm_password, Integer userId);
 }

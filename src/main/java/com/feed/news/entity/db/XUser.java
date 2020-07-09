@@ -1,5 +1,6 @@
 package com.feed.news.entity.db;
 
+import com.feed.news.validation.PasswordsEqualConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,15 +26,12 @@ public class XUser {
     private String full_name;
 
     @Column(name = "email" ,unique = true)
-    @Email(message = "*Please provide a valid Email")
     private String email;
 
     @Column(name = "password")
-    @Length(min = 5, message = "*Your password must have at least 5 characters")
     private String password;
 
     @Column(name = "confirm_password")
-    @Length(min = 5, message = "*Your password must have at least 5 characters")
     private String confirm_password;
 
     @Column(name = "ACTIVE")
@@ -59,11 +57,14 @@ public class XUser {
         this.password = password;
     }
 
-//    public XUser(String full_name, String email, String password, Set<Role> roles) {
-//        this.full_name = full_name;
-//        this.email = email;
-//        this.password = password;
-//        this.roles = roles;
-//    }
+
+    public XUser(String full_name, String email,String password, String confirm_password,Set<Role> roles, Integer active) {
+        this.full_name=full_name;
+        this.email = email;
+        this.password = password;
+        this.confirm_password = confirm_password;
+        this.roles = roles;
+        this.active = active;
+    }
 
 }
