@@ -22,13 +22,14 @@ public class NewsController {
         this.disableNewsService=disableNewsService;
     }
 
+    public String getSiteName(String siteName){
+        return Optional.ofNullable(siteName).orElse("");
+    }
 
     // http://localhost:8080/disable_news/1
 
     @GetMapping(value={"/disable_news/{id}","/disable_news/{id}/{news_id}"})
-    public String showAllSites(Model model, @PathVariable int id
-            ,String site_name
-    ) {
+    public String showAllSites(Model model, @PathVariable int id,String site_name) {
 
         List<News> allSites = disableNewsService.getAllSites();
 
@@ -36,14 +37,10 @@ public class NewsController {
 
         List<String> buttons = disableNewsService.getButtonsStatus(id,allSites);
 
+        model.addAttribute("allSites", !getSiteName(site_name).isEmpty() ? disableNewsService.findBySiteName(site_name) : allSites);
 
-//        News site_name = disableNewsService.findBySiteName(site);
-//        model.addAttribute("site_name",site_name);
-
-
-
-//        model.addAttribute("allSites", allSites);
-        model.addAttribute("allSites",site_name!=null ? disableNewsService.findBySiteName(site_name) : allSites);
+        int columnCount=disableNewsService.findBySiteName(getSiteName(site_name)).isEmpty() ? 5:1;
+        model.addAttribute("colCount",columnCount);
 
         model.addAttribute("user_id",id);
 

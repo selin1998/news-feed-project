@@ -39,14 +39,15 @@
         <p class="details">Disable news from specific websites:</p>
         <label class="main-header-search-wrapper">
             <form th:action ="@{/disable_news/{id}(id = ${user_id})}" method="get">
-                <input type="text" class="main-header-search" th:value="${site_name}" name="site_name" placeholder="Press Enter">
+                <input type="text" class="main-header-search" name="site_name" placeholder="Press Enter">
                 <img src="/img/search-icon.svg" alt="Search Icon">
             </form>
         </label>
 
     </div>
 
-    <th:block th:with="colCount=${5}">
+    <th:block th:with="colCount=${colCount}">
+<!--      colCount=${5}  -->
     <div class="news-tabs" th:each="r : ${#numbers.sequence(0, allSites.size()-1,colCount)}">
 
         <div th:each="c : ${#numbers.sequence(0, colCount-1 )}"  class="single-tab"  >

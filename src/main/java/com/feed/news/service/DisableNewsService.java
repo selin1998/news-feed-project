@@ -23,7 +23,6 @@ public class DisableNewsService {
     }
 
     public List<News> findBySiteName(String site){
-//        Optional<News> byNews_name = Optional.of(feedRepo.findByNews_name(site));
         return feedRepo.findByNews_name(site);
     }
 

@@ -38,7 +38,7 @@ public interface NewsRepo extends JpaRepository<News,Integer> {
     List<Integer> getAllDislikes(@Param("user_id")int u_id);
 
 
-    @Query(value = "SELECT * FROM news WHERE news_name=:site_name", nativeQuery = true)
-    List<News> findByNews_name(@Param("site_name") String site);
+    @Query(value = "SELECT * FROM news WHERE news.news_name=:site_name", nativeQuery = true)  //LIKE  %:site_name%
+    List<News> findByNews_name(@Param("site_name") String site_name);
 
 }

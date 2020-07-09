@@ -6,6 +6,8 @@ import com.feed.news.repository.NewsRepo;
 import com.feed.news.repository.UserRepo;
 import lombok.SneakyThrows;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayOutputStream;
