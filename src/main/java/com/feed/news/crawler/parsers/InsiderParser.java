@@ -1,5 +1,6 @@
 package com.feed.news.crawler.parsers;
 
+import com.feed.news.crawler.RestTemplateService;
 import com.feed.news.entity.Article;
 import com.feed.news.crawler.DateTimeFormats;
 import com.feed.news.crawler.JsoupParser;
@@ -9,22 +10,27 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InsiderParser implements JsoupParser {
+public class InsiderParser extends RestTemplateService implements JsoupParser {
 
-    List<Article> articles = new ArrayList();
-    @SneakyThrows
+    List<Article> articles;
+    Document doc;
+
+    public InsiderParser() {
+        this.articles = new ArrayList();
+        doc = rootPage("https://www.insider.com/news");
+    }
+
     @Override
     public List<Article> getArticles() {
-
-        Document document = Jsoup.connect("https://www.insider.com/news").get();
-        Elements elements = document.getElementsByClass("featured-post");
+        //  Document document = Jsoup.connect("https://www.insider.com/news").get();
+        Elements elements = doc.getElementsByClass("featured-post");
         for (Element element : elements) {
             String header = element.select(".tout-title-link").text();
             String content = element.select(".tout-copy").text();

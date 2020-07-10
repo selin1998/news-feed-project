@@ -1,5 +1,6 @@
 package com.feed.news.crawler.parsers;
 
+import com.feed.news.crawler.RestTemplateService;
 import com.feed.news.entity.Article;
 import com.feed.news.crawler.DateTimeFormats;
 import com.feed.news.crawler.JsoupParser;
@@ -9,20 +10,26 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LenovaNewsParser implements JsoupParser {
+public class LenovaNewsParser extends RestTemplateService implements JsoupParser {
 
-    static List<Article> articles = new ArrayList();
+    List<Article> articles;
+    Document doc;
 
-    @SneakyThrows
+    public LenovaNewsParser() {
+        articles = new ArrayList();
+        doc = rootPage("https://news.lenovo.com/pressroom/press-releases/");
+    }
+
     @Override
     public List<Article> getArticles() {
-        Document document = Jsoup.connect("https://news.lenovo.com/pressroom/press-releases/").get();
-        Elements elements = document.getElementsByClass("col-12_xs-12");
+        //  Document document = Jsoup.connect("https://news.lenovo.com/pressroom/press-releases/").get();
+        Elements elements = doc.getElementsByClass("col-12_xs-12");
         for (Element element : elements) {
             String header = element.select(".card-title").text();
             String content = element.select(".card-text").text();
@@ -32,7 +39,7 @@ public class LenovaNewsParser implements JsoupParser {
 
             articles.add(new Article(header, content, link, image, date, Website.LenovaNews));
 
-                    }
+        }
         return articles;
     }
 }

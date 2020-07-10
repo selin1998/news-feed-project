@@ -1,6 +1,7 @@
 package com.feed.news.crawler;
 
 import com.feed.news.crawler.parsers.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 public enum Website {
@@ -19,8 +20,10 @@ public enum Website {
 
     public final JsoupParser parser;
 
-    Website(JsoupParser parser) {
+
+    Website(JsoupParser parser ) {
         this.parser = parser;
+
     }
 
     public JsoupParser getParser() {

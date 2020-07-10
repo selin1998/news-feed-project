@@ -1,9 +1,7 @@
 package com.feed.news.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Base64;
@@ -15,6 +13,9 @@ import java.util.Set;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
+@ToString
 @Table (name="news")
 public class News {
 

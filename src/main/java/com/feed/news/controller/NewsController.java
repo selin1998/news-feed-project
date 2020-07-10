@@ -40,6 +40,7 @@ public class NewsController {
         model.addAttribute("allSites", !getSiteName(site_name).isEmpty() ? disableNewsService.findBySiteName(site_name) : allSites);
 
         int columnCount=disableNewsService.findBySiteName(getSiteName(site_name)).isEmpty() ? 5:1;
+
         model.addAttribute("colCount",columnCount);
 
         model.addAttribute("user_id",id);
@@ -76,6 +77,8 @@ public class NewsController {
         model.addAttribute("user_id",id);
 
         model.addAttribute("buttons",buttons);
+
+        model.addAttribute("colCount",5);
 
         return "disable-news";
     }
