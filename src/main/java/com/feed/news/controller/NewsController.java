@@ -37,11 +37,13 @@ public class NewsController {
 
         List<News> allSites = disableNewsService.getAllSites();
 
-        List<String> buttons = disableNewsService.getButtonsStatus(id,allSites);
+        List<News> searchResultBySiteName = disableNewsService.findBySiteName(getSiteName(site_name));
 
-        model.addAttribute("allSites", !getSiteName(site_name).isEmpty() ? disableNewsService.findBySiteName(site_name) : allSites);
+        List<String> buttons = disableNewsService.getButtonsStatus(id,!getSiteName(site_name).isEmpty() ? searchResultBySiteName : allSites);
 
-        int columnCount=disableNewsService.findBySiteName(getSiteName(site_name)).isEmpty() ? 5:1;
+        model.addAttribute("allSites", !getSiteName(site_name).isEmpty() ? searchResultBySiteName : allSites);
+
+        int columnCount=searchResultBySiteName.isEmpty() ? 5:1;
 
         log.info(fmt("User Id -> %d",id));
         model.addAttribute("user_id",id);
