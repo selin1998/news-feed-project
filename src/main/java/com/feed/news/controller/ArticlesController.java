@@ -22,7 +22,6 @@ import java.util.stream.Stream;
 @RequestMapping("/")
 public class ArticlesController {
 
-
     private final ArticleService articleService;
 
     public ArticlesController(ArticleService articleService) {
@@ -30,8 +29,9 @@ public class ArticlesController {
         this.articleService = articleService;
     }
 
-    // http://localhost:8080/news_feed/1
-
+    private static String fmt(String format, Object... args) {
+        return String.format(format, args);
+    }
 
     public int valueOf(String s) {
         return Optional.ofNullable(s).map(Integer::parseInt).orElse(0);
@@ -45,10 +45,12 @@ public class ArticlesController {
        return getKeyword(s1)!="" && getKeyword(s2)!="";
     }
 
-
+    // http://localhost:8080/news_feed/1
 
     @GetMapping("/news_feed/{id}")
-    public String showDesignForm(Model model, @PathVariable int id, @RequestParam(required = false)String news_start, @RequestParam(required = false)String news_finish, @RequestParam(required = false) String keyword, @RequestParam(required = false) String page, @RequestParam(required = false) String size) {
+    public String showDesignForm(Model model, @PathVariable int id, @RequestParam(required = false)String news_start
+            , @RequestParam(required = false)String news_finish, @RequestParam(required = false) String keyword
+            , @RequestParam(required = false) String page, @RequestParam(required = false) String size) {
 
         Stream<JsoupParser> newsParsers = articleService.getNewsParsers(id);
 
@@ -56,20 +58,20 @@ public class ArticlesController {
 
         articleService.saveAll(articles);
 
-        log.info(keyword);
-        log.info(news_start);
-        log.info(news_finish);
-
         PageRequest pageable = PageRequest.of(valueOf(page),10);
 
         model.addAttribute("articles", existsDate(news_start,news_finish) ? articleService.findArticleByDate(news_start,news_finish,id,pageable) : articleService.findArticleByKeyword(getKeyword(keyword),id,pageable));
 
+        log.info(fmt("Keywork for search ->  %s", keyword));
         model.addAttribute("keyword",keyword);
 
+        log.info(fmt("Start date for search ->  %s",news_start));
         model.addAttribute("news_start",news_start);
 
+        log.info(fmt("Finish date for search ->  %s",news_finish));
         model.addAttribute("news_finish",news_finish);
 
+        log.info(fmt("User id -> %d",id));
         model.addAttribute("user_id",id);
 
         return "main-page";

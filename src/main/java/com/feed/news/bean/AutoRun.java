@@ -6,6 +6,7 @@ import com.feed.news.entity.User;
 import com.feed.news.repository.NewsRepo;
 import com.feed.news.repository.UserRepo;
 import lombok.SneakyThrows;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -23,10 +24,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-
+@Log4j2
 @Configuration
 public class AutoRun {
-
 
     private final UserRepo userRepo;
     private final NewsRepo newsRepo;
@@ -36,6 +36,10 @@ public class AutoRun {
         this.userRepo = userRepo;
 
         this.newsRepo = newsRepo;
+    }
+
+    private static String fmt(String format, Object... args) {
+        return String.format(format, args);
     }
 
     @SneakyThrows
@@ -63,6 +67,7 @@ public class AutoRun {
 //    @Bean
 //    @Order(1)
     public CommandLineRunner add_news(){
+        log.info("Adding data about all sites to DB ->");
         return args->{
             newsRepo.saveAll(Arrays.asList(
                     new News("TechCrunch","https://techcrunch.com/"
@@ -113,6 +118,7 @@ public class AutoRun {
 //    @Bean
 //    @Order(2)
     public CommandLineRunner populate_user_with_news(){
+        log.info("Adding data about user and news ->");
 
             return args->{
                 Set<News> newsSet=new HashSet<>(Arrays.asList(new News("Habr","https://habr.com/en/"
@@ -123,7 +129,7 @@ public class AutoRun {
                                 ,convertImagetoByteArray("src/main/resources/templates/img/policy_logo.png"))));
                 User user1=new User("sherlock holmes","sholmes@gmail.com","watson",newsSet);
                 userRepo.save(user1);
-
+                log.info(fmt("Save user -> %s",user1.toString()));
 
             };
         }

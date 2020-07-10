@@ -27,9 +27,14 @@ public class ArticleService {
         this.articleRepo = repo;
     }
 
+    private static String fmt(String format, Object... args) {
+        return String.format(format, args);
+    }
+
+
     public List<Website> newsDisabled(int id) {
         List<Website> disabled = articleRepo.extractNewsNamebyUserid(id).stream().map(a -> Website.valueOf(a)).collect(Collectors.toList());
-        log.info("sites disabled" + disabled);
+        log.info(fmt("sites disabled %s ->" , disabled.toString()));
         return disabled;
     }
 
