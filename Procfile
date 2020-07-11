@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/news-feed-project-1.0-SNAPSHOT.jar -Dserver.port=$PORT
+web: java $JAVA_OPTS -jar target/news-feed-project-1.0-SNAPSHOT.jar
