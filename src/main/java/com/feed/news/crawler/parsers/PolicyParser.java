@@ -18,17 +18,18 @@ import java.util.List;
 
 public class PolicyParser extends RestTemplateService implements JsoupParser {
 
-    List<Article> articles;
+    List<Article> articles = new ArrayList<>();;
     Document doc;
 
-    public PolicyParser() {
-        this.articles = new ArrayList();
-        doc = rootPage("https://www.policygenius.com/blog/");
-    }
+//    public PolicyParser() {
+//        this.articles = new ArrayList();
+//        doc = rootPage("https://www.policygenius.com/blog/");
+//    }
 
+    @SneakyThrows
     @Override
     public List<Article> getArticles() {
-        //  Document document = Jsoup.connect("https://www.policygenius.com/blog/").get();
+          Document doc = Jsoup.connect("https://www.policygenius.com/blog/").get();
         Elements elements = doc.getElementsByClass("teaser");
         for (Element element : elements) {
             String header = element.select(".teaser__title").text();

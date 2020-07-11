@@ -56,10 +56,12 @@
             <p class="tab-title" th:text="${allSites[c+r].news_name}"></p>
             <p class="tab-description" th:text="${allSites[c+r].news_description}"></p>
 
+            <div class="button-area">
                 <form th:action="@{'/disable_news/'+${user_id}+'/'+${allSites[c+r].getNews_id()}}" method="post">
                     <button  th:id="${allSites[c+r].getNews_id()}"  type="submit"  th:value="${buttons[c+r]}" name="operation"  />
                     <p class="button-text" th:text="${buttons[c+r]}"></p>
                 </form>
+            </div>
 
         </div>
 

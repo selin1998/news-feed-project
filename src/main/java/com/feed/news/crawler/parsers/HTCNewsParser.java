@@ -20,17 +20,18 @@ import java.util.List;
 @Service
 public class HTCNewsParser extends RestTemplateService implements JsoupParser {
 
-    List<Article> articles;
+    List<Article> articles = new ArrayList<>();;
     Document doc;
 
-    public HTCNewsParser() {
-        this.articles = new ArrayList();
-        doc = rootPage("https://www.pocket-lint.com/htc");
-    }
+//    public HTCNewsParser() {
+//        this.articles = new ArrayList();
+//        doc = rootPage("https://www.pocket-lint.com/htc");
+//    }
 
+    @SneakyThrows
     @Override
     public List<Article> getArticles() {
-        //   Document document = Jsoup.connect("https://www.pocket-lint.com/htc").get();
+          Document doc = Jsoup.connect("https://www.pocket-lint.com/htc").get();
         Elements elements = doc.getElementsByClass("article");
         for (Element element : elements) {
             String header = element.select(".article-info-title").text();

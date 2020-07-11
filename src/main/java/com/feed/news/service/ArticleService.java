@@ -60,13 +60,10 @@ public class ArticleService {
         return articleRepo.findBySiteNotInAndDateBetweenOrderByDateDesc(newsDisabled(user_id), date1, date2,pageable);
     }
 
-    public Stream<JsoupParser> getNewsParsers(int id) {
+    public Stream<JsoupParser> getNewsParsers() {
 
-        Stream<Website> newsThatUserPrefers = EnumSet.allOf(Website.class).stream().filter(site -> !newsDisabled(id).contains(site));
+       return  EnumSet.allOf(Website.class).stream().map(site -> site.getParser());
 
-        Stream<JsoupParser> newsParsers = newsThatUserPrefers.map(site -> site.getParser());
-
-        return newsParsers;
     }
 
 }

@@ -5,10 +5,17 @@ input[type="search"]::-webkit-search-results-decoration {
     -webkit-appearance:none;
 }
 
-body{
-    margin: 0;
+html{
+    /*height: 100%;*/
+}
+
+body {
+    /*margin: 0;*/
+    /*height: 100vh;*/
+    /*padding: 0;*/
     font-family: 'Roboto', sans-serif;
 }
+
 
 .main-header{
     padding: 10px 100px;
@@ -160,7 +167,9 @@ body{
 }
 
 .single-tab {
+    position: relative;
     width: 10%;
+    height: 330px;
     border-radius: 15px;
     border: 1px solid #828282;
     text-align: center;
@@ -181,15 +190,28 @@ body{
 }
 
 .tab-description {
+    height: auto;
     color: #828282;
 }
 
+.button-area{
+    left: 50%;
+    margin-left: -15px;
+    align-items: center;
+    position: absolute;
+    bottom: 0px;
+
+}
+
+
 .button {
+
     display: flex;
     justify-content: space-evenly;
     border-radius: 15px;
     border: 1px solid #828282;
     margin: 15px;
+
 }
 
 .icon {

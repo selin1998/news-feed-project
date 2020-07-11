@@ -6,6 +6,7 @@ import com.feed.news.crawler.DateTimeFormats;
 import com.feed.news.crawler.JsoupParser;
 import com.feed.news.crawler.Website;
 import lombok.SneakyThrows;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -17,17 +18,18 @@ import java.util.List;
 
 public class DigitInParser extends RestTemplateService implements JsoupParser {
 
-    List<Article> articles;
+    List<Article> articles = new ArrayList<>();;
     Document doc;
 
-    public DigitInParser() {
-        articles = new ArrayList();
-        doc = rootPage("https://www.digit.in/news/");
-    }
+//    public DigitInParser() {
+//        articles = new ArrayList();
+//        doc = rootPage("https://www.digit.in/news/");
+//    }
 
+    @SneakyThrows
     @Override
     public List<Article> getArticles() {
-        //  Document document = Jsoup.connect("https://www.digit.in/news/").get();
+          Document doc = Jsoup.connect("https://www.digit.in/news/").get();
         Elements elements = doc.getElementsByClass("Thumb-new");
         for (Element element : elements) {
             String header = element.select(".product-desc").text();

@@ -64,12 +64,12 @@ public class NewsController {
 
         log.info(fmt("Operation disable/enable -> %s",operation));
 
-        if(String.valueOf(operation).equals("Disable")){
+        if(String.valueOf(operation).equals("On+")){
             log.info("adding dislike");
             log.info(fmt("news id that clicked is %d ", news_id.get()));
             disableNewsService.addDislike(id, news_id.get());
         }
-        if(String.valueOf(operation).equals("Enable")){
+        if(String.valueOf(operation).equals("Off-")){
             log.info("deleting dislike");
             log.info(fmt("news id that clicked is %d ", news_id.get()));
             disableNewsService.deleteDislike(id, news_id.get());

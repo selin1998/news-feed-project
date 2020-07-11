@@ -52,12 +52,6 @@ public class ArticlesController {
             , @RequestParam(required = false)String news_finish, @RequestParam(required = false) String keyword
             , @RequestParam(required = false) String page, @RequestParam(required = false) String size) {
 
-        Stream<JsoupParser> newsParsers = articleService.getNewsParsers(id);
-
-        List<Article> articles = newsParsers.flatMap(p -> p.getArticles().stream()).collect(Collectors.toList());
-
-        articleService.saveAll(articles);
-
         PageRequest pageable = PageRequest.of(valueOf(page),10);
 
         model.addAttribute("articles", existsDate(news_start,news_finish) ? articleService.findArticleByDate(news_start,news_finish,id,pageable) : articleService.findArticleByKeyword(getKeyword(keyword),id,pageable));

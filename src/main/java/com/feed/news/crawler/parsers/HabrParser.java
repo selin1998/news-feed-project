@@ -15,17 +15,18 @@ import java.util.List;
 
 public class HabrParser extends RestTemplateService implements JsoupParser {
 
-    List<Article> articles;
+    List<Article> articles = new ArrayList<>();;
     Document doc;
 
-    public HabrParser() {
-        this.articles = new ArrayList<>();
-        this.doc = rootPage("https://habr.com/en/flows/develop/");
-    }
+//    public HabrParser() {
+//        this.articles = new ArrayList<>();
+//        this.doc = rootPage("https://habr.com/en/flows/develop/");
+//    }
 
+    @SneakyThrows
     @Override
     public List<Article> getArticles() {
-        //  Document document = Jsoup.connect("https://habr.com/en/flows/develop/").get();
+          Document doc = Jsoup.connect("https://habr.com/en/flows/develop/").get();
         Elements elements = doc.getElementsByTag("article");
         for (Element element : elements) {
             String header = element.select(".post__title_link").text();

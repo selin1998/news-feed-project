@@ -20,17 +20,18 @@ import java.util.List;
 @Service
 public class TechCrunchParser extends RestTemplateService implements JsoupParser {
 
-    List<Article> articles;
+    List<Article> articles = new ArrayList<>();;
     Document doc;
 
-    public TechCrunchParser() {
-        this.articles = new ArrayList();
-        this.doc = rootPage("https://techcrunch.com/");
-    }
+//    public TechCrunchParser() {
+//        this.articles = new ArrayList();
+//        this.doc = rootPage("https://techcrunch.com/");
+//    }
 
+    @SneakyThrows
     @Override
     public List<Article> getArticles() {
-        //    Document document = Jsoup.connect("https://techcrunch.com/").get();
+            Document doc = Jsoup.connect("https://techcrunch.com/").get();
         Elements elements = doc.getElementsByClass("post-block");
         for (Element element : elements) {
             String header = element.select(".post-block__title__link").text();

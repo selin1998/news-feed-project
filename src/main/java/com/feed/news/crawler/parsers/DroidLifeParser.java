@@ -6,6 +6,7 @@ import com.feed.news.crawler.DateTimeFormats;
 import com.feed.news.crawler.JsoupParser;
 import com.feed.news.crawler.Website;
 import lombok.SneakyThrows;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -18,17 +19,18 @@ import java.util.List;
 
 public class DroidLifeParser extends RestTemplateService implements JsoupParser {
 
-    List<Article> articles;
+    List<Article> articles = new ArrayList<>();;
     Document doc;
 
-    public DroidLifeParser() {
-        articles = new ArrayList();
-        doc = rootPage("https://www.droid-life.com/");
-    }
+//    public DroidLifeParser() {
+//        articles = new ArrayList();
+//        doc = rootPage("https://www.droid-life.com/");
+//    }
 
+    @SneakyThrows
     @Override
     public List<Article> getArticles() {
-        //  Document document = Jsoup.connect("https://www.droid-life.com/").get();
+          Document doc = Jsoup.connect("https://www.droid-life.com/").get();
         Elements elements = doc.getElementsByTag("article");
         for (Element element : elements) {
             String header = element.select(".preview__title").first()

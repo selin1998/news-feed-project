@@ -18,17 +18,18 @@ import java.util.List;
 
 public class LenovaNewsParser extends RestTemplateService implements JsoupParser {
 
-    List<Article> articles;
+    List<Article> articles = new ArrayList<>();;
     Document doc;
 
-    public LenovaNewsParser() {
-        articles = new ArrayList();
-        doc = rootPage("https://news.lenovo.com/pressroom/press-releases/");
-    }
+//    public LenovaNewsParser() {
+//        articles = new ArrayList();
+//        doc = rootPage("https://news.lenovo.com/pressroom/press-releases/");
+//    }
 
+    @SneakyThrows
     @Override
     public List<Article> getArticles() {
-        //  Document document = Jsoup.connect("https://news.lenovo.com/pressroom/press-releases/").get();
+          Document doc = Jsoup.connect("https://news.lenovo.com/pressroom/press-releases/").get();
         Elements elements = doc.getElementsByClass("col-12_xs-12");
         for (Element element : elements) {
             String header = element.select(".card-title").text();

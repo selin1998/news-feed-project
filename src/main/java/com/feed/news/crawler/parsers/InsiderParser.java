@@ -19,17 +19,18 @@ import java.util.List;
 
 public class InsiderParser extends RestTemplateService implements JsoupParser {
 
-    List<Article> articles;
+    List<Article> articles = new ArrayList<>();;
     Document doc;
 
-    public InsiderParser() {
-        this.articles = new ArrayList();
-        doc = rootPage("https://www.insider.com/news");
-    }
+//    public InsiderParser() {
+//        this.articles = new ArrayList();
+//        doc = rootPage("https://www.insider.com/news");
+//    }
 
+    @SneakyThrows
     @Override
     public List<Article> getArticles() {
-        //  Document document = Jsoup.connect("https://www.insider.com/news").get();
+         Document doc = Jsoup.connect("https://www.insider.com/news").get();
         Elements elements = doc.getElementsByClass("featured-post");
         for (Element element : elements) {
             String header = element.select(".tout-title-link").text();

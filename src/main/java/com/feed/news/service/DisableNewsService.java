@@ -37,7 +37,7 @@ public class DisableNewsService {
     public List<String> getButtonsStatus(int user_id, List<News> allSites){
 
         return allSites.stream().map(site ->
-                getDislikesByUserId(user_id).contains(site.getNews_id()) ? "Enable" : "Disable")
+                getDislikesByUserId(user_id).contains(site.getNews_id()) ? "Off-" : "On+")
                 .collect(Collectors.toList());
     }
 }
