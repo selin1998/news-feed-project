@@ -87,19 +87,21 @@
 </section>
 
 
-<div class="pagination-div main-section">
+<div th:if="${articles.totalPages > 0}" class="pagination-div main-section">
+
     <span th:if="${articles.hasPrevious()}">
         <a th:href="@{/news_feed/{id}(id = ${user_id},page=${articles.number-1},size=${articles.size}, keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}">Previous</a>
     </span>
-        <th:block th:each="i: ${#numbers.sequence(0, articles.totalPages - 1)}">
-            <span th:if="${articles.number == i}" class="selected">[[${i}+1]]</span>
+        <th:block th:each="i: ${#numbers.sequence(1, articles.totalPages -1)}">
+            <span th:if="${articles.number == i}" class="selected">[[${i}]]</span>
             <span th:unless="${articles.number == i}">
-             <a th:href="@{/news_feed/{id}(id = ${user_id},page=${i},size=${articles.size},keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}">[[${i}+1]]</a>
+             <a th:href="@{/news_feed/{id}(id = ${user_id},page=${i},size=${articles.size},keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}">[[${i}]]</a>
         </span>
         </th:block>
         <span th:if="${articles.hasNext()}">
         <a th:href="@{/news_feed/{id}(id = ${user_id},page=${articles.number+1},size=${articles.size},keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}">Next</a>
     </span>
+
 </div>
 
 

@@ -45,7 +45,7 @@ public class ArticlesController {
        return getKeyword(s1)!="" && getKeyword(s2)!="";
     }
 
-    // http://localhost:8080/news_feed/1
+    // http://localhost:5000/news_feed/1
 
     @GetMapping("/news_feed/{id}")
     public String showDesignForm(Model model, @PathVariable int id, @RequestParam(required = false)String news_start

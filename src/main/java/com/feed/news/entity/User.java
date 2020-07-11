@@ -35,15 +35,15 @@ public class User {
     private Set<News> news;
 
 
+
     public Set<News> getNews(){
         return news;
     }
 
-    public User(String full_name, String user_email, String password,Set<News> news) {
+    public User(String full_name, String user_email, String password) {
         this.full_name=full_name;
         this.user_email=user_email;
         this.password=password;
-        this.news=news;
 
     }
 }

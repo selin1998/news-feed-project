@@ -121,13 +121,7 @@ public class AutoRun {
         log.info("Adding data about user and news ->");
 
             return args->{
-                Set<News> newsSet=new HashSet<>(Arrays.asList(new News("Habr","https://habr.com/en/"
-                        ,"All posts in Development stream on Habr"
-                                ,convertImagetoByteArray("src/main/resources/templates/img/Habr_logo.png"))
-                        ,new News("Policy","https://www.policygenius.com/blog/"
-                                ,"A financial newsletter bringing you the money news and the money moves."
-                                ,convertImagetoByteArray("src/main/resources/templates/img/policy_logo.png"))));
-                User user1=new User("sherlock holmes","sholmes@gmail.com","watson",newsSet);
+                User user1=new User("sherlock holmes","sholmes@gmail.com","watson");
                 userRepo.save(user1);
                 log.info(fmt("Save user -> %s",user1.toString()));
 
