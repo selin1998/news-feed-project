@@ -7,9 +7,9 @@ spring:
     banner-mode: off
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/project
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
-    password: password
+    password: dreamgirl15
 
 #  security:
 #    oauth2:

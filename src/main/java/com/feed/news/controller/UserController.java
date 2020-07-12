@@ -2,20 +2,20 @@ package com.feed.news.controller;
 
 
 import com.feed.news.crawler.JsoupParser;
-import com.feed.news.entity.PasswordForgotDto;
 import com.feed.news.entity.db.Article;
 import com.feed.news.entity.db.XUser;
-import com.feed.news.entity.XUserDetails;
 import com.feed.news.repository.ArticleRepo;
 import com.feed.news.service.NewsFeedService;
 import com.feed.news.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.security.core.userdetails.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -27,13 +27,14 @@ public class UserController {
 
         private final NewsFeedService feedService;
         private final ArticleRepo articleRepo;
+        private final UserService userService;
 
-        public UserController(NewsFeedService feedService, ArticleRepo articleRepo) {
+        public UserController(NewsFeedService feedService, ArticleRepo articleRepo, UserService userService) {
             this.feedService = feedService;
             this.articleRepo = articleRepo;
+            this.userService = userService;
         }
-    @Autowired
-    private UserService userService;
+
 
     @ModelAttribute("registrationForm")
     public XUser registrationForm() {
@@ -92,9 +93,17 @@ public class UserController {
 
     @RequestMapping(value = "/news", method = RequestMethod.GET)
     public ModelAndView showDesignForm(Model model) {
+
         ModelAndView modelAndView= new ModelAndView();
-        XUserDetails xd = (XUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Stream<JsoupParser> newsParsers = feedService.getNewsParsers(xd.getId());
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        User user = (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
+
+        int id=userService.findUserByEmail(user.getUsername()).get().getUser_id();
+
+        System.out.println(id);
+        Stream<JsoupParser> newsParsers = feedService.getNewsParsers(id);
         List<Article> articles = newsParsers.flatMap(p -> p.getArticles().stream()).collect(Collectors.toList());
         articleRepo.saveAll(articles);
         model.addAttribute("articles", articles);

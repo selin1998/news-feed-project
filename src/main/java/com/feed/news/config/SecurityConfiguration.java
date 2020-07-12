@@ -52,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
                 //Перенарпавление на главную страницу после успешного входа
-                .defaultSuccessUrl("/registration")
+                .defaultSuccessUrl("/news")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .permitAll();

@@ -1,9 +1,7 @@
 package com.feed.news.entity.db;
 
 import com.feed.news.validation.PasswordsEqualConstraint;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -14,6 +12,8 @@ import java.util.Set;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Table (name = "user_table")
 public class XUser {
 
