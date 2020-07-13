@@ -2,8 +2,8 @@ package com.feed.news.config;
 
 
 import com.feed.news.entity.db.XUser;
-import com.feed.news.entity.XUserDetails;
-import com.feed.news.repository.UserRepository;
+import com.feed.news.security.XUserDetails;
+import com.feed.news.repository.UserRepo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.User;
@@ -15,9 +15,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 @Configuration
 public class UserDetailsServiceJPA implements UserDetailsService {
 
-  private final UserRepository repo;
+  private final UserRepo repo;
 
-  public UserDetailsServiceJPA(UserRepository repo) {
+  public UserDetailsServiceJPA(UserRepo repo) {
     this.repo = repo;
   }
 

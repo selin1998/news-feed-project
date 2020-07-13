@@ -42,27 +42,4 @@ public class XUser {
     @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<News> news;
 
-    public XUser(String full_name, String email, String password, Set<News> news) {
-        this.full_name=full_name;
-        this.email=email;
-        this.password=password;
-        this.news=news;
-    }
-
-    public XUser(String full_name,  String email, String password) {
-        this.full_name = full_name;
-        this.email = email;
-        this.password = password;
-    }
-
-
-    public XUser(String full_name, String email,String password, String confirm_password,Role role, Integer active) {
-        this.full_name=full_name;
-        this.email = email;
-        this.password = password;
-        this.confirm_password = confirm_password;
-        this.role = role;
-        this.active = active;
-    }
-
 }

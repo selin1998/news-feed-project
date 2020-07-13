@@ -1,4 +1,4 @@
-package com.feed.news.entity;
+package com.feed.news.security;
 
 import lombok.Getter;
 import lombok.Setter;

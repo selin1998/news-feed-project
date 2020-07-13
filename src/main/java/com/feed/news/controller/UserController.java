@@ -7,10 +7,12 @@ import com.feed.news.entity.db.XUser;
 import com.feed.news.repository.ArticleRepo;
 import com.feed.news.service.NewsFeedService;
 import com.feed.news.service.UserService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +24,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@RestController
+@Log4j2
+@Controller
 public class UserController {
 
     private final NewsFeedService feedService;
@@ -57,24 +60,19 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@ModelAttribute("registrationForm")  @Valid XUser user, BindingResult bindingResult, Model model) {
+    public ModelAndView createNewUser(@ModelAttribute("registrationForm")  @Valid XUser user, BindingResult bindingResult) {
+
         ModelAndView modelAndView = new ModelAndView();
         Optional<XUser> userExists = userService.findUserByEmail(user.getEmail());
-        if (user.getFull_name().isEmpty() || user.getEmail().isEmpty()) {
-            bindingResult
-                    .rejectValue("full_name", "error.user",
-                            "Each field is mandatory");
-        }
 
+        if (user.getFull_name().isEmpty() || user.getEmail().isEmpty()) {
+            bindingResult.rejectValue("full_name", "error.user", "Each field is mandatory");
+        }
         if (userExists.isPresent()) {
-            bindingResult
-                    .rejectValue("email", "error.user",
-                            "There is already a user registered with the email provided");
+            bindingResult.rejectValue("email", "error.user", "There is already a user registered with the email provided");
         }
         if (!user.getPassword().equals(user.getConfirm_password())){
-           bindingResult
-                   .rejectValue("password", "error.user",
-                           "The password fields must match");
+           bindingResult.rejectValue("password", "error.user", "The password fields must match");
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("registration");
@@ -82,7 +80,6 @@ public class UserController {
         else {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
-
         }
         modelAndView.setViewName("registration");
         return  modelAndView;
@@ -95,11 +92,11 @@ public class UserController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        User user = (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
+        User user = (User) authentication.getPrincipal();
 
         int id=userService.findUserByEmail(user.getUsername()).get().getUser_id();
 
-        System.out.println(id);
+        log.info("user id: "+id);
 
         Stream<JsoupParser> newsParsers = feedService.getNewsParsers(id);
         List<Article> articles = newsParsers.flatMap(p -> p.getArticles().stream()).collect(Collectors.toList());

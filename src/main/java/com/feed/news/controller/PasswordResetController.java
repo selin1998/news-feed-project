@@ -35,13 +35,12 @@ public class PasswordResetController {
     }
 
     @GetMapping
-    public String displayResetPasswordPage(@RequestParam(required = false) String token,
-                                           Model model) {
+    public String displayResetPasswordPage(@RequestParam(required = false) String token, Model model) {
 
         PasswordResetToken resetToken = tokenRepository.findByToken(token);
-        if (resetToken == null){
+        if (resetToken == null) {
             model.addAttribute("error", "Could not find password reset token.");
-        } else if (resetToken.isExpired()){
+        } else if (resetToken.isExpired()) {
             model.addAttribute("error", "Token has expired, please request a new password reset.");
         } else {
             model.addAttribute("token", resetToken.getToken());
@@ -56,7 +55,7 @@ public class PasswordResetController {
                                       BindingResult result,
                                       RedirectAttributes redirectAttributes) {
 
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
             redirectAttributes.addFlashAttribute(BindingResult.class.getName() + ".passwordResetForm", result);
             redirectAttributes.addFlashAttribute("passwordResetForm", form);
             return "redirect:/reset-password?token=" + form.getToken();
@@ -65,8 +64,8 @@ public class PasswordResetController {
         PasswordResetToken token = tokenRepository.findByToken(form.getToken());
         XUser user = token.getUser();
         String updatedPassword = passwordEncoder.encode(form.getPassword());
-        String updatedConfirmPassword=passwordEncoder.encode(form.getConfirmPassword());
-        userService.updatePassword(updatedPassword, updatedConfirmPassword,user.getUser_id());
+        String updatedConfirmPassword = passwordEncoder.encode(form.getConfirmPassword());
+        userService.updatePassword(updatedPassword, updatedConfirmPassword, user.getUser_id());
         tokenRepository.delete(token);
         return "redirect:/login?resetSuccess";
     }

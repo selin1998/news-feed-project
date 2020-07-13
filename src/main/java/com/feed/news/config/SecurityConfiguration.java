@@ -63,6 +63,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/");
 
         http
+                .rememberMe();
+
+        http
                 .rememberMe()
                 .key("myUniqueKey")
                 .tokenValiditySeconds(10000000);

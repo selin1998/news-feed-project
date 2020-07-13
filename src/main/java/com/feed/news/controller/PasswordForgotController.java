@@ -51,8 +51,8 @@ public class PasswordForgotController {
         if (result.hasErrors()) {
             return "forgot-password";
         }
-
         Optional<XUser> user = userService.findUserByEmail(form.getEmail());
+
         if (!user.isPresent()) {
             result.rejectValue("email", null, "We could not find an account for that e-mail address.");
             return "forgot-password";
