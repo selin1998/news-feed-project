@@ -42,17 +42,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 //Доступ только для не зарегистрированных пользователей
-                .antMatchers("/registration").not().fullyAuthenticated()
+                .antMatchers("/registration").permitAll()
                 //Доступ разрешен всем пользователей
                 .antMatchers("/", "/resources/**").permitAll()
                 //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated();
         http
+                .oauth2Login().loginPage("/login");
+        http
                 //Настройка для входа в систему
                 .formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
                 //Перенарпавление на главную страницу после успешного входа
-                .defaultSuccessUrl("/registration")
+                .defaultSuccessUrl("/news")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .permitAll();
@@ -60,6 +62,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll()
                 .logoutSuccessUrl("/");
+        http
+                .csrf().
+                disable();
 
         http
                 .rememberMe()

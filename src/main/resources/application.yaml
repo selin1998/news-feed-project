@@ -11,12 +11,13 @@ spring:
     username: postgres
     password: secret
 
-#    oauth2:
-#      client:
-#        registration:
-#          github:
-#            clientId: 8d408ff76b1915728870
-#            clientSecret: 9403a4ccbd62a8f71ddd21da51abd41531e14bb2
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            clientId: 275467666884234
+            clientSecret: 18c6977e20cb1374b2085df443aa684d
 
   jpa:
     open-in-view: false
