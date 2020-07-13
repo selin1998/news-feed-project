@@ -1,8 +1,7 @@
 package com.feed.news.service;
 
-import com.feed.news.entity.db.Role;
+import com.feed.news.entity.Role;
 import com.feed.news.entity.db.XUser;
-import com.feed.news.repository.RoleRepository;
 import com.feed.news.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,13 +14,11 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService{
-    private RoleRepository roleRepository;
     private UserRepository userRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserServiceImpl(RoleRepository roleRepository,UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.roleRepository=roleRepository;
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
@@ -39,8 +36,6 @@ public class UserServiceImpl implements UserService{
     public XUser saveUser(XUser user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setPassword(bCryptPasswordEncoder.encode(user.getConfirm_password()));
-        Role userRole = roleRepository.findByRole("ADMIN");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         user.setActive(1);
         return userRepository.save(user);
     }

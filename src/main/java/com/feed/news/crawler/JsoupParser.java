@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface JsoupParser {
 
-    public List<Article> getArticles();
+    List<Article> getArticles();
 
     default LocalDate convertStringToDate(String s, DateTimeFormatter formatter){
         try{

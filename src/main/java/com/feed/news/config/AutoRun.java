@@ -48,18 +48,6 @@ public class AutoRun {
     }
 
 
-//    @Bean
-//    @Order(2)
-    public CommandLineRunner populate_user_with_news(){
-
-            return args->{
-                Set<News> newsSet=new HashSet<>(Arrays.asList(new News("Habr","https://habr.com/en/"),new News("Policy","https://www.policygenius.com/blog/")));
-                XUser user1=new XUser("sherlock holmes","sholmes@gmail.com","watson",newsSet);
-                userRepo.save(user1);
-
-
-            };
-        }
 
 
 

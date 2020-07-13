@@ -26,10 +26,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private String usersQuery;
     @Value("${spring.queries.roles-query}")
     private String rolesQuery;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
-        auth.
+                auth.
                 jdbcAuthentication()
                 .authoritiesByUsernameQuery(rolesQuery)
                 .usersByUsernameQuery(usersQuery)

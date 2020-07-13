@@ -1,11 +1,9 @@
 package com.feed.news.entity.db;
 
-import com.feed.news.validation.PasswordsEqualConstraint;
+import com.feed.news.entity.Role;
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.util.Set;
 
 @Data
@@ -37,9 +35,9 @@ public class XUser {
     @Column(name = "ACTIVE")
     private int active;
 
-    @ManyToMany(cascade= CascadeType.MERGE)
-    @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
-    private Set<Role> roles;
+    @Column(length = 32, columnDefinition = "varchar(32) default 'USER'")
+    @Enumerated(EnumType.STRING)
+    Role role=Role.USER;
 
     @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<News> news;
@@ -58,12 +56,12 @@ public class XUser {
     }
 
 
-    public XUser(String full_name, String email,String password, String confirm_password,Set<Role> roles, Integer active) {
+    public XUser(String full_name, String email,String password, String confirm_password,Role role, Integer active) {
         this.full_name=full_name;
         this.email = email;
         this.password = password;
         this.confirm_password = confirm_password;
-        this.roles = roles;
+        this.role = role;
         this.active = active;
     }
 

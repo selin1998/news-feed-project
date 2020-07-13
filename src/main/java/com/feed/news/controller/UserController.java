@@ -25,15 +25,15 @@ import java.util.stream.Stream;
 @RestController
 public class UserController {
 
-        private final NewsFeedService feedService;
-        private final ArticleRepo articleRepo;
-        private final UserService userService;
+    private final NewsFeedService feedService;
+    private final ArticleRepo articleRepo;
+    private final UserService userService;
 
-        public UserController(NewsFeedService feedService, ArticleRepo articleRepo, UserService userService) {
-            this.feedService = feedService;
-            this.articleRepo = articleRepo;
-            this.userService = userService;
-        }
+    public UserController(NewsFeedService feedService, ArticleRepo articleRepo, UserService userService) {
+        this.feedService = feedService;
+        this.articleRepo = articleRepo;
+        this.userService = userService;
+    }
 
 
     @ModelAttribute("registrationForm")
@@ -52,8 +52,6 @@ public class UserController {
     @RequestMapping(value="/registration", method = RequestMethod.GET)
     public ModelAndView registration(){
         ModelAndView modelAndView = new ModelAndView();
-        XUser user = new XUser();
-        modelAndView.addObject("user", user);
         modelAndView.setViewName("registration");
         return modelAndView;
     }
@@ -84,7 +82,6 @@ public class UserController {
         else {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
-            modelAndView.addObject("user", new XUser());
 
         }
         modelAndView.setViewName("registration");
@@ -103,6 +100,7 @@ public class UserController {
         int id=userService.findUserByEmail(user.getUsername()).get().getUser_id();
 
         System.out.println(id);
+
         Stream<JsoupParser> newsParsers = feedService.getNewsParsers(id);
         List<Article> articles = newsParsers.flatMap(p -> p.getArticles().stream()).collect(Collectors.toList());
         articleRepo.saveAll(articles);
