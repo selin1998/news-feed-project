@@ -20,11 +20,11 @@ public class MVCConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         String[][] mappings = {
                 //  mapping     file name in `resources/templates` folder `.html`
-                {"/"      , "main-page" },
+                {"/"      , "news" },
                 {"/disable" , "disable-news"},
-                {"/index"  , "index" },
+                {"/login"  , "login" },
                 {"/open-tab" , "open-tab"},
-                {"/reg"    , "registration"   },
+                {"/registration"    , "registration"   },
         };
 
         for (String[] item: mappings) {

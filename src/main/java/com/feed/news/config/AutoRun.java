@@ -1,19 +1,12 @@
-package com.feed.news.bean;
+package com.feed.news.config;
 
-import com.feed.news.entity.News;
-import com.feed.news.entity.User;
+import com.feed.news.entity.db.News;
 import com.feed.news.repository.NewsFeedRepo;
 import com.feed.news.repository.UserRepo;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Configuration
@@ -52,18 +45,6 @@ public class AutoRun {
     }
 
 
-//    @Bean
-//    @Order(2)
-    public CommandLineRunner populate_user_with_news(){
-
-            return args->{
-                Set<News> newsSet=new HashSet<>(Arrays.asList(new News("Habr","https://habr.com/en/"),new News("Policy","https://www.policygenius.com/blog/")));
-                User user1=new User("sherlock holmes","sholmes@gmail.com","watson",newsSet);
-                userRepo.save(user1);
-
-
-            };
-        }
 
 
 

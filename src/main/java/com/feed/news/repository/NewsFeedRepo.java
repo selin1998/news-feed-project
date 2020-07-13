@@ -1,19 +1,13 @@
 package com.feed.news.repository;
 
-import com.feed.news.entity.News;
-import com.feed.news.entity.User;
+import com.feed.news.entity.db.News;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-
-import static org.hibernate.hql.internal.antlr.SqlTokenTypes.LEFT;
-import static org.hibernate.hql.internal.antlr.SqlTokenTypes.ON;
 
 @Repository
 public interface NewsFeedRepo extends JpaRepository<News,Integer> {
