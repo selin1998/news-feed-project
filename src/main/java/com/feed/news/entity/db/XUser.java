@@ -1,5 +1,6 @@
 package com.feed.news.entity.db;
 
+import com.feed.news.entity.News;
 import com.feed.news.entity.Role;
 import lombok.*;
 
@@ -16,6 +17,7 @@ import java.util.Set;
 public class XUser {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_id")
     private int user_id;
 

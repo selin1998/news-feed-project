@@ -1,7 +1,7 @@
-package com.feed.news.controller;
+package com.feed.news.config;
 
 import com.feed.news.crawler.JsoupParser;
-import com.feed.news.entity.Article;
+import com.feed.news.entity.db.Article;
 import com.feed.news.service.ArticleService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,6 +17,8 @@ import java.util.stream.Stream;
 @Component
 public class Scheduler {
 
+    private static final int FIXED_RATE=1800000;
+
     private final ArticleService articleService;
 
     public Scheduler(ArticleService articleService) {
@@ -24,7 +26,7 @@ public class Scheduler {
         this.articleService = articleService;
     }
 
-    @Scheduled(fixedRate =1800000, initialDelay = 10000) // every 30 minutes parse, try fixedRate=60000 for one minute
+    @Scheduled(fixedRate =FIXED_RATE, initialDelay = 10000) // every 30 minutes parse, try fixedRate=60000 for one minute
     public void parseArticles(){
 
         log.info("fetching articles-> time:"+new SimpleDateFormat("HH:mm:ss").format(new Date()));

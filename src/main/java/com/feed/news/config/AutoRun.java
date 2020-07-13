@@ -2,7 +2,7 @@ package com.feed.news.bean;
 
 import com.feed.news.crawler.RestTemplateService;
 import com.feed.news.entity.News;
-import com.feed.news.entity.User;
+
 import com.feed.news.repository.NewsRepo;
 import com.feed.news.repository.UserRepo;
 import lombok.SneakyThrows;
@@ -12,11 +12,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -115,18 +110,6 @@ public class AutoRun {
     }
 
 
-//    @Bean
-//    @Order(2)
-    public CommandLineRunner populate_user_with_news(){
-        log.info("Adding data about user and news ->");
-
-            return args->{
-                User user1=new User("sherlock holmes","sholmes@gmail.com","watson");
-                userRepo.save(user1);
-                log.info(fmt("Save user -> %s",user1.toString()));
-
-            };
-        }
 
 
 

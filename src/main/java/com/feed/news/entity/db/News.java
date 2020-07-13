@@ -1,7 +1,9 @@
 package com.feed.news.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.feed.news.entity.db.XUser;
 import lombok.*;
+import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.*;
 import java.util.Base64;
@@ -42,7 +44,7 @@ public class News {
     joinColumns = {@JoinColumn(name = "n_id", referencedColumnName ="news_id" )},
             inverseJoinColumns = {@JoinColumn(name = "u_id", referencedColumnName = "user_id")}
     )
-    private Set<User> users;
+    private Set<XUser> users;
 
 
     public News(String news_name, String news_url,String news_description,byte[] news_image) {

@@ -14,7 +14,7 @@
     <a href="/main-page.html" class="main-header-logo"><img src="/img/Group%2012.png" alt="IBA Tech Academy"></a>
     <div class="main-header-wrapper">
         <label class="main-header-search-wrapper">
-            <form th:action ="@{/news_feed/{id}(id = ${user_id})}" method="get">
+            <form th:action ="@{/news_feed}" method="get">
                 <input type="text" class="main-header-search"  name="keyword" placeholder="Press Enter">
                 <img src="/img/search-icon.svg" alt="Search Icon">
             </form>
@@ -23,13 +23,13 @@
         <div class="main-header-profile-wrapper">
             <div class="main-header-profile-credentials">
                 <span class="main-header-profile-welcome">Welcome,</span>
-                <span class="main-header-username">Sample User</span>
+                <span class="main-header-username" th:text="${username}"></span>
             </div>
             <img class="main-header-user-icon" src="/img/user-icon-with-background.svg" alt="User Icon">
             <div class="hidden-accordion-wrapper">
                 <ul class="hidden-accordion">
-                    <li class="hidden-accordion-item"><img src="/img/favourite-icon.svg" alt="Favourite Icon"><a th:href="@{/disable_news/{id}(id = ${user_id})}" class="hidden-accordion-item-link">My News</a></li>
-                    <li class="hidden-accordion-item"><img src="/img/log-out-icon.svg" alt="Log Out Icon"><a href="/index.html" class="hidden-accordion-item-link">Log Out</a></li>
+                    <li class="hidden-accordion-item"><img src="/img/favourite-icon.svg" alt="Favourite Icon"><a th:href="@{/disable_news}" class="hidden-accordion-item-link">My News</a></li>
+                    <li class="hidden-accordion-item"><img src="/img/log-out-icon.svg" alt="Log Out Icon"><a th:href="@{/}" class="hidden-accordion-item-link">Log Out</a></li>
                 </ul>
             </div>
         </div>
@@ -38,28 +38,28 @@
 
 <div class="container">
 
-<form th:action ="@{/news_feed/{id}(id = ${user_id}, news_start=${news_start},news_finish=${news_finish} )}" method="get">
-<div class="row justify-content-center ">
-    <div class="col-2">
-        <p></p>
-        <input  type="date" id="start" name="news_start"
-               value="2020-07-01"
-               min="2018-01-01" max="2021-12-31">
-        <p>Start date</p>
-    </div>
-    <div class="col-2">
-        <p></p>
-        <input  type="date" id="finish" name="news_finish"
-                value="2020-07-01"
-                min="2018-01-01" max="2021-12-31">
-        <p>Finish date</p>
-    </div>
-    <div class="col-2">
-        <p></p>
-        <button  type="submit">Submit</button>
-    </div>
-</div>
-</form>
+    <form th:action ="@{/news_feed/(news_start=${news_start},news_finish=${news_finish} )}" method="get">
+        <div class="row justify-content-center ">
+            <div class="col-2">
+                <p></p>
+                <input  type="date" id="start" name="news_start"
+                        value="2020-07-01"
+                        min="2018-01-01" max="2021-12-31">
+                <p>Start date</p>
+            </div>
+            <div class="col-2">
+                <p></p>
+                <input  type="date" id="finish" name="news_finish"
+                        value="2020-07-01"
+                        min="2018-01-01" max="2021-12-31">
+                <p>Finish date</p>
+            </div>
+            <div class="col-2">
+                <p></p>
+                <button  type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
 
 </div>
 
@@ -90,16 +90,16 @@
 <div th:if="${articles.totalPages > 0}" class="pagination-div main-section">
 
     <span th:if="${articles.hasPrevious()}">
-        <a th:href="@{/news_feed/{id}(id = ${user_id},page=${articles.number-1},size=${articles.size}, keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}">Previous</a>
+        <a th:href="@{/news_feed/(page=${articles.number-1},size=${articles.size}, keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}">Previous</a>
     </span>
-        <th:block th:each="i: ${#numbers.sequence(1, articles.totalPages -1)}">
-            <span th:if="${articles.number == i}" class="selected">[[${i}]]</span>
-            <span th:unless="${articles.number == i}">
-             <a th:href="@{/news_feed/{id}(id = ${user_id},page=${i},size=${articles.size},keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}">[[${i}]]</a>
+    <th:block th:each="i: ${#numbers.sequence(1, articles.totalPages -1)}">
+        <span th:if="${articles.number == i}" class="selected">[[${i}]]</span>
+        <span th:unless="${articles.number == i}">
+             <a th:href="@{/news_feed/(page=${i},size=${articles.size},keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}">[[${i}]]</a>
         </span>
-        </th:block>
-        <span th:if="${articles.hasNext()}">
-        <a th:href="@{/news_feed/{id}(id = ${user_id},page=${articles.number+1},size=${articles.size},keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}">Next</a>
+    </th:block>
+    <span th:if="${articles.hasNext()}">
+        <a th:href="@{/news_feed/(page=${articles.number+1},size=${articles.size},keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}">Next</a>
     </span>
 
 </div>

@@ -26,10 +26,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private String usersQuery;
     @Value("${spring.queries.roles-query}")
     private String rolesQuery;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
-        auth.
+                auth.
                 jdbcAuthentication()
                 .authoritiesByUsernameQuery(rolesQuery)
                 .usersByUsernameQuery(usersQuery)
@@ -42,19 +43,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 //Доступ только для не зарегистрированных пользователей
-                .antMatchers("/registration").permitAll()
+                .antMatchers("/registration","/forgot-password","/reset-password").permitAll()
                 //Доступ разрешен всем пользователей
                 .antMatchers("/", "/resources/**").permitAll()
                 //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated();
         http
-                .oauth2Login().loginPage("/login");
-        http
                 //Настройка для входа в систему
                 .formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
                 //Перенарпавление на главную страницу после успешного входа
-                .defaultSuccessUrl("/news")
+                .defaultSuccessUrl("/news_feed")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .permitAll();
@@ -62,9 +61,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll()
                 .logoutSuccessUrl("/");
+
         http
-                .csrf().
-                disable();
+                .rememberMe();
 
         http
                 .rememberMe()

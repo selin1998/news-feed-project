@@ -12,7 +12,7 @@
     <a href="/main-page.html" class="main-header-logo"><img src="/img/Group 12.png" alt="IBA Tech Academy"></a>
     <div class="main-header-wrapper">
         <label class="main-header-search-wrapper">
-            <form th:action ="@{/news_feed/{id}(id = ${user_id})}" method="get">
+            <form th:action ="@{/news_feed}" method="get">
                 <input type="text" class="main-header-search"  name="keyword" placeholder="Press Enter">
                 <img src="/img/search-icon.svg" alt="Search Icon">
             </form>
@@ -21,13 +21,13 @@
         <div class="main-header-profile-wrapper">
             <div class="main-header-profile-credentials">
                 <span class="main-header-profile-welcome">Welcome,</span>
-                <span class="main-header-username">Sample User</span>
+                <span class="main-header-username" th:text="${username}"></span>
             </div>
             <img class="main-header-user-icon" src="/img/user-icon-with-background.svg" alt="User Icon">
             <div class="hidden-accordion-wrapper">
                 <ul class="hidden-accordion">
-                    <li class="hidden-accordion-item"><img src="/img/favourite-icon.svg" alt="Favourite Icon"><a th:href="@{/news_feed/{id}(id = ${user_id})}" class="hidden-accordion-item-link">Main-page</a></li>
-                    <li class="hidden-accordion-item"><img src="/img/log-out-icon.svg" alt="Log Out Icon"><a href="/index.html" class="hidden-accordion-item-link">Log Out</a></li>
+                    <li class="hidden-accordion-item"><img src="/img/favourite-icon.svg" alt="Favourite Icon"><a th:href="@{/news_feed}" class="hidden-accordion-item-link">Main-page</a></li>
+                    <li class="hidden-accordion-item"><img src="/img/log-out-icon.svg" alt="Log Out Icon"><a th:href="@{/}" class="hidden-accordion-item-link">Log Out</a></li>
                 </ul>
             </div>
         </div>
@@ -38,7 +38,7 @@
     <div class="add-search">
         <p class="details">Disable news from specific websites:</p>
         <label class="main-header-search-wrapper">
-            <form th:action ="@{/disable_news/{id}(id = ${user_id})}" method="get">
+            <form th:action ="@{/disable_news}" method="get">
                 <input type="text" class="main-header-search" name="site_name" placeholder="Press Enter">
                 <img src="/img/search-icon.svg" alt="Search Icon">
             </form>
@@ -57,7 +57,7 @@
             <p class="tab-description" th:text="${allSites[c+r].news_description}"></p>
 
             <div class="button-area">
-                <form th:action="@{'/disable_news/'+${user_id}+'/'+${allSites[c+r].getNews_id()}}" method="post">
+                <form th:action="@{'/disable_news/'+${allSites[c+r].getNews_id()}}" method="post">
                     <button  th:id="${allSites[c+r].getNews_id()}"  type="submit"  th:value="${buttons[c+r]}" name="operation"  />
                     <p class="button-text" th:text="${buttons[c+r]}"></p>
                 </form>

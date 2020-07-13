@@ -1,7 +1,7 @@
 package com.feed.news.crawler.parsers;
 
 import com.feed.news.crawler.*;
-import com.feed.news.entity.Article;
+import com.feed.news.entity.db.Article;
 import lombok.SneakyThrows;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

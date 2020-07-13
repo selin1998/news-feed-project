@@ -5,13 +5,8 @@ import com.feed.news.crawler.JsoupParser;
 import com.feed.news.entity.db.Article;
 import com.feed.news.entity.db.XUser;
 import com.feed.news.repository.ArticleRepo;
-import com.feed.news.service.NewsFeedService;
 import com.feed.news.service.UserService;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,12 +23,11 @@ import java.util.stream.Stream;
 @Controller
 public class UserController {
 
-    private final NewsFeedService feedService;
     private final ArticleRepo articleRepo;
     private final UserService userService;
 
-    public UserController(NewsFeedService feedService, ArticleRepo articleRepo, UserService userService) {
-        this.feedService = feedService;
+    public UserController( ArticleRepo articleRepo, UserService userService) {
+
         this.articleRepo = articleRepo;
         this.userService = userService;
     }
@@ -85,25 +79,5 @@ public class UserController {
         return  modelAndView;
     }
 
-    @RequestMapping(value = "/news", method = RequestMethod.GET)
-    public ModelAndView showDesignForm(Model model) {
 
-        ModelAndView modelAndView= new ModelAndView();
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        User user = (User) authentication.getPrincipal();
-
-        int id=userService.findUserByEmail(user.getUsername()).get().getUser_id();
-
-        log.info("user id: "+id);
-
-        Stream<JsoupParser> newsParsers = feedService.getNewsParsers(id);
-        List<Article> articles = newsParsers.flatMap(p -> p.getArticles().stream()).collect(Collectors.toList());
-        articleRepo.saveAll(articles);
-        model.addAttribute("articles", articles);
-        modelAndView.setViewName("news");
-        return modelAndView;
-
-    }
 }

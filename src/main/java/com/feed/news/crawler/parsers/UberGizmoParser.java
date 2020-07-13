@@ -1,7 +1,7 @@
 package com.feed.news.crawler.parsers;
 
 import com.feed.news.crawler.RestTemplateService;
-import com.feed.news.entity.Article;
+import com.feed.news.entity.db.Article;
 import com.feed.news.crawler.DateTimeFormats;
 import com.feed.news.crawler.JsoupParser;
 import com.feed.news.crawler.Website;
@@ -20,7 +20,7 @@ import java.util.List;
 @Controller
 public class UberGizmoParser extends RestTemplateService implements JsoupParser {
 
-    List<Article> articles = new ArrayList<>();;
+    List<Article> articles = new ArrayList<>();
     Document doc;
 //
 //    public UberGizmoParser() {
@@ -31,7 +31,7 @@ public class UberGizmoParser extends RestTemplateService implements JsoupParser 
     @SneakyThrows
     @Override
     public List<Article> getArticles() {
-          Document doc = Jsoup.connect("https://www.ubergizmo.com/").get();
+        Document doc = Jsoup.connect("https://www.ubergizmo.com/").get();
         Elements elements = doc.getElementsByClass("article_card");
         for (Element element : elements) {
             String header = element.select(".article_card_title").text();
