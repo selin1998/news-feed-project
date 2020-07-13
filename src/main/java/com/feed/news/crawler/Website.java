@@ -1,8 +1,11 @@
 package com.feed.news.crawler;
 
 import com.feed.news.crawler.parsers.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
 
 public enum Website {
+
 
     TechCrunch(new TechCrunchParser()),
     UberGizmo(new UberGizmoParser()),
@@ -14,17 +17,18 @@ public enum Website {
     DigitIn(new DigitInParser()),
     Policy(new PolicyParser()),
     Habr(new HabrParser());
-    // Mashable(new MashableParser());
-    //   BBC(new BBCParser()),
-    //   TheNextWeb(new TheNextWebParser()),
 
     public final JsoupParser parser;
 
-    Website(JsoupParser parser) {
+
+    Website(JsoupParser parser ) {
         this.parser = parser;
+
     }
 
     public JsoupParser getParser() {
         return this.parser;
     }
+
+
 }

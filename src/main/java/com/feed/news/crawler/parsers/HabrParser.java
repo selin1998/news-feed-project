@@ -1,28 +1,33 @@
 package com.feed.news.crawler.parsers;
 
-import com.feed.news.entity.Article;
-import com.feed.news.crawler.DateTimeFormats;
-import com.feed.news.crawler.JsoupParser;
-import com.feed.news.crawler.Website;
+import com.feed.news.crawler.*;
+import com.feed.news.entity.db.Article;
 import lombok.SneakyThrows;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HabrParser implements JsoupParser {
+public class HabrParser extends RestTemplateService implements JsoupParser {
 
-    static List<Article> articles = new ArrayList();
+    List<Article> articles = new ArrayList<>();;
+    Document doc;
+
+//    public HabrParser() {
+//        this.articles = new ArrayList<>();
+//        this.doc = rootPage("https://habr.com/en/flows/develop/");
+//    }
 
     @SneakyThrows
     @Override
     public List<Article> getArticles() {
-        Document document = Jsoup.connect("https://habr.com/en/flows/develop/").get();
-        Elements elements = document.getElementsByTag("article");
+          Document doc = Jsoup.connect("https://habr.com/en/flows/develop/").get();
+        Elements elements = doc.getElementsByTag("article");
         for (Element element : elements) {
             String header = element.select(".post__title_link").text();
             String content = header;
@@ -35,5 +40,6 @@ public class HabrParser implements JsoupParser {
 
         return articles;
     }
+
 
 }

@@ -1,0 +1,52 @@
+
+
+
+server:
+  port: ${PORT:5000}
+
+
+spring:
+  main:
+    banner-mode: off
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: dreamgirl15
+
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          github:
+#            clientId: 8d408ff76b1915728870
+#            clientSecret: 9403a4ccbd62a8f71ddd21da51abd41531e14bb2
+
+
+# ===============================
+# = JPA configurations
+# ===============================
+  jpa:
+    open-in-view: false
+    generate-ddl: true
+    hibernate.ddl-auto: update
+    show-sql: true
+
+# ===============================
+# = MAIL configurations
+# ===============================
+  mail:
+      default-encoding: UTF-8
+      host: smtp.gmail.com
+      username: new.news.feed.2020@gmail.com
+      password: guxzgbeckqxrlisn
+      port: 587
+      properties:
+        mail:
+          smtp:
+            auth: true
+            starttls:
+              enable: true
+      protocol: smtp
+      test-connection: false
+

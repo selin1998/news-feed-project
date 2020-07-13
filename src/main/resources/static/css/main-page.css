@@ -79,11 +79,34 @@ body{
 
 .main-section{
     background: whitesmoke;
-    height: calc(98vh - 70px);
-    position: relative;
-    padding: 100px 200px;
-    /*overflow: hidden;*/
+    padding: 10px 100px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
+
 }
+
+table{
+    width:100%;
+}
+
+table td, table th {
+    border: 1px solid grey;
+}
+
+table th { background: #eee;}
+
+.pagination-div{user-select: none;}
+
+.pagination-div span{
+    border-radius:3px;
+    border:1px solid #999;
+    padding:5px;
+    margin:10px 0px 0px 10px;
+    display:inline-block;
+
+}
+
+span.selected{background:#ccf;}
+
 
 .tab {
     margin-bottom: 20px;
@@ -98,7 +121,7 @@ body{
 }
 
 .tab-image {
-    width: 50px;
+    width: 150px;
     height: 50px;
     margin: 10px;
 }
@@ -108,6 +131,9 @@ body{
     height: 200px;
 }
 
+.article-date{
+    border-top: 20px;
+}
 
 .tab-title {
     font-weight: bold;
@@ -346,9 +372,7 @@ body{
         top: 5%;
     }
 
-    .main-section{
-        height: calc(97vh - 70px);
-    }
+
 }
 
 @media (max-width: 1300px){

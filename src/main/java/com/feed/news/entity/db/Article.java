@@ -1,4 +1,4 @@
-package com.feed.news.entity;
+package com.feed.news.entity.db;
 
 
 import com.feed.news.crawler.Website;
@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -31,10 +32,11 @@ public class Article {
     @Column(name="image_link")
     String imageLink;
 
-    @Column(name="date")
+    @Column(name="article_date")
     LocalDate date;
 
-    @Transient
-    Website site;
+    @Column(name="site")
+    @Enumerated(EnumType.STRING)Website site;
+
 
 }

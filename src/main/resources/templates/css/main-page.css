@@ -79,7 +79,6 @@ body{
 
 .main-section{
     background: whitesmoke;
-    height: calc(98vh - 70px);
     position: relative;
     padding: 100px 200px;
     /*overflow: hidden;*/
@@ -339,9 +338,7 @@ body{
         top: 5%;
     }
 
-    .main-section{
-        height: calc(97vh - 70px);
-    }
+
 }
 
 @media (max-width: 1300px){

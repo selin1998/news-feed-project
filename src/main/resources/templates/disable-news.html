@@ -1,148 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tinder: news</title>
-
-    <link rel="stylesheet" href="css/news.css">
+    <title>Disable-news</title>
+    <link rel="stylesheet" th:href="@{/css/news.css}">
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
 </head>
 <body>
 <header class="main-header">
-    <a href="./main-page.html" class="main-header-logo"><img src="./img/Group%2012.png" alt="IBA Tech Academy"></a>
+    <a href="/main-page.html" class="main-header-logo"><img src="/img/Group 12.png" alt="IBA Tech Academy"></a>
     <div class="main-header-wrapper">
         <label class="main-header-search-wrapper">
-            <input type="search" class="main-header-search" placeholder="Search">
-            <img src="./img/search-icon.svg" alt="Search Icon">
+            <form th:action ="@{/news_feed}" method="get">
+                <input type="text" class="main-header-search"  name="keyword" placeholder="Press Enter">
+                <img src="/img/search-icon.svg" alt="Search Icon">
+            </form>
+
         </label>
         <div class="main-header-profile-wrapper">
             <div class="main-header-profile-credentials">
                 <span class="main-header-profile-welcome">Welcome,</span>
-                <span class="main-header-username">Sample User</span>
+                <span class="main-header-username" th:text="${username}"></span>
             </div>
-
-            <img class="main-header-user-icon" src="./img/user-icon-with-background.svg" alt="User Icon">
+            <img class="main-header-user-icon" src="/img/user-icon-with-background.svg" alt="User Icon">
             <div class="hidden-accordion-wrapper">
                 <ul class="hidden-accordion">
-                    <li class="hidden-accordion-item"><img src="./img/favourite-icon.svg" alt="Favourite Icon"><a href="./disable-news.html" class="hidden-accordion-item-link">My News</a></li>
-                    <li class="hidden-accordion-item"><img src="./img/log-out-icon.svg" alt="Log Out Icon"><a href="./index.html" class="hidden-accordion-item-link">Log Out</a></li>
+                    <li class="hidden-accordion-item"><img src="/img/favourite-icon.svg" alt="Favourite Icon"><a th:href="@{/news_feed}" class="hidden-accordion-item-link">Main-page</a></li>
+                    <li class="hidden-accordion-item"><img src="/img/log-out-icon.svg" alt="Log Out Icon"><a th:href="@{/}" class="hidden-accordion-item-link">Log Out</a></li>
                 </ul>
             </div>
         </div>
     </div>
 </header>
 <section>
+
     <div class="add-search">
         <p class="details">Disable news from specific websites:</p>
         <label class="main-header-search-wrapper">
-            <input type="search" class="main-header-search" placeholder="Search">
-
-            <img src="./img/search-icon.svg" alt="Search Icon">
+            <form th:action ="@{/disable_news}" method="get">
+                <input type="text" class="main-header-search" name="site_name" placeholder="Press Enter">
+                <img src="/img/search-icon.svg" alt="Search Icon">
+            </form>
         </label>
+
     </div>
-    <div class="news-tabs">
-        <div class="single-tab">
 
-            <img class="tab-picture" src="img/1_6_fgYnisCa9V21mymySIvA%201.png">
-            <p class="tab-title">MEDIUM</p>
-            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
-            <div class="button">
-                <img class="icon" src="img/vec.png">
-                <p class="button-text">Dissmiss this author</p>
-            </div>
-        </div>
-        <div class="single-tab">
+    <th:block th:with="colCount=${colCount}">
+<!--      colCount=${5}  -->
+    <div class="news-tabs" th:each="r : ${#numbers.sequence(0, allSites.size()-1,colCount)}">
 
-            <img class="tab-picture" src="img/1_6_fgYnisCa9V21mymySIvA%201.png">
-            <p class="tab-title">MEDIUM</p>
-            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
-            <div class="button">
-                <img class="icon" src="img/vec.png">
-                <p class="button-text">Dissmiss this author</p>
-            </div>
-        </div>
-        <div class="single-tab">
+        <div th:each="c : ${#numbers.sequence(0, colCount-1 )}"  class="single-tab"  >
 
-            <img class="tab-picture" src="img/1_6_fgYnisCa9V21mymySIvA%201.png">
-            <p class="tab-title">MEDIUM</p>
-            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
-            <div class="button">
-                <img class="icon" src="img/vec.png">
-                <p class="button-text">Dissmiss this author</p>
-            </div>
-        </div>
-        <div class="single-tab">
+            <img class="tab-picture " th:src="${allSites[c+r].getImageAsBase64()}">
+            <p class="tab-title" th:text="${allSites[c+r].news_name}"></p>
+            <p class="tab-description" th:text="${allSites[c+r].news_description}"></p>
 
-            <img class="tab-picture" src="img/1_6_fgYnisCa9V21mymySIvA%201.png">
-            <p class="tab-title">MEDIUM</p>
-            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
-            <div class="button">
-                <img class="icon" src="img/vec.png">
-                <p class="button-text">Dissmiss this author</p>
+            <div class="button-area">
+                <form th:action="@{'/disable_news/'+${allSites[c+r].getNews_id()}}" method="post">
+                    <button  th:id="${allSites[c+r].getNews_id()}"  type="submit"  th:value="${buttons[c+r]}" name="operation"  />
+                    <p class="button-text" th:text="${buttons[c+r]}"></p>
+                </form>
             </div>
-        </div>
-        <div class="single-tab">
 
-            <img class="tab-picture" src="img/1_6_fgYnisCa9V21mymySIvA%201.png">
-            <p class="tab-title">MEDIUM</p>
-            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
-            <div class="button">
-                <img class="icon" src="img/vec.png">
-                <p class="button-text">Dissmiss this author</p>
-            </div>
         </div>
+
     </div>
-    <div class="news-tabs">
-        <div class="single-tab">
+    </th:block>
 
-            <img class="tab-picture" src="img/1_6_fgYnisCa9V21mymySIvA%201.png">
-            <p class="tab-title">MEDIUM</p>
-            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
-            <div class="button">
-                <img class="icon" src="img/vec.png">
-                <p class="button-text">Dissmiss this author</p>
-            </div>
-        </div>
-        <div class="single-tab">
-
-            <img class="tab-picture" src="img/1_6_fgYnisCa9V21mymySIvA%201.png">
-            <p class="tab-title">MEDIUM</p>
-            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
-            <div class="button">
-                <img class="icon" src="img/vec.png">
-                <p class="button-text">Dissmiss this author</p>
-            </div>
-        </div>
-        <div class="single-tab">
-
-            <img class="tab-picture" src="img/1_6_fgYnisCa9V21mymySIvA%201.png">
-            <p class="tab-title">MEDIUM</p>
-            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
-            <div class="button">
-                <img class="icon" src="img/vec.png">
-                <p class="button-text">Dissmiss this author</p>
-            </div>
-        </div>
-        <div class="single-tab">
-
-            <img class="tab-picture" src="img/1_6_fgYnisCa9V21mymySIvA%201.png">
-            <p class="tab-title">MEDIUM</p>
-            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
-            <div class="button">
-                <img class="icon" src="img/vec.png">
-                <p class="button-text">Dissmiss this author</p>
-            </div>
-        </div>
-        <div class="single-tab">
-
-            <img class="tab-picture" src="img/1_6_fgYnisCa9V21mymySIvA%201.png">
-            <p class="tab-title">MEDIUM</p>
-            <p class="tab-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
-            <div class="button">
-                <img class="icon" src="img/vec.png">
-                <p class="button-text">Dissmiss this author</p>
-            </div>
-        </div>
-    </div>
 
 </section>
 

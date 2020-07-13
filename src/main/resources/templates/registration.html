@@ -1,49 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Tinder: Registration</title>
+    <title>Registration</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/registration.css">
+    <link rel="stylesheet" type="text/css" href="/css/registration.css">
 </head>
 <body>
 
 
 <section class="registration-section">
     <header class="header">
-
-        <a href="./registration.html" class="header-link"><img src="./img/Group%201.png" alt="IBA Tech Academy"></a>
+        <a th:action="@{/registration}" th:method="get" class="header-link"><img src="/img/Group 12.png" alt="IBA Tech Academy"></a>
     </header>
     <!--    <img class="registration-section-image" src="./img/login-background.svg" alt="404">-->
     <div class="registration-section-container">
         <h1 class="registration-section-container-title">Create An Account</h1>
-        <p class="registration-section-container-description">Create your account, it takes less than a minute. If you already have an account - <a href="./index.html" class="registration-section-container-description-link">login</a></p>
-        <form action="" class="registration-section-container-form">
+        <p class="registration-section-container-description">Create your account, it takes less than a minute. If you already have an account - <a href="/login" class="registration-section-container-description-link">login</a></p>
+        <form th:action="@{/registration}" th:object="${registrationForm}"  method="post" class="registration-section-container-form" role="form">
+            <p class="error-message"
+               th:each="error : ${#fields.errors('full_name')}"
+               th:text="${error}">Validation error</p>
             <div class="registration-section-container-form-input-wrapper">
-
-                <img class="box-icons" src="./img/user-icon.svg" alt="User Icon">
+                <img class="box-icons" src="/img/user-icon.svg" alt="User Icon">
                 <label for="full-name"></label>
-                <input class="registration-section-container-form-input" id="full-name" placeholder="Full name" type="text">
+                <input class="registration-section-container-form-input" id="full-name" placeholder="Full name" type="text" name="full_name" th:field="*{full_name}">
             </div>
-            <div class="registration-section-container-form-input-wrapper">
-
-                <img class="box-icons" src="./img/mail-icon.svg" alt="User Icon">
+            <p class="error-message"
+               th:each="error : ${#fields.errors('email')}"
+               th:text="${error}">Validation error</p>
+            <div class="registration-section-container-form-input-wrapper" >
+                <img class="box-icons" src="/img/mail-icon.svg" alt="User Icon">
                 <label for="email"></label>
-                <input class="registration-section-container-form-input" id="email" placeholder="Email address" type="email">
+                <input class="registration-section-container-form-input" id="email" placeholder="Email address" type="email" name="email" th:field="*{email}">
             </div>
+            <p class="error-message"
+               th:each="error: ${#fields.errors('password')}"
+               th:text="${error}">Validation error</p>
             <div class="registration-section-container-form-input-wrapper">
-
-                <img class="box-icons" src="./img/lock-icon.svg" alt="User Icon">
+                <img class="box-icons" src="/img/lock-icon.svg" alt="User Icon">
                 <label for="password"></label>
-                <input class="registration-section-container-form-input" id="password" placeholder="Password" type="password">
+                <input class="registration-section-container-form-input" id="password" placeholder="Password" type="password" name="password" th:field="*{password}">
             </div>
             <div class="registration-section-container-form-input-wrapper mb0">
-
-                <img class="box-icons" src="./img/lock-icon.svg" alt="User Icon">
+                <img class="box-icons" src="/img/lock-icon.svg" alt="User Icon">
                 <label for="confirm-password"></label>
-                <input class="registration-section-container-form-input" id="confirm-password" placeholder="Confirm Password" type="password">
+                <input  class="registration-section-container-form-input" id="confirm-password" placeholder="Confirm Password" type="password" name="confirm_password" th:field="*{confirm_password}">
+                <p class="error-message"
+                   th:each="error: ${#fields.errors('confirm_password')}"
+                   th:text="${error}">Validation error</p>
             </div>
-            <input type="submit" value="Create account" class="registration-section-container-form-submit">
+            <input class="registration-section-container-form-submit" name="Submit" type="submit" value="Create account">
+            <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
         </form>
     </div>
 </section>
