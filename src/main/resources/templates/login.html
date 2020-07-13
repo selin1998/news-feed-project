@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Tinder: Login</title>
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+</head>
+<body>
+
+
+<section class="login-section">
+    <header class="header">
+        <a th:action="@{/login}" th:method="post" class="header-link"><img src="/img/Group 12.png" alt="IBA Tech Academy"></a>
+    </header>
+    <div class="login-section-container">
+        <h1 class="login-section-container-title">Welcome Back!</h1>
+        <p class="login-section-container-description">To keep connected with us please login with personal information by email address and password</p>
+        <form th:action="@{/login}" method="POST" class="login-section-container-form">
+            <div class="login-section-container-form-input-wrapper">
+                <img class="input-icons" src="/img/mail-icon.svg" alt="User Icon">
+                <label for="email"></label>
+                <input name="email" th:placeholder="Email" class="login-section-container-form-input" id="email" placeholder="Email address" type="email">
+            </div>
+            <div class="login-section-container-form-input-wrapper">
+                <img class="input-icons" src="/img/lock-icon.svg" alt="User Icon">
+                <label for="password"></label>
+                <input name="password"  th:placeholder="Password" class="login-section-container-form-input" id="password" placeholder="Password" type="password">
+            </div>
+            <div class="login-section-container-options">
+                <div class="login-section-container-options-wrapper">
+                    <label class="login-section-container-options-checkbox-wrapper">Remember Me
+                        <input type="checkbox" class="login-section-container-options-old-checkbox">
+                        <span class="login-section-container-options-checkmark"></span>
+                    </label>
+                </div>
+                <a href="/forgot-password" class="login-section-container-options-link">Forgot password?</a>
+            </div>
+            <div class="login-section-form-buttons">
+                <button th:text="Login" name="Submit" value="Login" type="Submit" class="login-section-container-form-login">Login now</button>
+                <a href="/registration"  class=" login-section-container-form-signup">Create account</a>
+            </div>
+            <div class="login-section-form-social">
+                <div class="login-section-form-social-description-wrapper">
+                    <hr class="login-section-form-social-description-line">
+                    <span class="login-section-form-social-description">Or you can Join with</span>
+                    <hr class="login-section-form-social-description-line">
+                </div>
+                <div class="login-section-form-social-icon-wrapper">
+                    <a href="#" class="login-section-form-social-icon"><img src="/img/google-plus.svg" alt="Google Plus"></a>
+                    <a href="#" class="login-section-form-social-icon"><img src="/img/facebook.svg" alt="Facebook"></a>
+                    <a href="#" class="login-section-form-social-icon"><img src="/img/linked-in.svg" alt="Linked In"></a>
+                    <a href="#" class="login-section-form-social-icon mr0"><img src="/img/twitter.svg" alt="Twitter"></a>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+</body>
+</html>

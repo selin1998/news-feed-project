@@ -1,4 +1,4 @@
-package com.feed.news.entity;
+package com.feed.news.entity.db;
 
 
 import com.feed.news.crawler.Website;

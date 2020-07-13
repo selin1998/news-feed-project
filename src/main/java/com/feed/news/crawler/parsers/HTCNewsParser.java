@@ -4,7 +4,7 @@ import com.feed.news.crawler.DateTimeFormats;
 import com.feed.news.crawler.JsoupParser;
 import com.feed.news.crawler.RestTemplateService;
 import com.feed.news.crawler.Website;
-import com.feed.news.entity.Article;
+import com.feed.news.entity.db.Article;
 import lombok.SneakyThrows;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
