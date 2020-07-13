@@ -19,28 +19,40 @@
     <div class="registration-section-container">
         <h1 class="registration-section-container-title">Create An Account</h1>
         <p class="registration-section-container-description">Create your account, it takes less than a minute. If you already have an account - <a href="/login" class="registration-section-container-description-link">login</a></p>
-        <form th:action="@{/registration}" th:object="${user}"  method="post" class="registration-section-container-form" role="form">
+        <form th:action="@{/registration}" th:object="${registrationForm}"  method="post" class="registration-section-container-form" role="form">
+            <p class="error-message"
+               th:each="error : ${#fields.errors('full_name')}"
+               th:text="${error}">Validation error</p>
             <div class="registration-section-container-form-input-wrapper">
                 <img class="box-icons" src="/img/user-icon.svg" alt="User Icon">
-                <label th:if="${#fields.hasErrors('full_name')}" th:errors="*{full_name}" for="full-name"></label>
-                <input name="full_name" th:field="*{full_name}" class="registration-section-container-form-input" id="full-name" placeholder="Full name" type="text">
+                <label for="full-name"></label>
+                <input class="registration-section-container-form-input" id="full-name" placeholder="Full name" type="text" name="full_name" th:field="*{full_name}">
             </div>
-            <div class="registration-section-container-form-input-wrapper">
+            <p class="error-message"
+               th:each="error : ${#fields.errors('email')}"
+               th:text="${error}">Validation error</p>
+            <div class="registration-section-container-form-input-wrapper" >
                 <img class="box-icons" src="/img/mail-icon.svg" alt="User Icon">
-                <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" for="email"></label>
-                <input name="email" th:field="*{email}" class="registration-section-container-form-input" id="email" placeholder="Email address" type="email">
+                <label for="email"></label>
+                <input class="registration-section-container-form-input" id="email" placeholder="Email address" type="email" name="email" th:field="*{email}">
             </div>
+            <p class="error-message"
+               th:each="error: ${#fields.errors('password')}"
+               th:text="${error}">Validation error</p>
             <div class="registration-section-container-form-input-wrapper">
                 <img class="box-icons" src="/img/lock-icon.svg" alt="User Icon">
-                <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" for="password"></label>
-                <input name="password" th:field="*{password}" class="registration-section-container-form-input" id="password" placeholder="Password" type="password">
+                <label for="password"></label>
+                <input class="registration-section-container-form-input" id="password" placeholder="Password" type="password" name="password" th:field="*{password}">
             </div>
             <div class="registration-section-container-form-input-wrapper mb0">
                 <img class="box-icons" src="/img/lock-icon.svg" alt="User Icon">
-                <label th:if="${#fields.hasErrors('confirm_password')}" th:errors="*{confirm_password}" for="confirm-password"></label>
-                <input name="confirm_password" th:field="*{confirm_password}" class="registration-section-container-form-input" id="confirm-password" placeholder="Confirm Password" type="password">
+                <label for="confirm-password"></label>
+                <input  class="registration-section-container-form-input" id="confirm-password" placeholder="Confirm Password" type="password" name="confirm_password" th:field="*{confirm_password}">
+                <p class="error-message"
+                   th:each="error: ${#fields.errors('confirm_password')}"
+                   th:text="${error}">Validation error</p>
             </div>
-            <input name="Submit" type="submit" value="Create account" class="registration-section-container-form-submit">
+            <input class="registration-section-container-form-submit" name="Submit" type="submit" value="Create account">
             <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
         </form>
     </div>

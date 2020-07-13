@@ -4,36 +4,44 @@ package com.feed.news.controller;
 import com.feed.news.crawler.JsoupParser;
 import com.feed.news.entity.db.Article;
 import com.feed.news.entity.db.XUser;
-import com.feed.news.entity.XUserDetails;
 import com.feed.news.repository.ArticleRepo;
 import com.feed.news.service.NewsFeedService;
 import com.feed.news.service.UserService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.security.core.userdetails.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@RestController
+@Log4j2
+@Controller
 public class UserController {
 
-        private final NewsFeedService feedService;
-        private final ArticleRepo articleRepo;
+    private final NewsFeedService feedService;
+    private final ArticleRepo articleRepo;
+    private final UserService userService;
 
-        public UserController(NewsFeedService feedService, ArticleRepo articleRepo) {
-            this.feedService = feedService;
-            this.articleRepo = articleRepo;
-        }
-    @Autowired
-    private UserService userService;
+    public UserController(NewsFeedService feedService, ArticleRepo articleRepo, UserService userService) {
+        this.feedService = feedService;
+        this.articleRepo = articleRepo;
+        this.userService = userService;
+    }
 
+
+    @ModelAttribute("registrationForm")
+    public XUser registrationForm() {
+        return new XUser();
+    }
 
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
     public ModelAndView login(){
@@ -46,44 +54,50 @@ public class UserController {
     @RequestMapping(value="/registration", method = RequestMethod.GET)
     public ModelAndView registration(){
         ModelAndView modelAndView = new ModelAndView();
-        XUser user = new XUser();
-        modelAndView.addObject("user", user);
         modelAndView.setViewName("registration");
         return modelAndView;
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid XUser user, BindingResult bindingResult, Model model) {
+    public ModelAndView createNewUser(@ModelAttribute("registrationForm")  @Valid XUser user, BindingResult bindingResult) {
+
         ModelAndView modelAndView = new ModelAndView();
         Optional<XUser> userExists = userService.findUserByEmail(user.getEmail());
+
+        if (user.getFull_name().isEmpty() || user.getEmail().isEmpty()) {
+            bindingResult.rejectValue("full_name", "error.user", "Each field is mandatory");
+        }
         if (userExists.isPresent()) {
-            bindingResult
-                    .rejectValue("email", "error.user",
-                            "There is already a user registered with the email provided");
+            bindingResult.rejectValue("email", "error.user", "There is already a user registered with the email provided");
         }
         if (!user.getPassword().equals(user.getConfirm_password())){
-            model.addAttribute("passwordError", "Miss match");
-            modelAndView.setViewName("registration");
-            return  modelAndView;
+           bindingResult.rejectValue("password", "error.user", "The password fields must match");
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("registration");
-        } else {
+        }
+        else {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
-            modelAndView.addObject("user", new XUser());
-            modelAndView.setViewName("registration");
-            return  modelAndView;
-
         }
-        return modelAndView;
+        modelAndView.setViewName("registration");
+        return  modelAndView;
     }
 
     @RequestMapping(value = "/news", method = RequestMethod.GET)
     public ModelAndView showDesignForm(Model model) {
+
         ModelAndView modelAndView= new ModelAndView();
-        XUserDetails xd = (XUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Stream<JsoupParser> newsParsers = feedService.getNewsParsers(xd.getId());
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        User user = (User) authentication.getPrincipal();
+
+        int id=userService.findUserByEmail(user.getUsername()).get().getUser_id();
+
+        log.info("user id: "+id);
+
+        Stream<JsoupParser> newsParsers = feedService.getNewsParsers(id);
         List<Article> articles = newsParsers.flatMap(p -> p.getArticles().stream()).collect(Collectors.toList());
         articleRepo.saveAll(articles);
         model.addAttribute("articles", articles);

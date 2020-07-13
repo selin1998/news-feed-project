@@ -1,12 +1,14 @@
-package com.feed.news.entity;
+package com.feed.news.security;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
 @Getter
+@Setter
 public class XUserDetails implements UserDetails {
 
   private final int id;
