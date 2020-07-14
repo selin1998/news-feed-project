@@ -68,7 +68,7 @@ public class ArticlesController {
 
         model.addAttribute("articles", existsDate(news_start,news_finish) ? articleService.findArticleByDate(news_start,news_finish,user_id,pageable) : articleService.findArticleByKeyword(getKeyword(keyword),user_id,pageable));
 
-        log.info(fmt("Keywork for search ->  %s", keyword));
+        log.info(fmt("Keyword for search ->  %s", keyword));
         model.addAttribute("keyword",keyword);
 
         log.info(fmt("Start date for search ->  %s",news_start));

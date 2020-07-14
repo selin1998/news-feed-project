@@ -15,10 +15,10 @@ import java.util.List;
 @Repository
 public interface ArticleRepo extends JpaRepository<Article,String> {
 
-    // (a^b^c)&d=(a&d)^(b&d)^(c&d) -> (header^content^siteEquals)&(siteNotIn) : for search bar
-    Page<Article> findAllByHeaderIgnoreCaseContainingAndSiteNotInOrContentIgnoreCaseContainingAndSiteNotInOrSiteEqualsAndSiteNotInOrderByDateDesc(String keyword1, List<Website> sites1, String keyword2, List<Website> sites2, Website keyword3 , List<Website> sites3, Pageable page);
+    // (a^b^c)&d=(a&d)^(b&d)^(c&d) -> (header^content^siteEquals)&(siteIn) : for search bar
+    Page<Article> findAllByHeaderIgnoreCaseContainingAndSiteInOrContentIgnoreCaseContainingAndSiteInOrSiteEqualsAndSiteInOrderByDateDesc(String keyword1, List<Website> sites1, String keyword2, List<Website> sites2, Website keyword3 , List<Website> sites3, Pageable page);
 
-    Page<Article> findBySiteNotInAndDateBetweenOrderByDateDesc(List<Website> sites, LocalDate d1, LocalDate d2, Pageable page);
+    Page<Article> findBySiteInAndDateBetweenOrderByDateDesc(List<Website> sites, LocalDate d1, LocalDate d2, Pageable page);
 
     Page<Article> findBySiteNotInOrderByDateDesc(List<Website> sites,Pageable page);
 
