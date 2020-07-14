@@ -4,7 +4,9 @@ import com.feed.news.entity.db.News;
 import com.feed.news.repository.NewsFeedRepo;
 import com.feed.news.repository.UserRepo;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import java.util.Arrays;
 
@@ -23,8 +25,8 @@ public class AutoRun {
         this.newsRepo = newsRepo;
     }
 
-//    @Bean
-//    @Order(1)
+    @Bean
+    @Order(1)
     public CommandLineRunner add_news(){
         return args->{
             newsRepo.saveAll(Arrays.asList(

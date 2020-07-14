@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.social.security.SocialUserDetails;
 
 import java.util.Collection;
 
@@ -61,4 +62,6 @@ public class XUserDetails implements UserDetails {
   public boolean isEnabled() {
     return true;
   }
+
+
 }
