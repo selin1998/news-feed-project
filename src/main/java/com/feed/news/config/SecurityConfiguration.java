@@ -60,11 +60,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .logout()
                 .permitAll()
-                .logoutSuccessUrl("/");
-
-
-        // Settings for OAUTH2
-                .and().oauth2Login() .loginPage("/login")// enable OAuth2
+                .logoutSuccessUrl("/").
+                and().oauth2Login() .loginPage("/login")// enable OAuth2
                 .defaultSuccessUrl("/oauth2LoginSuccess")
                 .and().csrf().disable(); // disable CSRF
 
