@@ -62,14 +62,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .logoutSuccessUrl("/");
 
-        http
-                .rememberMe();
+
+        // Settings for OAUTH2
+                .and().oauth2Login() .loginPage("/login")// enable OAuth2
+                .defaultSuccessUrl("/oauth2LoginSuccess")
+                .and().csrf().disable(); // disable CSRF
 
         http
                 .rememberMe()
                 .key("myUniqueKey")
                 .tokenValiditySeconds(10000000);
     }
+
 
     @Override
     public void configure(WebSecurity web) throws Exception {
