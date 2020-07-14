@@ -5,18 +5,17 @@
     <meta charset="UTF-8">
     <title>Main Page</title>
     <link rel="stylesheet" th:href="@{/css/main-page.css}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 </head>
 <body>
 
 <header class="main-header">
-    <a href="/main-page" class="main-header-logo"><img src="/img/Group%2012.png" alt="IBA Tech Academy"></a>
+    <a href="/main-page.html" class="main-header-logo"><img src="/img/Group%2012.png" alt="IBA Tech Academy"></a>
     <div class="main-header-wrapper">
         <label class="main-header-search-wrapper">
-            <form th:action="@{/news_feed}" method="get">
-                <input type="text" class="main-header-search" name="keyword" placeholder="Press Enter">
+            <form th:action ="@{/news_feed}" method="get">
+                <input type="text" class="main-header-search"  name="keyword" placeholder="Press Enter">
                 <img src="/img/search-icon.svg" alt="Search Icon">
             </form>
 
@@ -29,10 +28,8 @@
             <img class="main-header-user-icon" src="/img/user-icon-with-background.svg" alt="User Icon">
             <div class="hidden-accordion-wrapper">
                 <ul class="hidden-accordion">
-                    <li class="hidden-accordion-item"><img src="/img/favourite-icon.svg" alt="Favourite Icon"><a
-                            th:href="@{/disable_news}" class="hidden-accordion-item-link">My News</a></li>
-                    <li class="hidden-accordion-item"><img src="/img/log-out-icon.svg" alt="Log Out Icon"><a
-                            th:href="@{/}" class="hidden-accordion-item-link">Log Out</a></li>
+                    <li class="hidden-accordion-item"><img src="/img/favourite-icon.svg" alt="Favourite Icon"><a th:href="@{/disable_news}" class="hidden-accordion-item-link">My News</a></li>
+                    <li class="hidden-accordion-item"><img src="/img/log-out-icon.svg" alt="Log Out Icon"><a th:href="@{/}" class="hidden-accordion-item-link">Log Out</a></li>
                 </ul>
             </div>
         </div>
@@ -41,25 +38,25 @@
 
 <div class="container">
 
-    <form th:action="@{/news_feed/(news_start=${news_start},news_finish=${news_finish} )}" method="get">
+    <form th:action ="@{/news_feed/(news_start=${news_start},news_finish=${news_finish} )}" method="get">
         <div class="row justify-content-center ">
             <div class="col-2">
                 <p></p>
-                <input type="date" id="start" name="news_start"
-                       value="2020-07-01"
-                       min="2018-01-01" max="2021-12-31">
+                <input  type="date" id="start" name="news_start"
+                        value="2020-07-01"
+                        min="2018-01-01" max="2021-12-31">
                 <p>Start date</p>
             </div>
             <div class="col-2">
                 <p></p>
-                <input type="date" id="finish" name="news_finish"
-                       value="2020-07-01"
-                       min="2018-01-01" max="2021-12-31">
+                <input  type="date" id="finish" name="news_finish"
+                        value="2020-07-01"
+                        min="2018-01-01" max="2021-12-31">
                 <p>Finish date</p>
             </div>
             <div class="col-2">
                 <p></p>
-                <button type="submit">Submit</button>
+                <button  type="submit">Submit</button>
             </div>
         </div>
     </form>
@@ -78,65 +75,8 @@
                 <p class="tab-date" th:text="${article.getDate()}"></p>
             </div>
         </a>
-        <div class="link-share-img">
-            <button class="myBtn"><img class="vector" src="/img/Vector.png"></button>
-            <div class="modal">
-
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <input type="text" th:value="${article.articleLink}" id="myInput">
-
-                    <!-- The button used to copy the text -->
-                    <button onclick="myFunction()">Copy text</button>
-                </div>
-
-            </div>
-
-            <script>
-                // Get the modal
-                var modal = document.getElementsByClassName('modal');
-
-                // Get the button that opens the modal
-                var btn = document.getElementsByClassName("myBtn");
-
-                // Get the <span> element that closes the modal
-                var span = document.getElementsByClassName("close");
-
-
-                for (let i = 0; i < btn.length; i++) {
-                    btn[i].onclick = function () {
-                        modal[i].style.display = "block";
-                    }
-                }
-                for (let i = 0; i < span.length; i++) {
-                    span[i].onclick = function () {
-                        modal[i].style.display = "none";
-                    }
-                }
-
-                function myFunction() {
-                    /* Get the text field */
-                    var copyText = document.getElementById("myInput");
-                    for (let i = 0; i < modal.length; i++) {
-                    /* Select the text field */
-                    copyText.select();
-                    copyText.setSelectionRange(0, 99999); /*For mobile devices*/
-
-                    /* Copy the text inside the text field */
-                    document.execCommand("copy");
-
-                    // /* Alert the copied text */
-                    // alert("Copied the text: " + copyText.value);
-                }
-
-                // // When the user clicks anywhere outside of the modal, close it
-                window.onclick = function(event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
-                }
-            </script>
+        <div>
+            <img class="vector" src="/img/Vector.png">
         </div>
         <a class="vector-text">Share</a>
         <div class="tab-options">
@@ -163,6 +103,8 @@
     </span>
 
 </div>
+
+
 
 
 </body>

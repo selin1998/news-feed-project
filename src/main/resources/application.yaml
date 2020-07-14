@@ -14,13 +14,19 @@ spring:
     username: postgres
     password: password
 
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          github:
-#            clientId: 8d408ff76b1915728870
-#            clientSecret: 9403a4ccbd62a8f71ddd21da51abd41531e14bb2
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: 275467666884234
+            client-secret: 18c6977e20cb1374b2085df443aa684d
+            scope:
+              - email
+              - public_profile
+          google:
+            clientId: 747054116050-j25974gvn8i27h044kdddi3714rr8s74.apps.googleusercontent.com
+            clientSecret: EitCAZgKbH-Ae0ymTBLJJoVG
 
 
 # ===============================
