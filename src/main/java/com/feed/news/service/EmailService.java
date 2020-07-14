@@ -6,10 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.context.Context;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.spring5.SpringTemplateEngine;
-
 import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
 
@@ -19,8 +15,6 @@ public class EmailService {
     @Autowired()
     private JavaMailSender emailSender;
 
-    @Autowired
-    private SpringTemplateEngine templateEngine;
 
     public void sendEmail(Mail mail) {
         try {

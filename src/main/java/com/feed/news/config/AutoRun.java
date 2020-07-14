@@ -1,17 +1,17 @@
-package com.feed.news.bean;
+package com.feed.news.config;
 
-import com.feed.news.crawler.RestTemplateService;
 import com.feed.news.entity.News;
 
 import com.feed.news.repository.NewsRepo;
 import com.feed.news.repository.UserRepo;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.web.client.RestTemplate;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,15 +50,15 @@ public class AutoRun {
 
         return buffer.toByteArray();
     }
-
+//
 //    @Bean
 //    public RestTemplate buildRestTemplate() {
 //        System.setProperty("https.protocols", "TLSv1.2,TLSv1.1,TLSv1");
 //        return new RestTemplate();
 //    }
-
-
-
+//
+//
+//
 //    @Bean
 //    @Order(1)
     public CommandLineRunner add_news(){

@@ -2,7 +2,7 @@
 
 
 server:
-  port: ${PORT:5000}
+  port: ${PORT:9090}
 
 
 spring:
@@ -10,9 +10,9 @@ spring:
     banner-mode: off
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://localhost:5432/feed
     username: postgres
-    password: dreamgirl15
+    password: password
 
 #  security:
 #    oauth2:
@@ -29,7 +29,7 @@ spring:
   jpa:
     open-in-view: false
     generate-ddl: true
-    hibernate.ddl-auto: update
+    hibernate.ddl-auto: create-drop
     show-sql: true
 
 # ===============================
