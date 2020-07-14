@@ -65,11 +65,13 @@ public class PasswordForgotController {
         tokenRepository.save(token);
 
         Mail mail = new Mail();
-        mail.setFrom("no-reply@ibatech.com");
+        mail.setFrom("new.news.2020@gmail.com");
         mail.setTo(user.get().getEmail());
         mail.setSubject("Password reset request");
-        mail.setContent("Dear " + user.get().getFull_name() + "\n\nTo complete the password reset process, please click here: "
-                + request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/reset-password?token=" + token.getToken());
+        mail.setContent("Dear " + user.get().getFull_name() +
+                "\n\nTo complete the password reset process, please click here: "
+                + request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+                + "/reset-password?token=" + token.getToken());
         emailService.sendEmail(mail);
         return "redirect:/forgot-password?success";
 
