@@ -1,4 +1,4 @@
-package com.feed.news.bean;
+package com.feed.news.config;
 
 import com.feed.news.crawler.RestTemplateService;
 import com.feed.news.entity.News;
