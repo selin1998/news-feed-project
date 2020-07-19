@@ -85,10 +85,10 @@
                 <!-- Modal content -->
                 <div class="modal-content">
                     <span class="close">&times;</span>
-                    <input type="text" th:value="${article.articleLink}" id="myInput">
+                    <input type="text" th:value="${article.articleLink}" th:id="${article.articleLink}">
 
                     <!-- The button used to copy the text -->
-                    <button onclick="myFunction()">Copy URL</button>
+                    <button th:data-id="${article.articleLink}" onclick="myFunction(this.getAttribute('data-id'))">Copy text</button>
                 </div>
 
             </div>
@@ -115,9 +115,9 @@
                     }
                 }
 
-                function myFunction() {
+                function myFunction(text) {
                     /* Get the text field */
-                    var copyText = document.getElementById("myInput");
+                    var copyText = document.getElementById(text);
                     for (let i = 0; i < 100; i++) {
                         /* Select the text field */
                         copyText.select();
@@ -148,21 +148,66 @@
 </section>
 
 
-<div th:if="${articles.totalPages > 0}" class="pagination-div main-section">
+<div th:if="${articles.totalPages > 0}" class="pagination-div  main-section">
 
-    <span th:if="${articles.hasPrevious()}">
-        <a th:href="@{/news_feed/(page=${articles.number-1},size=${articles.size}, keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}">Previous</a>
-    </span>
-    <th:block th:each="i: ${#numbers.sequence(0, articles.totalPages -1)}">
-        <span th:if="${articles.number == i}" class="selected">[[${i}]]</span>
-        <span th:unless="${articles.number == i}">
+
+    <div class="inlining">
+        <span th:if="${articles.hasPrevious()}">
+               <a th:href="@{/news_feed/(page=${articles.number-1},size=${articles.size}, keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}">Previous</a>
+        </span>
+    </div>
+
+    <div th:if="${articles.totalPages < 10}" class="inlining">
+        <th:block th:each="i: ${#numbers.sequence(0, articles.totalPages -1)}">
+            <span th:if="${articles.number == i}" class="selected">[[${i+1}]]</span>
+            <span th:unless="${articles.number == i}">
              <a th:href="@{/news_feed/(page=${i},size=${articles.size},keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}">[[${i+1}]]</a>
         </span>
-    </th:block>
-    <span th:if="${articles.hasNext()}">
-        <a th:href="@{/news_feed/(page=${articles.number+1},size=${articles.size},keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}">Next</a>
-    </span>
+        </th:block>
+    </div>
+    <div th:unless="${articles.totalPages < 10}" class="inlining">
+        <th:block th:each="c: ${custompager}">
+            <span th:if="${articles.number == c-1}" class="selected" th:text="${c}"></span>
+            <span th:unless="${articles.number == c-1}" th:switch="${c==-1}">
+                    <a th:case="${true}">...</a>
+                    <a th:case="*" th:href="@{/news_feed/(page=${c}-1,size=${articles.size},keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}">[[${c}]]</a>
+            </span>
 
+        </th:block>
+    </div>
+    <div class="inlining">
+         <span th:if="${articles.hasNext()}">
+             <a th:href="@{/news_feed/(page=${articles.number+1},size=${articles.size},keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}">Next</a>
+        </span>
+    </div>
+    <div class="inlining">
+
+        <form  th:action ="@{/news_feed/(page=${num},size=${articles.size},keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}" method="get">
+            <span>/</span>
+            <div class="page-input">
+                <input type="number" value="*{num}"  th:name="num" placeholder="Page">
+                <input type="hidden"  name="size" th:value="${articles.size}">
+                <input type="hidden"  name="keyword" th:value="${keyword}">
+                <input type="hidden"  name="news_start" th:value="${news_start}">
+                <input type="hidden"  name="news_finish" th:value="${news_finish}">
+            </div>
+        </form>
+
+    </div>
+
+
+</div>
+
+
+<div th:if="${articles.totalPages > 0}"  class="pagination-div justify-content-center main-section" >
+    <p>Items per page: </p>
+    <th:block th:each="s : ${new int[]{5,10,25,50} }">
+
+        <span th:if="${articles.size == s}" class="selected">[[${s}]]</span>
+        <span th:unless="${articles.size == s}">
+             <a th:text="${s}" th:href="@{/news_feed/(page=${articles.number},size=${s},keyword=${keyword}, news_start=${news_start}, news_finish=${news_finish})}">[[${s}]]</a>
+         </span>
+    </th:block>
 </div>
 
 

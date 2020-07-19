@@ -109,7 +109,7 @@ public class UserController {
         // send welcome email for the first time
         model.addAttribute("name", user.getAttribute("name"));
 
-        modelAndView.setViewName("news");
+        modelAndView.setViewName("main-page");
         return modelAndView;
     }
 

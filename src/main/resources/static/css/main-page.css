@@ -82,7 +82,7 @@ body{
     background: whitesmoke;
     padding: 10px 100px;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
-
+    margin: 0 auto;
 }
 
 table{
@@ -95,7 +95,12 @@ table td, table th {
 
 table th { background: #eee;}
 
-.pagination-div{user-select: none;}
+.pagination-div{
+    user-select: none;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
 
 .pagination-div span{
     border-radius:3px;
@@ -103,6 +108,16 @@ table th { background: #eee;}
     padding:5px;
     margin:10px 0px 0px 10px;
     display:inline-block;
+
+}
+
+.pagination-div .page-input{
+
+
+    padding:5px;
+    margin:10px 0px 0px 10px;
+    display:inline-block;
+
 
 }
 
@@ -127,9 +142,20 @@ span.selected{background:#ccf;}
     margin: 10px;
 }
 
+.inlining{
+    display: inline-block;
+    margin: 0 auto;
+
+}
+
+.inlining input{
+    width: 60px;
+    height: 36px;
+}
+
 .main-page-image{
-    width: 250px;
-    height: 200px;
+    width: 300px;
+    height: 250px;
 }
 
 .article-date{
