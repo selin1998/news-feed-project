@@ -1,6 +1,3 @@
-
-
-
 server:
   port: ${PORT:5000}
 
@@ -13,20 +10,6 @@ spring:
     url: jdbc:postgresql://localhost:5432/feed
     username: postgres
     password: password
-
-  security:
-    oauth2:
-      client:
-        registration:
-          facebook:
-            client-id: 275467666884234
-            client-secret: 18c6977e20cb1374b2085df443aa684d
-            scope:
-              - email
-              - public_profile
-          google:
-            clientId: 747054116050-j25974gvn8i27h044kdddi3714rr8s74.apps.googleusercontent.com
-            clientSecret: EitCAZgKbH-Ae0ymTBLJJoVG
 
 
 # ===============================
