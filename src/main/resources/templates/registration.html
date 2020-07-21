@@ -47,7 +47,7 @@
             <p class="error-message"
                th:each="error: ${#fields.errors('confirm_password')}"
                th:text="${error}">Validation error</p>
-            <div class="registration-section-container-form-input-wrapper ">
+            <div class="registration-section-container-form-input-wrapper">
                 <img class="box-icons" src="/img/lock-icon.svg" alt="User Icon">
                 <label for="confirm-password"></label>
                 <input  class="registration-section-container-form-input" id="confirm-password" placeholder="Confirm Password" type="password" name="confirm_password" th:field="*{confirm_password}">
@@ -56,7 +56,7 @@
             <p class="error-message"
                th:each="error : ${#fields.errors('file')}"
                th:text="${error}">Validation error</p>
-            <div class="registration-section-container-form-input-wrapper" >
+            <div class="registration-section-container-form-input-wrapper">
                 <img class="box-icons" src="/img/photo.svg" alt="photo Icon">
                 <label for="file"></label>
                 <input class="registration-section-container-form-input" id="file" placeholder="Image" type="file" name="image" th:field="*{file}">
