@@ -100,7 +100,7 @@ public class UserController {
 
             emailSenderService.sendEmail(mailMessage);
             modelAndView.addObject("email", user.getEmail());
-
+            modelAndView.addObject("emailMessage", "A verification email has been sent to: ");
 
             modelAndView.addObject("successMessage", "User has been registered successfully");
         }
