@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:5000}
+  port: ${PORT:8080}
 
 
 spring:
@@ -7,9 +7,9 @@ spring:
     banner-mode: off
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://localhost:5432/feed
     username: postgres
-    password: dreamgirl15
+    password: password
 
 # ===============================
 # = JPA configurations

@@ -26,12 +26,11 @@ public class DroidLifeParser  implements JsoupParser {
         Document doc = connection("https://www.droid-life.com/");
         Elements elements = doc.getElementsByTag("article");
         for (Element element : elements) {
-            String header = element.select(".preview__title").first()
-                    .getElementsByTag("a").first().text();
+            String header = element.select(".preview__title").text();
             String content = element.select(".preview__excerpt").text();
-            String link = element.getElementsByTag("a").first().attr("href");
+            String link = element.select(".preview__link").first().select("a").first().attr("href");
             String imageLink = "https://www.droid-life.com/"
-                    .concat(element.getElementsByTag("a").first().getElementsByTag("img").attr("src"));
+                    .concat(element.select(".picture").first().select("img").first().attr("data-src"));
             LocalDate date = convertStringToDate(element.select(".entry-meta__updated").text(), dateTimeForm.FULL_MONTH_FORMAT);
 
             articles.add(new Article(header, content, link, imageLink, date, Website.DroidLife));

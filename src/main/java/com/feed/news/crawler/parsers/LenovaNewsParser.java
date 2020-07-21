@@ -24,7 +24,7 @@ public class LenovaNewsParser  implements JsoupParser {
     @Override
     public List<Article> getArticles() {
         Document doc = connection("https://news.lenovo.com/pressroom/press-releases/");
-        Elements elements = doc.getElementsByClass("col-12_xs-12");
+        Elements elements = doc.getElementsByClass("card card-wide card-release");
         for (Element element : elements) {
             String header = element.select(".card-title").text();
             String content = element.select(".card-text").text();
