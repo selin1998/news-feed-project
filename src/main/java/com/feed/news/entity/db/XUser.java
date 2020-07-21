@@ -3,8 +3,10 @@ package com.feed.news.entity.db;
 import com.feed.news.entity.News;
 import com.feed.news.entity.Role;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.util.Base64;
 import java.util.Set;
 
 @Data
@@ -33,8 +35,15 @@ public class XUser {
     @Column(name = "confirm_password")
     private String confirm_password;
 
+
+    @Column(name="image")
+    private byte[] image;
+
     @Column(name = "ACTIVE")
     private int active;
+
+    @Transient
+    private MultipartFile file;
 
     @Column(length = 32, columnDefinition = "varchar(32) default 'USER'")
     @Enumerated(EnumType.STRING)
@@ -44,5 +53,12 @@ public class XUser {
     private Set<News> news;
 
     private boolean isEnabled;
+
+    public String getImageAsBase64() {
+        byte[] encoded = Base64.getEncoder().encode(image);
+        String imgDataAsBase64 = new String(encoded);
+        String imgAsBase64 = "data:image/png;base64," + imgDataAsBase64;
+        return imgAsBase64;
+    }
 
 }

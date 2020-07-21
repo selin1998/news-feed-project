@@ -59,51 +59,50 @@ public class AutoRun {
 //
 //
 //
-//    @Bean
-//    @Order(1)
-    public CommandLineRunner add_news(){
+//@Bean
+public CommandLineRunner add_news(){
         log.info("Adding data about all sites to DB ->");
         return args->{
             newsRepo.saveAll(Arrays.asList(
                     new News("TechCrunch","https://techcrunch.com/"
                     ,"TechCrunch - Reporting on the business of technology, startups, venture capital funding, and Silicon Valley"
-                    ,convertImagetoByteArray("src/main/resources/templates/img/techcrunch_logo.png")),
+                    ,convertImagetoByteArray("src/main/resources/static/img/techcrunch_logo.png")),
 
                     new News("UberGizmo","https://www.ubergizmo.com/"
                     ,"Opinionated news and reviews of consumer electronics"
-                    ,convertImagetoByteArray("src/main/resources/templates/img/ubergizmo_logo_icon_64.png")),
+                    ,convertImagetoByteArray("src/main/resources/static/img/ubergizmo_logo_icon_64.png")),
 
                     new News("DroidLife","https://www.droid-life.com/"
                     ,"We write about the happenings in the Android world, most of which involves Google. " +
                             "We do reviews too, so we got you covered, Samsung guy."
-                    , convertImagetoByteArray("src/main/resources/templates/img/droidlife_logo.png")),
+                    , convertImagetoByteArray("src/main/resources/static/img/droidlife_logo.png")),
 
                     new News("TechStartups","https://techstartups.com/"
                     ,"TechStartups - Coverage of Technology News, technology startups, Emerging technology, venture capital funding, and Silicon Valley"
-                    ,convertImagetoByteArray("src/main/resources/templates/img/techstartups.com-logo-v3.png")),
+                    ,convertImagetoByteArray("src/main/resources/static/img/techstartups.com-logo-v3.png")),
 
                     new News("LenovaNews","https://news.lenovo.com/pressroom/press-releases/"
                     ,"Lenovo's official site for press materials and original stories about the vision and passion behind the technology."
-                    ,convertImagetoByteArray("src/main/resources/templates/img/lenovo2_logo.png")),
+                    ,convertImagetoByteArray("src/main/resources/static/img/lenovo2_logo.png")),
 
                     new News("Insider","https://www.insider.com/news","What You Need To Know"
-                            ,convertImagetoByteArray("src/main/resources/templates/img/insider_logo.png")),
+                            ,convertImagetoByteArray("src/main/resources/static/img/insider_logo.png")),
 
                     new News("HTCNews","https://www.pocket-lint.com/htc"
                     ,"Get all the latest on HTC. All the very best in HTC news, HTC reviews, HTC rumours and HTC buying advice in one place."
-                    ,convertImagetoByteArray("src/main/resources/templates/img/HTC_logo.png")),
+                    ,convertImagetoByteArray("src/main/resources/static/img/HTC_logo.png")),
 
                     new News("DigitIn","https://www.digit.in/news/"
                             ,"Latest Technology News on mobile phones in India. Read news on computer, apps, games, gadgets and other personal tech."
-                    ,convertImagetoByteArray("src/main/resources/templates/img/digit_logo.png")),
+                    ,convertImagetoByteArray("src/main/resources/static/img/digit_logo.png")),
 
                     new News("Policy","https://www.policygenius.com/blog/"
                     ,"A financial newsletter bringing you the money news and the money moves."
-                    ,convertImagetoByteArray("src/main/resources/templates/img/policy_logo.png")),
+                    ,convertImagetoByteArray("src/main/resources/static/img/policy_logo.png")),
 
-            new News("Habr","https://habr.com/en/flows/develop/"
+                    new News("Habr","https://habr.com/en/flows/develop/"
                     ,"All posts in Development stream on Habr"
-                    ,convertImagetoByteArray("src/main/resources/templates/img/Habr_logo.png"))
+                    ,convertImagetoByteArray("src/main/resources/static/img/Habr_logo.png"))
             ));
 
         };

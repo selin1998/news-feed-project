@@ -23,7 +23,7 @@
                 <span class="main-header-profile-welcome">Welcome,</span>
                 <span class="main-header-username" th:text="${username}"></span>
             </div>
-            <img class="main-header-user-icon" src="/img/user-icon-with-background.svg" alt="User Icon">
+            <img class="main-header-user-icon" th:src="${imageAsBase64}" alt="User Icon">
             <div class="hidden-accordion-wrapper">
                 <ul class="hidden-accordion">
                     <li class="hidden-accordion-item"><img src="/img/favourite-icon.svg" alt="Favourite Icon"><a th:href="@{/news_feed}" class="hidden-accordion-item-link">Main-page</a></li>
