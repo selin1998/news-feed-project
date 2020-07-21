@@ -109,5 +109,9 @@ public class ArticlesController {
 
     }
 
+    @PostMapping("/news_feed")
+    public String redirect(){
+        return "redirect:/news_feed";
+    }
 
 }

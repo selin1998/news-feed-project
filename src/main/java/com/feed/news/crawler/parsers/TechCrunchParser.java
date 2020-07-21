@@ -18,27 +18,24 @@ import java.util.List;
 
 
 @Service
-public class TechCrunchParser extends RestTemplateService implements JsoupParser {
+public class TechCrunchParser  implements JsoupParser {
 
     List<Article> articles = new ArrayList<>();;
     Document doc;
 
-//    public TechCrunchParser() {
-//        this.articles = new ArrayList();
-//        this.doc = rootPage("https://techcrunch.com/");
-//    }
+
 
     @SneakyThrows
     @Override
     public List<Article> getArticles() {
-            Document doc = Jsoup.connect("https://techcrunch.com/").get();
+        Document doc = connection("https://techcrunch.com/");
         Elements elements = doc.getElementsByClass("post-block");
         for (Element element : elements) {
             String header = element.select(".post-block__title__link").text();
             String content = element.select(".post-block__content").text();
             String link = element.select(".post-block__title").first().select("a").first().attr("href");
             String image = element.select(".post-block__media").first().select("img").first().attr("src");
-            LocalDate date = convertStringToDate(element.select("[datetime]").text(), DateTimeFormats.ABBR_MONTH_FORMAT);
+            LocalDate date = convertStringToDate(element.select("[datetime]").text(), dateTimeForm.ABBR_MONTH_FORMAT);
 
             articles.add(new Article(header, content, link, image, date, Website.TechCrunch));
 

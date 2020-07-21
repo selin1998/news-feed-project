@@ -13,6 +13,12 @@
 
 <header class="main-header">
     <a href="/main-page" class="main-header-logo"><img src="/img/Group%2012.png" alt="IBA Tech Academy"></a>
+    <div class="button-area">
+        <form th:action="@{'/news_feed'}" method="post">
+            <button   type="submit"   name="reset"  />
+            <img src="/img/resetter.png">
+        </form>
+    </div>
     <div class="main-header-wrapper">
         <label class="main-header-search-wrapper">
             <form th:action="@{/news_feed}" method="get">
@@ -21,6 +27,7 @@
             </form>
 
         </label>
+
         <div class="main-header-profile-wrapper">
             <div class="main-header-profile-credentials">
                 <span class="main-header-profile-welcome">Welcome,</span>
@@ -200,13 +207,6 @@
                     }
                 }
 
-                //     // When the user clicks anywhere outside of the modal, close it
-                // for (let i = 0; i < modalid.length; i++) {
-                //     window.onclick = function(event) {
-                //         if (event.target == modalid) {
-                //             modalid.style.display = "none";
-                //         }
-                //     }
             </script>
 
     </div>
