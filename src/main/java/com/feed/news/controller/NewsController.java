@@ -50,6 +50,8 @@ public class NewsController {
 
         String username = userService.findUserByEmail(user.getUsername()).get().getFull_name();
 
+        String imageAsBase64 = userService.findUserByEmail(user.getUsername()).get().getImageAsBase64();
+
         List<News> allSites = disableNewsService.getAllSites();
 
         List<News> searchResultBySiteName = disableNewsService.findBySiteName(getSiteName(site_name));
@@ -69,6 +71,7 @@ public class NewsController {
 
         model.addAttribute("username",username);
 
+        model.addAttribute("imageAsBase64",imageAsBase64);
 
         return "disable-news";
 
@@ -86,6 +89,8 @@ public class NewsController {
         int user_id=userService.findUserByEmail(user.getUsername()).get().getUser_id();
 
         String username = userService.findUserByEmail(user.getUsername()).get().getFull_name();
+
+        String imageAsBase64 = userService.findUserByEmail(user.getUsername()).get().getImageAsBase64();
 
         List<News> allSites = disableNewsService.getAllSites();
 
@@ -114,6 +119,8 @@ public class NewsController {
         model.addAttribute("colCount",5);
 
         model.addAttribute("username",username);
+
+        model.addAttribute("imageAsBase64",imageAsBase64);
 
         return "disable-news";
     }

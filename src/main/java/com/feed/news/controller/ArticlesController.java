@@ -67,6 +67,8 @@ public class ArticlesController {
 
         String username = userService.findUserByEmail(user.getUsername()).get().getFull_name();
 
+        String imageAsBase64 = userService.findUserByEmail(user.getUsername()).get().getImageAsBase64();
+
         log.info("user id: "+user_id);
 
         log.info("username"+username);
@@ -101,6 +103,7 @@ public class ArticlesController {
 
         model.addAttribute("username",username);
 
+        model.addAttribute("imageAsBase64",imageAsBase64);
 
         return "main-page";
 

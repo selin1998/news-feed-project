@@ -9,6 +9,7 @@ import com.feed.news.repository.ConfirmationTokenRepository;
 import com.feed.news.repository.UserRepo;
 import com.feed.news.service.EmailService;
 import com.feed.news.service.UserService;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Optional;
 
 @Log4j2
@@ -66,8 +69,9 @@ public class UserController {
         return modelAndView;
     }
 
+    @SneakyThrows
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@ModelAttribute("registrationForm")  @Valid XUser user, BindingResult bindingResult,  HttpServletRequest request) {
+    public ModelAndView createNewUser(@ModelAttribute("registrationForm")  @Valid XUser user, BindingResult bindingResult,  HttpServletRequest request, @RequestParam("file") MultipartFile file)  {
 
         ModelAndView modelAndView = new ModelAndView();
         Optional<XUser> userExists = userService.findUserByEmail(user.getEmail());
@@ -85,6 +89,7 @@ public class UserController {
             modelAndView.setViewName("registration");
         }
         else {
+            user.setImage(file.getBytes());
             userService.saveUser(user);
             ConfirmationToken confirmationToken = new ConfirmationToken(user);
 

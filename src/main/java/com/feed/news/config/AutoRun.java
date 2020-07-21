@@ -59,9 +59,8 @@ public class AutoRun {
 //
 //
 //
-//    @Bean
-//    @Order(1)
-    public CommandLineRunner add_news(){
+//@Bean
+public CommandLineRunner add_news(){
         log.info("Adding data about all sites to DB ->");
         return args->{
             newsRepo.saveAll(Arrays.asList(
@@ -101,7 +100,7 @@ public class AutoRun {
                     ,"A financial newsletter bringing you the money news and the money moves."
                     ,convertImagetoByteArray("src/main/resources/static/img/policy_logo.png")),
 
-            new News("Habr","https://habr.com/en/flows/develop/"
+                    new News("Habr","https://habr.com/en/flows/develop/"
                     ,"All posts in Development stream on Habr"
                     ,convertImagetoByteArray("src/main/resources/static/img/Habr_logo.png"))
             ));
