@@ -31,6 +31,7 @@ public class InsiderParser  implements JsoupParser {
             String link = "https://www.insider.com/".concat(element.select(".tout-title-link").attr("href"));
             String image = element.select(".lazy-image").first().attr("data-srcs").split("\":\\{")[0].substring(2);
             LocalDate date = convertStringToDate(element.select(".tout-timestamp").text(), dateTimeForm.ISO_INSTANT_FORMAT);
+
             articles.add(new Article(header, content, link, image, date, Website.Insider));
 
         }

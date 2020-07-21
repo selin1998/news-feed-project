@@ -12,13 +12,8 @@
 <body>
 
 <header class="main-header">
-    <a href="/main-page" class="main-header-logo"><img src="/img/Group%2012.png" alt="IBA Tech Academy"></a>
-    <div class="button-area">
-        <form th:action="@{'/news_feed'}" method="post">
-            <button   type="submit"   name="reset"  />
-            <img src="/img/resetter.png">
-        </form>
-    </div>
+    <a href="/news_feed" class="main-header-logo"><img src="/img/Group%2012.png" alt="IBA Tech Academy"></a>
+
     <div class="main-header-wrapper">
         <label class="main-header-search-wrapper">
             <form th:action="@{/news_feed}" method="get">
@@ -82,7 +77,7 @@
                 <p class="tab-title" th:text="${article.header}"></p>
                 <p class="tab-description" th:text="${article.getContent()}"></p>
                 <p class="tab-tags"><a class="tab-link" th:text="${article.site}"></a></p>
-                <p class="tab-date" th:text="${article.getDate()}"></p>
+                <p class="tab-date" th:text="${#temporals.format(article.getDate(),'dd-MM-yyyy')}"></p>
             </div>
         </a>
 

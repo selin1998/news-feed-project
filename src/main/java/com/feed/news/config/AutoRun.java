@@ -51,15 +51,8 @@ public class AutoRun {
         return buffer.toByteArray();
     }
 
-    @Bean
-    public RestTemplate buildRestTemplate() {
-        System.setProperty("https.protocols", "TLSv1.2,TLSv1.1,TLSv1");
-        return new RestTemplate();
-    }
 
-
-
-@Bean
+//@Bean
 public CommandLineRunner add_news(){
         log.info("Adding data about all sites to DB ->");
         return args->{

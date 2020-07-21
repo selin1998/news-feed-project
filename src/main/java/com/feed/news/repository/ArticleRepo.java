@@ -16,7 +16,7 @@ import java.util.List;
 public interface ArticleRepo extends JpaRepository<Article,String> {
 
     // (a^b^c)&d=(a&d)^(b&d)^(c&d) -> (header^content^siteEquals)&(siteIn) : for search bar
-    Page<Article> findAllByHeaderIgnoreCaseContainingAndSiteInOrContentIgnoreCaseContainingAndSiteInOrSiteIgnoreCaseAndSiteInOrderByDateDesc(String keyword1, List<Website> sites1, String keyword2, List<Website> sites2, Website keyword3 , List<Website> sites3, Pageable page);
+    Page<Article> findAllByHeaderIgnoreCaseContainingAndSiteInOrContentIgnoreCaseContainingAndSiteInOrSiteEqualsAndSiteInOrderByDateDesc(String keyword1, List<Website> sites1, String keyword2, List<Website> sites2, Website keyword3 , List<Website> sites3, Pageable page);
 
     Page<Article> findBySiteInAndDateBetweenOrderByDateDesc(List<Website> sites, LocalDate d1, LocalDate d2, Pageable page);
 
