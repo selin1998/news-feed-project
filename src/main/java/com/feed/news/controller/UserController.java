@@ -1,17 +1,17 @@
 package com.feed.news.controller;
 
 
+import com.feed.news.entity.Mail;
 import com.feed.news.entity.db.ConfirmationToken;
 import com.feed.news.entity.db.XUser;
 import com.feed.news.repository.ArticleRepo;
 import com.feed.news.repository.ConfirmationTokenRepository;
 import com.feed.news.repository.UserRepo;
-import com.feed.news.service.EmailSenderService;
+import com.feed.news.service.EmailService;
 import com.feed.news.service.UserService;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,7 +34,7 @@ public class UserController {
     private ConfirmationTokenRepository confirmationTokenRepository;
 
     @Autowired
-    private EmailSenderService emailSenderService;
+    private EmailService emailService;
 
     @Autowired
     private UserRepo userRepository;
@@ -76,7 +76,7 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         Optional<XUser> userExists = userService.findUserByEmail(user.getEmail());
 
-        if (user.getFull_name().isEmpty() || user.getEmail().isEmpty()) {
+        if (user.getFull_name().isEmpty() || user.getEmail().isEmpty()|| user.getPassword().isEmpty()) {
             bindingResult.rejectValue("full_name", "error.user", "Each field is mandatory");
         }
         if (userExists.isPresent()) {
@@ -95,19 +95,19 @@ public class UserController {
 
             confirmationTokenRepository.save(confirmationToken);
 
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setTo(user.getEmail());
-            mailMessage.setSubject("Complete Registration!");
-            mailMessage.setFrom("new.news.2020@gmail.com");
-            mailMessage.setText("To confirm your account, please click here : " +
-                    request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-                    +"/confirm-account?token="+confirmationToken.getConfirmationToken());
+            Mail mail = new Mail();
+            mail.setFrom("new.news.2020@gmail.com");
+            mail.setTo(user.getEmail());
+            mail.setSubject("Complete Registration!");
+            mail.setContent("Dear " + user.getFull_name() +
+                    "\n\nTo confirm your account, please click here :  "
+                    + request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+                    + "/confirm-account?token="+confirmationToken.getConfirmationToken());
+            emailService.sendEmail(mail);
 
-            emailSenderService.sendEmail(mailMessage);
-            modelAndView.addObject("email", user.getEmail());
-            modelAndView.addObject("emailMessage", "A verification email has been sent to: ");
 
-            modelAndView.addObject("successMessage", "User has been registered successfully");
+
+            modelAndView.addObject("successMessage", "User has been registered successfully\n A verification email has been sent to "+user.getEmail());
         }
         modelAndView.setViewName("registration");
         return  modelAndView;
