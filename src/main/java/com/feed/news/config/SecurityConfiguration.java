@@ -43,7 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 //Доступ только для не зарегистрированных пользователей
-                .antMatchers("/registration","/forgot-password","/reset-password").permitAll()
+                .antMatchers("/registration","/forgot-password","/reset-password","/confirm-account").permitAll()
                 //Доступ разрешен всем пользователей
                 .antMatchers("/", "/resources/**").permitAll()
                 //Все остальные страницы требуют аутентификации
@@ -60,9 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .logout()
                 .permitAll()
-                .logoutSuccessUrl("/").
-                and().oauth2Login() .loginPage("/login")// enable OAuth2
-                .defaultSuccessUrl("/oauth2LoginSuccess")
+                .logoutSuccessUrl("/")
                 .and().csrf().disable(); // disable CSRF
 
         http
