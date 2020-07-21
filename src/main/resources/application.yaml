@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:5000}
+  port: ${PORT:6060}
 
 
 spring:
@@ -11,14 +11,13 @@ spring:
     username: postgres
     password: password
 
-
 # ===============================
 # = JPA configurations
 # ===============================
   jpa:
     open-in-view: false
     generate-ddl: true
-    hibernate.ddl-auto: create-drop
+    hibernate.ddl-auto: update
     show-sql: true
 
 # ===============================

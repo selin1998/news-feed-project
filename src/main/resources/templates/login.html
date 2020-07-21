@@ -18,6 +18,7 @@
     </header>
     <div class="login-section-container">
         <h1 class="login-section-container-title">Welcome Back!</h1>
+        <p class="login-section-container-description" th:utext="${confirmMessage}"> </p>
         <p class="login-section-container-description">To keep connected with us please login with personal information by email address and password</p>
         <form th:action="@{/login}" method="POST" class="login-section-container-form">
             <div class="login-section-container-form-input-wrapper">

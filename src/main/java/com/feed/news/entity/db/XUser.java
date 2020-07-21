@@ -43,4 +43,6 @@ public class XUser {
     @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<News> news;
 
+    private boolean isEnabled;
+
 }
