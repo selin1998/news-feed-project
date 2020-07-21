@@ -68,6 +68,14 @@ a {
     margin-bottom: 20px;
 }
 
+.registration-section-container-form-input-wrapper img{
+    width: 42px;
+    height: 42px;
+    border: 1px solid #3b5998;
+    padding: 8px 10px;
+    border-radius: 8px;
+}
+
 .registration-section-container-form-input{
     border: none;
     height: 42px;
@@ -93,4 +101,8 @@ a {
 
 .box-icons {
     transform: scale(.8);
+}
+.photo-icon{
+    width: 500px;
+    height: 500px;
 }
