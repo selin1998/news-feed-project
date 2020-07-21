@@ -59,7 +59,7 @@ public class AutoRun {
 //
 //
 //
-//@Bean
+@Bean
 public CommandLineRunner add_news(){
         log.info("Adding data about all sites to DB ->");
         return args->{
