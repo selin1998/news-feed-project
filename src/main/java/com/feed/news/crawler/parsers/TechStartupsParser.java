@@ -17,26 +17,26 @@ import java.util.List;
 public class TechStartupsParser  implements JsoupParser {
 
     List<Article> articles = new ArrayList<>();;
-    Document doc;
 
 
-
-    @SneakyThrows
     @Override
     public List<Article> getArticles() {
-        Document doc = connection("https://techstartups.com/");
-        Elements elements = doc.select(".sidebar_content .post");
-        for (Element element : elements) {
-            String header = element.select(".post_header_title").first().getElementsByTag("a").first().text();
-            String content = element.select(".post_header_title > p").text();
-            String link = element.select(".post_header_title").first()
-                    .getElementsByTag("a").first().attr("href");
-            String imageLink = element.getElementsByTag("img").first().attr("src");
-            LocalDate date = convertStringToDate(element.select(".post_date .post_info_date > a").text().split("Posted On ")[1], dateTimeForm.FULL_MONTH_FORMAT);
+        Document doc = connection("https://techstartups.com/",this.getClass().getName());
+        try{
+            Elements elements = doc.select(".sidebar_content .post");
+            for (Element element : elements) {
+                String header = element.select(".post_header_title").first().getElementsByTag("a").first().text();
+                String content = element.select(".post_header_title > p").text();
+                String link = element.select(".post_header_title").first()
+                        .getElementsByTag("a").first().attr("href");
+                String imageLink = element.getElementsByTag("img").first().attr("src");
+                LocalDate date = convertStringToDate(element.select(".post_date .post_info_date > a").text().split("Posted On ")[1], dateTimeForm.FULL_MONTH_FORMAT);
 
-            articles.add(new Article(header, content, link, imageLink, date, Website.TechStartups));
+                articles.add(new Article(header, content, link, imageLink, date, Website.TechStartups));
+            }
+        } catch (NullPointerException e) {
+
         }
-
         return articles;
     }
 }

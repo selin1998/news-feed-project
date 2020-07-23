@@ -18,10 +18,6 @@ public class Paginator {
         List<Integer> bodyBefore = (pageNumber > 4 && pageNumber < totalPages - 1)?new ArrayList<>(Arrays.asList(pageNumber - 2, pageNumber - 1)):new ArrayList<>();
         List<Integer> bodyAfter = (pageNumber > 2 && pageNumber < totalPages - 3)?new ArrayList<>(Arrays.asList(pageNumber + 1, pageNumber + 2)):new ArrayList<>();
 
-        log.info(head);
-        log.info(bodyBefore);
-        log.info(bodyAfter);
-        log.info(tail);
 
         Optional.ofNullable(bodyBefore).ifPresent(head::addAll);
         head.addAll((pageNumber > 3 && pageNumber < totalPages - 2)?new ArrayList<>(Arrays.asList(pageNumber)):new ArrayList<>());

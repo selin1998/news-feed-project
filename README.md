@@ -1,5 +1,15 @@
 # The News Feed Final Project
 
+# Heroku link
+
+https://news-feed-iba-tech.herokuapp.com 
+
+# Test user
+
+Email: buttercupppg2020@gmail.com
+Password: password
+
+
 ## Content:
 The Front-End part is done using HTML, CSS and JS only. No frameworks, no hard stuff.
 
@@ -31,4 +41,3 @@ The algorythm that a new user should follow consists of the following:
 4) Get redirected to the `Main Page`, where the user can see all the news from various sources. The user can click on an article to open it and read it. Upon clicking on an article - the `Article page` should open. The user can also search for specific articles
 5) In order to disable news from specific sources, the user should hover onto his profile in the top right corner and choose the `My news` option. The user will be redirected to the `My news` page, where he can disable news from a specific source by clicking the `Dismiss this author` button. He can also search for a specific author by using the `Search` input box next to the `Disable news from specific websites` header.
 
-### That's about it. However, there is one thing left. Please keep in mind that the websites are "Work In Progress", which means that some html/css/js files may change during updates. Also you can ask for whatever Front-End feature you want to be implemented and it will be so. Good Luck! 

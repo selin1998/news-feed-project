@@ -109,12 +109,14 @@ public class NewsController {
 
         List<String> buttons = disableNewsService.getButtonsStatus(user_id,allSites);
 
+        model.addAttribute("buttons",buttons);
+
         model.addAttribute("allSites", allSites);
 
         log.info(fmt("User Id -> %d",user_id));
         model.addAttribute("user_id",user_id);
 
-        model.addAttribute("buttons",buttons);
+
 
         model.addAttribute("colCount",5);
 

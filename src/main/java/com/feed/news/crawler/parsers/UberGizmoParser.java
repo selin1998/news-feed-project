@@ -15,28 +15,33 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+
 public class UberGizmoParser  implements JsoupParser {
 
     List<Article> articles = new ArrayList<>();
-    Document doc;
 
 
-    @SneakyThrows
+
+
     @Override
     public List<Article> getArticles() {
-        Document doc = connection("https://www.ubergizmo.com/");
-        Elements elements = doc.getElementsByClass("article_card");
-        for (Element element : elements) {
-            String header = element.select(".article_card_title").text();
-            String content = element.select(".article_card_excerpt").text();
-            String link = element.select(".article_card_title").first().select("a").first().attr("href");
-            String image = element.select(".article_card_divimg").first().attr("data-bg");
-            LocalDate date = convertStringToDate(element.select(".byline").text().split(", on")[1], dateTimeForm.PDT_FORMAT);
+        Document doc = connection("https://www.ubergizmo.com/",this.getClass().getName());
+        try{
+            Elements elements = doc.getElementsByClass("article_card");
+            for (Element element : elements) {
+                String header = element.select(".article_card_title").text();
+                String content = element.select(".article_card_excerpt").text();
+                String link = element.select(".article_card_title").first().select("a").first().attr("href");
+                String image = element.select(".article_card_divimg").first().attr("data-bg");
+                LocalDate date = convertStringToDate(element.select(".byline").text().split(", on")[1], dateTimeForm.PDT_FORMAT);
 
-            articles.add(new Article(header, content, link, image, date, Website.UberGizmo));
+                articles.add(new Article(header, content, link, image, date, Website.UberGizmo));
+
+            }
+        } catch (NullPointerException e) {
 
         }
+
         return articles;
     }
 }

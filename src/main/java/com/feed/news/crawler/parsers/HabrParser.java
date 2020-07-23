@@ -15,23 +15,26 @@ import java.util.List;
 
 public class HabrParser  implements JsoupParser {
 
-    List<Article> articles = new ArrayList<>();;
-    Document doc;
+    List<Article> articles = new ArrayList<>();
 
 
-    @SneakyThrows
+
     @Override
     public List<Article> getArticles() {
-        Document doc = connection("https://habr.com/en/flows/develop/");
-        Elements elements = doc.getElementsByTag("article");
-        for (Element element : elements) {
-            String header = element.select(".post__title_link").text();
-            String content = header;
-            String link = element.select(".post__title_link").attr("href");
-            String image = element.getElementsByTag("img").attr("src");
-            LocalDate date = convertStringToDate(element.select(".post__time").text(), dateTimeForm.HABR_FORMAT);
+        Document doc = connection("https://habr.com/en/flows/develop/",this.getClass().getName());
+        try{
+            Elements elements = doc.getElementsByTag("article");
+            for (Element element : elements) {
+                String header = element.select(".post__title_link").text();
+                String content = header;
+                String link = element.select(".post__title_link").attr("href");
+                String image = element.getElementsByTag("img").attr("src");
+                LocalDate date = convertStringToDate(element.select(".post__time").text(), dateTimeForm.HABR_FORMAT);
 
-            articles.add(new Article(header, content, link, image, date, Website.Habr));
+                articles.add(new Article(header, content, link, image, date, Website.Habr));
+            }
+        } catch (NullPointerException e) {
+
         }
 
         return articles;

@@ -16,22 +16,26 @@ import java.util.List;
 
 public class DigitInParser  implements JsoupParser {
 
-    List<Article> articles = new ArrayList<>();;
-    Document doc;
+    List<Article> articles = new ArrayList<>();
 
-    @SneakyThrows
+
     @Override
     public List<Article> getArticles() {
-        Document doc = connection("https://www.digit.in/news/");
-        Elements elements = doc.getElementsByClass("Thumb-new");
-        for (Element element : elements) {
-            String header = element.select(".product-desc").text();
-            String content = element.select(".product-desc").text();
-            String link = element.getElementsByTag("a").first().attr("href");
-            String imageLink = element.getElementsByTag("img").first().attr("data-src");
-            LocalDate date = convertStringToDate(element.getElementsByTag("span").first().text(), dateTimeForm.ABBR_MONTH_FORMAT);
+        Document doc = connection("https://www.digit.in/news/",this.getClass().getName());
 
-            articles.add(new Article(header, content, link, imageLink, date, Website.DigitIn));
+        try{
+            Elements elements = doc.getElementsByClass("Thumb-new");
+            for (Element element : elements) {
+                String header = element.select(".product-desc").text();
+                String content = element.select(".product-desc").text();
+                String link = element.getElementsByTag("a").first().attr("href");
+                String imageLink = element.getElementsByTag("img").first().attr("data-src");
+                LocalDate date = convertStringToDate(element.getElementsByTag("span").first().text(), dateTimeForm.ABBR_MONTH_FORMAT);
+
+                articles.add(new Article(header, content, link, imageLink, date, Website.DigitIn));
+            }
+        } catch (NullPointerException e) {
+
         }
 
         return articles;

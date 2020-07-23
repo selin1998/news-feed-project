@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        table td{
+            vertical-align:top;
+            border:solid 1px #888;
+            padding:10px;
+        }
+
+    </style>
+</head>
+<body>
+<h1>My Thymeleaf Error Page</h1>
+<table>
+
+    <tr>
+        <td>Path</td>
+        <td th:text="${path}"/>
+    </tr>
+
+    <tr>
+        <td>URL</td>
+        <td th:text="${url}"/>
+    </tr>
+    <tr>
+        <td>Exception</td>
+        <td th:text="${exception}"/>
+    </tr>
+    <tr>
+        <td>HTTP Status</td>
+        <td>
+            <pre th:text="${status}"/>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

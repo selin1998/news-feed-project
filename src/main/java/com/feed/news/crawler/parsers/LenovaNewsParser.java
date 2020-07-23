@@ -16,25 +16,28 @@ import java.util.List;
 
 public class LenovaNewsParser  implements JsoupParser {
 
-    List<Article> articles = new ArrayList<>();;
-    Document doc;
+    List<Article> articles = new ArrayList<>();
 
 
-    @SneakyThrows
+
     @Override
     public List<Article> getArticles() {
-        Document doc = connection("https://news.lenovo.com/pressroom/press-releases/");
-        Elements elements = doc.getElementsByClass("card card-wide card-release");
-        for (Element element : elements) {
-            String header = element.select(".card-title").text();
-            String content = element.select(".card-text").text();
-            String link = element.select(".card-title").first().select("a").attr("href");
-            String image = element.select(".card-image").first().select("img").attr("src");
-            LocalDate date = convertStringToDate(element.select(".card-date").text(), dateTimeForm.SIMPLE_MONTH_FORMAT);
+        Document doc = connection("https://news.lenovo.com/pressroom/press-releases/",this.getClass().getName());
+        try{
+            Elements elements = doc.getElementsByClass("card card-wide card-release");
+            for (Element element : elements) {
+                String header = element.select(".card-title").text();
+                String content = element.select(".card-text").text();
+                String link = element.select(".card-title").first().select("a").attr("href");
+                String image = element.select(".card-image").first().select("img").attr("src");
+                LocalDate date = convertStringToDate(element.select(".card-date").text(), dateTimeForm.SIMPLE_MONTH_FORMAT);
 
-            articles.add(new Article(header, content, link, image, date, Website.LenovaNews));
+                articles.add(new Article(header, content, link, image, date, Website.LenovaNews));
 
+            }
+        } catch (NullPointerException e) {
         }
+
         return articles;
     }
 }
