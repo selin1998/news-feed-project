@@ -78,8 +78,8 @@ public class NewsController {
     }
 
     @PostMapping(value={"/disable_news","/disable_news/{news_id}"})
-    public String disableNews(Model model,@RequestParam(required =false) String  operation
-            , @PathVariable(required = false) Optional<Integer> news_id,String site_name){
+    public String disableNews(@RequestParam(required =false) String  operation
+            , @PathVariable(required = false) Optional<Integer> news_id){
 
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -87,12 +87,6 @@ public class NewsController {
         User user = (User) authentication.getPrincipal();
 
         int user_id=userService.findUserByEmail(user.getUsername()).get().getUser_id();
-
-        String username = userService.findUserByEmail(user.getUsername()).get().getFull_name();
-
-        String imageAsBase64 = userService.findUserByEmail(user.getUsername()).get().getImageAsBase64();
-
-        List<News> allSites = disableNewsService.getAllSites();
 
         log.info(fmt("Operation disable/enable -> %s",operation));
 
@@ -107,24 +101,7 @@ public class NewsController {
             disableNewsService.deleteDislike(user_id, news_id.get());
         }
 
-        List<String> buttons = disableNewsService.getButtonsStatus(user_id,allSites);
-
-        model.addAttribute("buttons",buttons);
-
-        model.addAttribute("allSites", allSites);
-
-        log.info(fmt("User Id -> %d",user_id));
-        model.addAttribute("user_id",user_id);
-
-
-
-        model.addAttribute("colCount",5);
-
-        model.addAttribute("username",username);
-
-        model.addAttribute("imageAsBase64",imageAsBase64);
-
-        return "disable-news";
+        return "redirect:/disable_news";
     }
 
 
