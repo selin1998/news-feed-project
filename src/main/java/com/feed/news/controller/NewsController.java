@@ -37,7 +37,7 @@ public class NewsController {
         return Optional.ofNullable(siteName).orElse("");
     }
 
-    // http://localhost:8080/disable_news/1
+    // http://localhost:5000/disable_news/1
 
     @GetMapping(value={"/disable_news","/disable_news/{news_id}"})
     public String showAllSites(Model model, String site_name) {

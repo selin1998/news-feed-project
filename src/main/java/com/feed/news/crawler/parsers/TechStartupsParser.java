@@ -24,7 +24,7 @@ public class TechStartupsParser  implements JsoupParser {
         Document doc = connection("https://techstartups.com/",this.getClass().getName());
         try{
             Elements elements = doc.select(".sidebar_content .post");
-            for (Element element : elements) {
+            elements.stream().parallel().forEach(element->{
                 String header = element.select(".post_header_title").first().getElementsByTag("a").first().text();
                 String content = element.select(".post_header_title > p").text();
                 String link = element.select(".post_header_title").first()
@@ -33,7 +33,7 @@ public class TechStartupsParser  implements JsoupParser {
                 LocalDate date = convertStringToDate(element.select(".post_date .post_info_date > a").text().split("Posted On ")[1], dateTimeForm.FULL_MONTH_FORMAT);
 
                 articles.add(new Article(header, content, link, imageLink, date, Website.TechStartups));
-            }
+            });
         } catch (NullPointerException e) {
 
         }

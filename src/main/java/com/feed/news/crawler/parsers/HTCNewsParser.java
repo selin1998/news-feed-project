@@ -27,16 +27,16 @@ public class HTCNewsParser  implements JsoupParser {
         Document doc = connection("https://www.pocket-lint.com/htc",this.getClass().getName());
         try{
             Elements elements = doc.getElementsByClass("article");
-            for (Element element : elements) {
-                String header = element.select(".article-info-title").text();
-                String content = element.select(".article-info-description").text();
-                String link = element.getElementsByTag("a").first().attr("href");
-                String image = element.select(".article-thumbnail").first().select("img").first().attr("src");
-                LocalDate date = convertStringToDate(element.getElementsByTag("time").text(), dateTimeForm.SIMPLE_MONTH_FORMAT);
+            elements.stream().parallel().forEach(element-> {
+                        String header = element.select(".article-info-title").text();
+                        String content = element.select(".article-info-description").text();
+                        String link = element.getElementsByTag("a").first().attr("href");
+                        String image = element.select(".article-thumbnail").first().select("img").first().attr("src");
+                        LocalDate date = convertStringToDate(element.getElementsByTag("time").text(), dateTimeForm.SIMPLE_MONTH_FORMAT);
 
-                articles.add(new Article(header, content, link, image, date, Website.HTCNews));
+                        articles.add(new Article(header, content, link, image, date, Website.HTCNews));
+                    });
 
-            }
         } catch (NullPointerException e) {
 
         }

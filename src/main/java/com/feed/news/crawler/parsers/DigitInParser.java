@@ -25,7 +25,8 @@ public class DigitInParser  implements JsoupParser {
 
         try{
             Elements elements = doc.getElementsByClass("Thumb-new");
-            for (Element element : elements) {
+
+            elements.stream().parallel().forEach(element->{
                 String header = element.select(".product-desc").text();
                 String content = element.select(".product-desc").text();
                 String link = element.getElementsByTag("a").first().attr("href");
@@ -33,7 +34,8 @@ public class DigitInParser  implements JsoupParser {
                 LocalDate date = convertStringToDate(element.getElementsByTag("span").first().text(), dateTimeForm.ABBR_MONTH_FORMAT);
 
                 articles.add(new Article(header, content, link, imageLink, date, Website.DigitIn));
-            }
+            });
+
         } catch (NullPointerException e) {
 
         }

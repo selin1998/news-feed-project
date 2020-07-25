@@ -25,7 +25,7 @@ public class InsiderParser  implements JsoupParser {
         Document doc = connection("https://www.insider.com/news",this.getClass().getName());
         try{
             Elements elements = doc.getElementsByClass("featured-post");
-            for (Element element : elements) {
+            elements.stream().parallel().forEach(element->{
                 String header = element.select(".tout-title-link").text();
                 String content = element.select(".tout-copy").text();
                 String link = "https://www.insider.com/".concat(element.select(".tout-title-link").attr("href"));
@@ -33,8 +33,8 @@ public class InsiderParser  implements JsoupParser {
                 LocalDate date = convertStringToDate(element.select(".tout-timestamp").text(), dateTimeForm.ISO_INSTANT_FORMAT);
 
                 articles.add(new Article(header, content, link, image, date, Website.Insider));
+            });
 
-            }
         } catch (NullPointerException e) {
         }
 

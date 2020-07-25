@@ -24,7 +24,7 @@ public class HabrParser  implements JsoupParser {
         Document doc = connection("https://habr.com/en/flows/develop/",this.getClass().getName());
         try{
             Elements elements = doc.getElementsByTag("article");
-            for (Element element : elements) {
+            elements.stream().parallel().forEach(element-> {
                 String header = element.select(".post__title_link").text();
                 String content = header;
                 String link = element.select(".post__title_link").attr("href");
@@ -32,7 +32,8 @@ public class HabrParser  implements JsoupParser {
                 LocalDate date = convertStringToDate(element.select(".post__time").text(), dateTimeForm.HABR_FORMAT);
 
                 articles.add(new Article(header, content, link, image, date, Website.Habr));
-            }
+
+        });
         } catch (NullPointerException e) {
 
         }

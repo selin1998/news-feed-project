@@ -25,7 +25,7 @@ public class LenovaNewsParser  implements JsoupParser {
         Document doc = connection("https://news.lenovo.com/pressroom/press-releases/",this.getClass().getName());
         try{
             Elements elements = doc.getElementsByClass("card card-wide card-release");
-            for (Element element : elements) {
+            elements.stream().parallel().forEach(element->{
                 String header = element.select(".card-title").text();
                 String content = element.select(".card-text").text();
                 String link = element.select(".card-title").first().select("a").attr("href");
@@ -34,7 +34,7 @@ public class LenovaNewsParser  implements JsoupParser {
 
                 articles.add(new Article(header, content, link, image, date, Website.LenovaNews));
 
-            }
+            });
         } catch (NullPointerException e) {
         }
 

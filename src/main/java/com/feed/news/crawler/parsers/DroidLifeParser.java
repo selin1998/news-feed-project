@@ -25,7 +25,7 @@ public class DroidLifeParser  implements JsoupParser {
         Document doc = connection("https://www.droid-life.com/",this.getClass().getName());
         try{
             Elements elements = doc.getElementsByTag("article");
-            for (Element element : elements) {
+            elements.stream().parallel().forEach(element->{
                 String header = element.select(".preview__title").text();
                 String content = element.select(".preview__excerpt").text();
                 String link = element.select(".preview__link").first().select("a").first().attr("href");
@@ -34,7 +34,7 @@ public class DroidLifeParser  implements JsoupParser {
                 LocalDate date = convertStringToDate(element.select(".entry-meta__updated").text(), dateTimeForm.FULL_MONTH_FORMAT);
 
                 articles.add(new Article(header, content, link, imageLink, date, Website.DroidLife));
-            }
+            });
         } catch (NullPointerException e) {
         }
 

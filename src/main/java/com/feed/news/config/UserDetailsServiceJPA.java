@@ -32,8 +32,7 @@ public class UserDetailsServiceJPA implements UserDetailsService {
     return new XUserDetails(
         user.getUser_id(),
         user.getEmail(),
-        user.getPassword()
-    );
+        user.getPassword(), user.getFull_name());
   }
 
   @Override

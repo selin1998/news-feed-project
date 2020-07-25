@@ -33,7 +33,7 @@ public class Scheduler {
 
         Stream<JsoupParser> newsParsers = articleService.getNewsParsers();
 
-        List<Article> articles = newsParsers.flatMap(p -> p.getArticles().parallelStream()).collect(Collectors.toList());
+        List<Article> articles = newsParsers.flatMap(p -> p.getArticles().stream().parallel()).collect(Collectors.toList());
 
         articleService.saveAll(articles);
     }

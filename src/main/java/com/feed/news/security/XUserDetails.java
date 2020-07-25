@@ -14,16 +14,18 @@ public class XUserDetails implements UserDetails {
   private final int id;
   private final String username;
   private final String password;
+  private final String fullName;
 
-  public XUserDetails(int id, String username, String password) {
+  public XUserDetails(int id, String username, String password, String fullName) {
     this.id = id;
     this.username = username;
     this.password = password;
+    this.fullName = fullName;
   }
 
   @Override
   public String toString() {
-    return String.format("XUserDetails[%d:'%s':'%s':{%s}]", id, username, password);
+    return String.format("XUserDetails[%d:'%s':'%s' :'%s':{%s}]", id, username, fullName, password);
   }
 
 

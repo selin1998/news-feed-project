@@ -19,9 +19,6 @@ http:
       max-request-size: 500000KB
 
 
-queries:
-    users-query: select email, password, active from user_table where email=?
-    roles-query: select email,role from user_table where email=?
 
 
 spring:
@@ -32,6 +29,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: dreamgirl15
+
+
 
 # ===============================
 # = JPA configurations

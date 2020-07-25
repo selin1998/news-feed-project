@@ -31,16 +31,16 @@ public class TechCrunchParser  implements JsoupParser {
         Document doc = connection("https://techcrunch.com/",this.getClass().getName());
         try{
             Elements elements = doc.getElementsByClass("post-block");
-            for (Element element : elements) {
+
+            elements.stream().parallel().forEach(element->{
                 String header = element.select(".post-block__title__link").text();
                 String content = element.select(".post-block__content").text();
                 String link = element.select(".post-block__title").first().select("a").first().attr("href");
                 String image = element.select(".post-block__media").first().select("img").first().attr("src");
                 LocalDate date = convertStringToDate(element.select("[datetime]").text(), dateTimeForm.ABBR_MONTH_FORMAT);
-
                 articles.add(new Article(header, content, link, image, date, Website.TechCrunch));
+            });
 
-            }
         } catch (NullPointerException e) {
 
         }

@@ -24,7 +24,7 @@ public class PolicyParser  implements JsoupParser {
         Document doc = connection("https://www.policygenius.com/blog/",this.getClass().getName());
         try{
             Elements elements = doc.getElementsByClass("teaser");
-            for (Element element : elements) {
+            elements.stream().parallel().forEach(element->{
                 String header = element.select(".teaser__title").text();
                 String content = header;
                 String link = String.format("%s%s", "https://www.policygenius.com", element.select(".teaser__title").select("a").attr("href"));
@@ -32,8 +32,8 @@ public class PolicyParser  implements JsoupParser {
                 LocalDate date = convertStringToDate(element.getElementsByTag("time").text(), dateTimeForm.POLICY_FORMAT);
 
                 articles.add(new Article(header, content, link, image, date, Website.Policy));
+            });
 
-            }
         } catch (NullPointerException e) {
 
         }

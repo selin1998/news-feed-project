@@ -56,7 +56,7 @@ public class ArticlesController {
     @GetMapping("/news_feed")
     public String showDesignForm(Model model, @RequestParam(required = false)String news_start
             , @RequestParam(required = false)String news_finish, @RequestParam(required = false) String keyword
-            , @RequestParam(required = false) String page, @RequestParam(required = false) String size, @RequestParam(required = false) String  num) {
+            , @RequestParam(required = false) String page, @RequestParam(required = false) String size, @RequestParam(required = false) String  num, Authentication auth) {
 
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
