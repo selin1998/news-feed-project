@@ -19,6 +19,8 @@ public class Scheduler {
 
     private static final int FIXED_RATE=1800000;
 
+    private static final int INITIAL_DELAY=10000;
+
     private final ArticleService articleService;
 
     public Scheduler(ArticleService articleService) {
@@ -26,7 +28,7 @@ public class Scheduler {
         this.articleService = articleService;
     }
 
-    @Scheduled(fixedRate =FIXED_RATE, initialDelay = 10000) // every 30 minutes parse, try fixedRate=60000 for one minute
+    @Scheduled(fixedRate =FIXED_RATE, initialDelay = INITIAL_DELAY) // every 30 minutes parse, try fixedRate=60000 for one minute
     public void parseArticles(){
 
         log.info("fetching articles-> time:"+new SimpleDateFormat("HH:mm:ss").format(new Date()));

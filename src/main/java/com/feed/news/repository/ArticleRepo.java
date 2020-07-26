@@ -25,5 +25,6 @@ public interface ArticleRepo extends JpaRepository<Article,String> {
     @Query(value="SELECT news_name FROM news  JOIN disliked ON disliked.n_id = news.news_id WHERE disliked.u_id=:id" , nativeQuery = true)
     List<String> extractNewsNamebyUserid(@Param("id") int id);
 
+    boolean existsByArticleLink(String link);
 
 }

@@ -1,6 +1,8 @@
 package com.feed.news.controller;
 
 import com.feed.news.entity.db.Article;
+import com.feed.news.entity.db.XUser;
+import com.feed.news.exception.UserNotFoundEx;
 import com.feed.news.service.ArticleService;
 import com.feed.news.service.UserService;
 import lombok.extern.log4j.Log4j2;
@@ -56,22 +58,24 @@ public class ArticlesController {
     @GetMapping("/news_feed")
     public String showDesignForm(Model model, @RequestParam(required = false)String news_start
             , @RequestParam(required = false)String news_finish, @RequestParam(required = false) String keyword
-            , @RequestParam(required = false) String page, @RequestParam(required = false) String size, @RequestParam(required = false) String  num, Authentication auth) {
+            , @RequestParam(required = false) String page, @RequestParam(required = false) String size, @RequestParam(required = false) String  num) {
 
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         User user = (User) authentication.getPrincipal();
 
-        int user_id=userService.findUserByEmail(user.getUsername()).get().getUser_id();
+        XUser xUser = userService.findUserByEmail(user.getUsername()).orElseThrow(UserNotFoundEx::new);
 
-        String username = userService.findUserByEmail(user.getUsername()).get().getFull_name();
+        int user_id=xUser.getUser_id();
 
-        String imageAsBase64 = userService.findUserByEmail(user.getUsername()).get().getImageAsBase64();
+        String username = xUser.getFull_name();
+
+        String imageAsBase64 = xUser.getImageAsBase64();
 
         log.info("user id: "+user_id);
 
-        log.info("username"+username);
+        log.info("username: "+username);
 
         PageRequest pageable = PageRequest.of(pageNum(num,valueOf(page,0)),valueOf(size,10));
 

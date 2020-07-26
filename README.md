@@ -6,27 +6,28 @@ https://news-feed-iba-tech.herokuapp.com
 
 ## Heroku database credentials
 
-###Host
+### Host
 ec2-34-233-226-84.compute-1.amazonaws.com
-###Database
+### Database
 db5qe1o13e8ha
-###User
+### User
 eqktossqaxceno
-###Port
+### Port
 5432
-###Password
+### Password
 3ee7a24089e09de955179f486bc043deb720f8d6a74b5c718f68d1f6493b02ae
 
-### Test user
+## Test user
 
 Email: buttercupppg2020@gmail.com
 Password: password
 
-##Technologies used
+## Technologies used
 Spring Boot, Hibernate, Jsoup, Spring Email, Spring Security, Thymeleaf, PostgreSql
 
-##Note
-If you want to run locally, uncomment bean in autorun so that news are loaded to db. Don`t forget to change db credentials in application.yaml
+### Note
+If you want to run locally, uncomment bean in autorun so that news are loaded to db. Don't forget to change db credentials in application.yaml. 
+Let`s say you searched for specific news and want to return back to the stage where you were able to see all articles from sites that are enabled , press IBA Tech icon, it acts like 'reload' button.
 
 ## Content:
 The Front-End part is done using HTML, CSS and JS only. No frameworks, no hard stuff.

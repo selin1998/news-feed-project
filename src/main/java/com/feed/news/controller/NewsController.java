@@ -2,6 +2,8 @@ package com.feed.news.controller;
 
 
 import com.feed.news.entity.News;
+import com.feed.news.entity.db.XUser;
+import com.feed.news.exception.UserNotFoundEx;
 import com.feed.news.service.DisableNewsService;
 import com.feed.news.service.UserService;
 import lombok.extern.log4j.Log4j2;
@@ -37,7 +39,7 @@ public class NewsController {
         return Optional.ofNullable(siteName).orElse("");
     }
 
-    // http://localhost:5000/disable_news/1
+    // http://localhost:5000/disable_news
 
     @GetMapping(value={"/disable_news","/disable_news/{news_id}"})
     public String showAllSites(Model model, String site_name) {
@@ -46,11 +48,13 @@ public class NewsController {
 
         User user = (User) authentication.getPrincipal();
 
-        int user_id=userService.findUserByEmail(user.getUsername()).get().getUser_id();
+        XUser xUser = userService.findUserByEmail(user.getUsername()).orElseThrow(UserNotFoundEx::new);
 
-        String username = userService.findUserByEmail(user.getUsername()).get().getFull_name();
+        int user_id=xUser.getUser_id();
 
-        String imageAsBase64 = userService.findUserByEmail(user.getUsername()).get().getImageAsBase64();
+        String username = xUser.getFull_name();
+
+        String imageAsBase64 = xUser.getImageAsBase64();
 
         List<News> allSites = disableNewsService.getAllSites();
 
@@ -86,7 +90,9 @@ public class NewsController {
 
         User user = (User) authentication.getPrincipal();
 
-        int user_id=userService.findUserByEmail(user.getUsername()).get().getUser_id();
+        XUser xUser = userService.findUserByEmail(user.getUsername()).orElseThrow(UserNotFoundEx::new);
+
+        int user_id=xUser.getUser_id();
 
         log.info(fmt("Operation disable/enable -> %s",operation));
 

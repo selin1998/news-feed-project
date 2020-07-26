@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +27,16 @@ public class GlobalExceptionHandler {
         model.addAttribute("status",response.getStatus());
 
         return "error-page";
+    }
+
+    @ExceptionHandler(UserNotFoundEx.class)
+    public String userIdError(){
+        return "user-error";
+    }
+
+    @ExceptionHandler(NumberFormatException.class)
+    public String numberError(){
+        return "redirect:/news_feed";
     }
 
 
