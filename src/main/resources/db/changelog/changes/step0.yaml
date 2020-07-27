@@ -1,0 +1,261 @@
+databaseChangeLog:
+- changeSet:
+    id: 1595881486572-1
+    author: selinhabiboghlu (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: news_pkey
+            name: news_id
+            type: INTEGER
+        - column:
+            name: news_description
+            type: VARCHAR(255)
+        - column:
+            name: news_image
+            type: BYTEA
+        - column:
+            name: news_name
+            type: VARCHAR(255)
+        - column:
+            name: news_url
+            type: VARCHAR(255)
+        tableName: news
+- changeSet:
+    id: 1595881486572-2
+    author: selinhabiboghlu (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: user_table_pkey
+            name: user_id
+            type: INTEGER
+        - column:
+            name: active
+            type: INTEGER
+        - column:
+            name: confirm_password
+            type: VARCHAR(255)
+        - column:
+            name: email
+            type: VARCHAR(255)
+        - column:
+            name: full_name
+            type: VARCHAR(255)
+        - column:
+            name: image
+            type: BYTEA
+        - column:
+            constraints:
+              nullable: false
+            name: is_enabled
+            type: BOOLEAN
+        - column:
+            name: password
+            type: VARCHAR(255)
+        - column:
+            defaultValue: USER
+            name: role
+            type: VARCHAR(32)
+        tableName: user_table
+- changeSet:
+    id: 1595881486572-3
+    author: selinhabiboghlu (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: forgot_reset_pkey
+            name: id
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: expiry_date
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: token
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: user_id
+            type: INTEGER
+        tableName: forgot_reset
+- changeSet:
+    id: 1595881486572-4
+    author: selinhabiboghlu (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: confirm_table_pkey
+            name: token_id
+            type: INTEGER
+        - column:
+            name: confirmation_token
+            type: VARCHAR(255)
+        - column:
+            name: created_date
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: user_id
+            type: INTEGER
+        tableName: confirm_table
+- changeSet:
+    id: 1595881486572-5
+    author: selinhabiboghlu (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: article_pkey
+            name: article_link
+            type: VARCHAR(255)
+        - column:
+            name: content
+            type: TEXT
+        - column:
+            name: article_date
+            type: date
+        - column:
+            name: header
+            type: VARCHAR(255)
+        - column:
+            name: image_link
+            type: VARCHAR(255)
+        - column:
+            name: site
+            type: VARCHAR(255)
+        tableName: article
+- changeSet:
+    id: 1595881486572-6
+    author: selinhabiboghlu (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: disliked_pkey
+            name: n_id
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: disliked_pkey
+            name: u_id
+            type: INTEGER
+        tableName: disliked
+- changeSet:
+    id: 1595881486572-7
+    author: selinhabiboghlu (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: news_url
+        constraintName: uk_flu689jwc00aqp7tw4kir1eh4
+        tableName: news
+- changeSet:
+    id: 1595881486572-8
+    author: selinhabiboghlu (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: email
+        constraintName: uk_eamk4l51hm6yqb8xw37i23kb5
+        tableName: user_table
+- changeSet:
+    id: 1595881486572-9
+    author: selinhabiboghlu (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: user_id
+        baseTableName: forgot_reset
+        constraintName: fkobr4j76stkpe67sbvtxjitt1r
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: user_id
+        referencedTableName: user_table
+        validate: true
+- changeSet:
+    id: 1595881486572-10
+    author: selinhabiboghlu (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: token
+        constraintName: uk_mfyimhg86bs00ldkt5y6k5cna
+        tableName: forgot_reset
+- changeSet:
+    id: 1595881486572-11
+    author: selinhabiboghlu (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: user_id
+        baseTableName: confirm_table
+        constraintName: fklbng1uvfmkp5wwr4dejt44a29
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: user_id
+        referencedTableName: user_table
+        validate: true
+- changeSet:
+    id: 1595881486572-12
+    author: selinhabiboghlu (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: n_id
+        baseTableName: disliked
+        constraintName: fk8bokpo6jo8agioaxr3auul0se
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: news_id
+        referencedTableName: news
+        validate: true
+- changeSet:
+    id: 1595881486572-13
+    author: selinhabiboghlu (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: u_id
+        baseTableName: disliked
+        constraintName: fkp81r0etit0wll5ejwiydctf9n
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: user_id
+        referencedTableName: user_table
+        validate: true
+

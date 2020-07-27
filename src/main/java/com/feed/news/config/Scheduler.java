@@ -31,7 +31,7 @@ public class Scheduler {
     @Scheduled(fixedRate =FIXED_RATE, initialDelay = INITIAL_DELAY) // every 30 minutes parse, try fixedRate=60000 for one minute
     public void parseArticles(){
 
-        log.info("fetching articles-> time:"+new SimpleDateFormat("HH:mm:ss").format(new Date()));
+        log.info("fetching articles -> time:"+new SimpleDateFormat("HH:mm:ss").format(new Date()));
 
         Stream<JsoupParser> newsParsers = articleService.getNewsParsers();
 

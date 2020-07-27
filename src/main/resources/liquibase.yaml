@@ -1,0 +1,20 @@
+# production db
+
+url:      ${JDBC_DATABASE_URL}
+username: ${JDBC_DATABASE_USERNAME}
+password: ${JDBC_DATABASE_PASSWORD}
+
+# development db
+
+referenceUrl:      jdbc:postgresql://localhost:5432/postgres
+referenceUsername: postgres
+referencePassword: dreamgirl15
+
+# for working
+changeLogFile: src/main/resources/db/changelog/master.yaml
+
+# for grabbing current database state
+outputChangeLogFile: src/main/resources/db/changelog/step0.yaml
+
+# for difference
+diffChangeLogFile: src/main/resources/db/changelog/changes/diff.yaml

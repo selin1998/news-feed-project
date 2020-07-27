@@ -38,6 +38,16 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>3.10.0</version>
+                <configuration>
+                    <propertyFile>src/main/resources/liquibase.yaml</propertyFile>
+                    <changeLogDirectory>src/main/resources</changeLogDirectory>
+                    <changeLogFile>db/changelog/master.yaml</changeLogFile>
+                </configuration>
+            </plugin>
         </plugins>
 
     </build>
@@ -121,6 +131,19 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-maven-plugin</artifactId>
+            <version>3.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
         </dependency>
 
 
