@@ -31,11 +31,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UserNotFoundEx.class)
     public String userIdError(){
+        log.error("UserNotFoundException");
         return "user-error";
     }
 
     @ExceptionHandler(NumberFormatException.class)
     public String numberError(){
+        log.error("NumberFormatException");
         return "redirect:/news_feed";
     }
 
